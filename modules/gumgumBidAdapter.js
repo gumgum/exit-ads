@@ -586,7 +586,7 @@ function interpretResponse(serverResponse, bidRequest) {
   const bidResponses = []
   const serverResponseBody = serverResponse.body
 
-  // DEMO/TEST: Return selected test creative for Echo Ads demo
+  // DEMO/TEST: Return selected test creative for Exit Ads demo
   // TODO: Remove this hardcoded response in production
   const isDemoMode = (typeof window !== 'undefined' && window.selectedTestCreative);
   if (isDemoMode) {
@@ -594,7 +594,7 @@ function interpretResponse(serverResponse, bidRequest) {
     const selectedCreative = window.selectedTestCreative;
 
     if (selectedCreative) {
-      logWarn('[GumGum] DEMO MODE: Returning test bid for Echo Ads demo (' + selectedCreative.name + ')');
+      logWarn('[GumGum] DEMO MODE: Returning test bid for Exit Ads demo (' + selectedCreative.name + ')');
       return [{
         ad: selectedCreative.creative,
         mediaType: BANNER,
@@ -613,9 +613,9 @@ function interpretResponse(serverResponse, bidRequest) {
       }];
     } else {
       // Fallback to default ACME creative if no creative is selected
-      logWarn('[GumGum] DEMO MODE: Returning default test bid for Echo Ads demo (ACME 300x250)');
+      logWarn('[GumGum] DEMO MODE: Returning default test bid for Exit Ads demo (ACME 300x250)');
       return [{
-        ad: '<a href="https://example.com" target="_blank"><img src="https://gumgum.github.io/echoads/creatives/acme.png" width="300" height="250" border="0" alt="ACME Products" style="display:block;"/></a>',
+        ad: '<a href="https://example.com" target="_blank"><img src="https://gumgum.github.io/exit-ads/creatives/acme.png" width="300" height="250" border="0" alt="ACME Products" style="display:block;"/></a>',
         mediaType: BANNER,
         cpm: 2.50,
         creativeId: 'acme-echo-demo',

@@ -1,5 +1,5 @@
 /**
- * Echo Ads Module
+ * Exit Ads Module
  *
  * This module enables publisher-controlled ad units that appear when users
  * reach the end of content consumption. Supports:
@@ -8,7 +8,7 @@
  * - Overlay/interstitial rendering
  * - Frequency capping
  *
- * @module modules/echoAdsModule
+ * @module modules/exitAdsModule
  */
 
 import { config } from '../../src/config.js';
@@ -16,7 +16,7 @@ import { logInfo, logWarn, logError } from '../../src/utils.js';
 import { getGlobal } from '../../src/prebidGlobal.js';
 import * as events from '../../src/events.js';
 import { EVENTS } from '../../src/constants.js';
-import { getWindowDimensions } from '../../src/utils/winDimensions.js';
+import { getWinDimensions } from '../../src/utils/winDimensions.js';
 import { getStorageManager } from '../../src/storageManager.js';
 
 const MODULE_NAME = 'echoAds';
@@ -39,7 +39,7 @@ const STORAGE_KEY_DAILY = 'echoAds_daily_count';
 const STORAGE_KEY_LAST_SHOWN = 'echoAds_last_shown';
 
 /**
- * Initialize the Echo Ads module
+ * Initialize the Exit Ads module
  */
 export function init(pbjs) {
   if (isInitialized) {
@@ -90,7 +90,7 @@ function setupEventListeners() {
 function onAuctionEnd(auctionData) {
   if (!moduleConfig || !auctionInProgress) return;
 
-  // Find our Echo Ads ad unit
+  // Find our Exit Ads ad unit
   const echoAdUnit = auctionData.adUnits?.find(
     unit => unit.code === moduleConfig.adUnit.code
   );
@@ -170,7 +170,7 @@ function handlePrefetchStrategy() {
 }
 
 /**
- * Start the ad auction for Echo Ads unit
+ * Start the ad auction for Exit Ads unit
  */
 function startAuction() {
   if (auctionInProgress) {
@@ -256,7 +256,7 @@ function handleScroll() {
 }
 
 function calculateScrollDepth() {
-  const { height: windowHeight } = getWindowDimensions();
+  const { innerHeight: windowHeight } = getWinDimensions();
   const documentHeight = Math.max(
     document.body.scrollHeight,
     document.documentElement.scrollHeight
@@ -496,6 +496,12 @@ function showEchoAd() {
 function showOverlay() {
   const displayConfig = moduleConfig.display || {};
 
+  // Remove any existing overlay from previous ad displays
+  const existingOverlay = document.getElementById('echo-ads-overlay');
+  if (existingOverlay) {
+    existingOverlay.parentNode.removeChild(existingOverlay);
+  }
+
   // Create overlay container
   const overlay = document.createElement('div');
   overlay.id = 'echo-ads-overlay';
@@ -510,6 +516,8 @@ function showOverlay() {
     display: flex;
     align-items: center;
     justify-content: center;
+    opacity: 1;
+    transition: opacity 0.2s ease-out;
   `;
 
   // Create ad container
@@ -605,7 +613,9 @@ function showOverlay() {
       }, 1000);
     }
 
-    closeButton.onclick = () => {
+    closeButton.onclick = (e) => {
+      e.stopPropagation();
+      e.preventDefault();
       closeEchoAd();
     };
 
@@ -626,12 +636,19 @@ function showInterstitial() {
 }
 
 /**
- * Close the Echo Ad
+ * Close the Exit Ad
  */
 function closeEchoAd() {
   const overlay = document.getElementById('echo-ads-overlay');
   if (overlay) {
-    overlay.remove();
+    // Instead of removing the overlay (which triggers mobile adapter lifecycle issues),
+    // just hide it completely. This prevents the "dismissed => dismissed" state error.
+    overlay.style.opacity = '0';
+    overlay.style.pointerEvents = 'none';
+    overlay.style.display = 'none';
+
+    // Mark it for potential cleanup later if needed
+    overlay.setAttribute('data-closed', 'true');
   }
 
   // Do NOT reset hasBeenTriggered - automatic triggers should only fire once per session
@@ -643,7 +660,7 @@ function closeEchoAd() {
     moduleConfig.onAdClose();
   }
 
-  logInfo(`${MODULE_NAME}: Echo Ad closed`);
+  logInfo(`${MODULE_NAME}: Exit Ad closed`);
 }
 
 /**

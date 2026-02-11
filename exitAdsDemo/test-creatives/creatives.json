@@ -13,6 +13,6 @@
     "type": "image",
     "width": 300,
     "height": 250,
-    "creative": "<a href=\"https://example.com\" target=\"_blank\"><img src=\"https://gumgum.github.io/echoads/creatives/acme.png\" width=\"300\" height=\"250\" border=\"0\" alt=\"ACME Products\" style=\"display:block;\"/></a>"
+    "creative": "<a href=\"https://example.com\" target=\"_blank\"><img src=\"https://gumgum.github.io/exit-ads/creatives/acme.png\" width=\"300\" height=\"250\" border=\"0\" alt=\"ACME Products\" style=\"display:block;\"/></a>"
   }
 ]

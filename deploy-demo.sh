@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# Echo Ads Demo Deployment Script
-# Deploys the Echo Ads demo to Google Cloud Storage
+# Exit Ads Demo Deployment Script
+# Deploys the Exit Ads demo to Google Cloud Storage
 
 set -e
 
 PROJECT_ID="jono-sandbox"
-BUCKET_NAME="echoads-demo"
-DEMO_FILE="integrationExamples/gpt/echoAds_gumgum.html"
+BUCKET_NAME="exit-ads-demo"
+DEMO_FILE="integrationExamples/gpt/exitAds_gumgum.html"
 PREBID_BUNDLE="build/dev/prebid.js"
 
-echo "🚀 Deploying Echo Ads Demo to Google Cloud Storage..."
+echo "🚀 Deploying Exit Ads Demo to Google Cloud Storage..."
 
 # Check if gcloud is installed
 if ! command -v gcloud &> /dev/null; then
@@ -38,7 +38,7 @@ fi
 
 if [ ! -f "$PREBID_BUNDLE" ]; then
     echo "⚠️  Prebid bundle not found, building now..."
-    npx gulp build-bundle-dev --modules=echoAdsModule,gumgumBidAdapter --nolint
+    npx gulp build-bundle-dev --modules=exitAdsModule,gumgumBidAdapter --nolint
 
     if [ ! -f "$PREBID_BUNDLE" ]; then
         echo "❌ Error: Build failed, bundle still not found"
@@ -76,4 +76,4 @@ echo ""
 echo "💡 Tips:"
 echo "  - Clear browser cache if you don't see updates"
 echo "  - Use incognito/private mode for fresh testing"
-echo "  - Check browser console for Echo Ads logs"
+echo "  - Check browser console for Exit Ads logs"

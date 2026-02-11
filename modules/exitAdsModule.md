@@ -1,13 +1,13 @@
-# Echo Ads Module
+# Exit Ads Module
 
 ## Overview
 
-The Echo Ads module enables publisher-controlled ad units that appear when users reach the end of content consumption or meet other configurable trigger conditions. This module works with any Prebid.js bidder adapter and provides:
+The Exit Ads module enables publisher-controlled ad units that appear when users reach the end of content consumption or meet other configurable trigger conditions. This module works with any Prebid.js bidder adapter and provides:
 
 - **Configurable Triggers**: Scroll depth, time on page, exit intent, or custom functions
 - **Bid Pre-fetching**: Reduce latency by fetching bids before the ad is shown
 - **Overlay/Interstitial Display**: Show ads in an engaging overlay format
-- **Frequency Capping**: Control how often users see Echo Ads
+- **Frequency Capping**: Control how often users see Exit Ads
 - **Size Control**: Configure which ad sizes are eligible to bid
 
 ## Configuration
@@ -124,7 +124,7 @@ Controls how the ad is displayed.
 
 ## Ad Size Configuration
 
-Echo Ads supports standard display banner sizes. Publishers can control which sizes are eligible by configuring the `mediaTypes.banner.sizes` array:
+Exit Ads supports standard display banner sizes. Publishers can control which sizes are eligible by configuring the `mediaTypes.banner.sizes` array:
 
 ```javascript
 adUnit: {
@@ -153,7 +153,7 @@ adUnit: {
 
 ## Manual Trigger
 
-Publishers can manually trigger Echo Ads using the API:
+Publishers can manually trigger Exit Ads using the API:
 
 ```javascript
 pbjs.echoAds.trigger();
@@ -244,7 +244,7 @@ pbjs.setConfig({
 
 ## Frequency Capping
 
-Echo Ads includes built-in frequency capping to prevent ad fatigue:
+Exit Ads includes built-in frequency capping to prevent ad fatigue:
 
 - **Session-based**: Uses `sessionStorage` - resets when browser tab is closed
 - **Daily**: Uses `localStorage` - resets at midnight
@@ -267,7 +267,7 @@ display: {
 
 ## Integration with Bidders
 
-Echo Ads works with **any** Prebid.js bidder adapter. Simply include the bidder in the `bids` array:
+Exit Ads works with **any** Prebid.js bidder adapter. Simply include the bidder in the `bids` array:
 
 ```javascript
 bids: [
@@ -281,12 +281,12 @@ bids: [
 
 ## Building
 
-To include the Echo Ads module in your Prebid.js build:
+To include the Exit Ads module in your Prebid.js build:
 
 ```bash
-gulp build --modules=echoAdsModule,gumgumBidAdapter,appnexusBidAdapter,...
+gulp build --modules=exitAdsModule,gumgumBidAdapter,appnexusBidAdapter,...
 ```
 
 ## Testing
 
-See `integrationExamples/gpt/echoAds_example.html` for a working demonstration.
+See `integrationExamples/gpt/exitAds_gumgum.html` for a working demonstration.

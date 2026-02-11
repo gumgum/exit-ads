@@ -1,16 +1,16 @@
 <!--
-  Echo Ads Module - GumGum Test Demo
+  Exit Ads Module - GumGum Test Demo
 
   This example uses GumGum's test placement credentials to demonstrate
-  the Echo Ads module with real bid responses.
+  the Exit Ads module with real bid responses.
 -->
 
 <html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Echo Ads - GumGum Demo</title>
-  <script async src="../../build/dev/prebid.js"></script>
+  <title>Exit Ads - GumGum Demo</title>
+  <script src="prebid.js"></script>
   <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
 
   <style>
@@ -162,9 +162,9 @@
     window.addEventListener('scroll', updateScrollIndicator);
     window.addEventListener('load', updateScrollIndicator);
 
-    // Configure Echo Ads with GumGum test placement
+    // Configure Exit Ads with GumGum test placement
     pbjs.que.push(function() {
-      logEvent('Configuring Echo Ads module with GumGum test placement...');
+      logEvent('Configuring Exit Ads module with GumGum test placement...');
 
       pbjs.setConfig({
         echoAds: {
@@ -232,18 +232,20 @@
         }
       });
 
-      logEvent('Echo Ads configured - scroll to 70% to start auction, 90% to trigger');
+      logEvent('Exit Ads configured - scroll to 70% to start auction, 90% to trigger');
       logEvent('Using GumGum test zone: dc9d6be1, slot: 15901');
     });
 
     // Manual trigger
     function manualTrigger() {
       logEvent('Manual trigger button clicked');
-      if (pbjs.echoAds) {
-        pbjs.echoAds.trigger();
-      } else {
-        logEvent('ERROR: Echo Ads module not loaded');
-      }
+      pbjs.que.push(function() {
+        if (pbjs.echoAds) {
+          pbjs.echoAds.trigger();
+        } else {
+          logEvent('ERROR: Exit Ads module not loaded');
+        }
+      });
     }
 
     // Clear frequency caps
@@ -286,11 +288,74 @@
     updateFrequencyDisplay();
     setInterval(updateFrequencyDisplay, 1000);
 
+    // Creative management
+    let availableCreatives = [];
+    let selectedCreative = null;
+
+    // Load available creatives from JSON file
+    function loadCreatives() {
+      fetch('test-creatives/creatives.json')
+        .then(response => response.json())
+        .then(creatives => {
+          availableCreatives = creatives;
+          const selector = document.getElementById('creative-selector');
+
+          // Clear loading message
+          selector.innerHTML = '';
+
+          // Add options for each creative
+          creatives.forEach((creative, index) => {
+            const option = document.createElement('option');
+            option.value = index;
+            option.textContent = creative.name;
+            selector.appendChild(option);
+          });
+
+          // Select the first creative by default
+          if (creatives.length > 0) {
+            selector.value = '0';
+            selectCreative();
+          }
+
+          logEvent('Loaded ' + creatives.length + ' test creative(s)');
+        })
+        .catch(error => {
+          logEvent('ERROR: Failed to load creatives - ' + error.message);
+          const selector = document.getElementById('creative-selector');
+          selector.innerHTML = '<option value="">Error loading creatives</option>';
+        });
+    }
+
+    // Handle creative selection
+    function selectCreative() {
+      const selector = document.getElementById('creative-selector');
+      const index = parseInt(selector.value);
+
+      if (isNaN(index) || index < 0 || index >= availableCreatives.length) {
+        return;
+      }
+
+      selectedCreative = availableCreatives[index];
+
+      // Update info display
+      const infoEl = document.getElementById('creative-info');
+      infoEl.innerHTML = '<strong>Type:</strong> ' + selectedCreative.type +
+                        ' | <strong>Size:</strong> ' + selectedCreative.width + 'x' + selectedCreative.height;
+
+      // Store selected creative ID in window for gumgumBidAdapter to access
+      window.selectedTestCreative = selectedCreative;
+
+      logEvent('Selected creative: ' + selectedCreative.name);
+    }
+
+    // Load creatives on page load
+    loadCreatives();
+
     // Reset
     function resetEchoAds() {
       if (pbjs.echoAds && pbjs.echoAds.reset) {
         pbjs.echoAds.reset();
-        logEvent('Echo Ads state reset - reconfiguring...');
+        logEvent('Exit Ads state reset - reconfiguring...');
 
         setTimeout(function() {
           pbjs.que.push(function() {
@@ -350,7 +415,7 @@
                 }
               }
             });
-            logEvent('Echo Ads reconfigured');
+            logEvent('Exit Ads reconfigured');
           });
         }, 100);
       }
@@ -372,7 +437,7 @@
   <div class="scroll-indicator" id="scroll-indicator"></div>
 
   <div class="container">
-    <h1>Echo Ads Module - GumGum Demo</h1>
+    <h1>Exit Ads Module - GumGum Demo</h1>
 
     <div class="info-box">
       <strong>Demo Configuration</strong><br>
@@ -396,6 +461,17 @@
       </div>
       <button onclick="manualTrigger()">Manual Trigger Echo Ad</button>
       <button onclick="clearFrequencyCaps()">Clear Frequency Caps</button>
+    </div>
+
+    <div class="controls">
+      <h3>Test Creative</h3>
+      <div style="margin-bottom: 15px;">
+        <label for="creative-selector" style="display: block; margin-bottom: 5px;">Select Creative:</label>
+        <select id="creative-selector" onchange="selectCreative()" style="width: 100%; padding: 8px; font-size: 14px;">
+          <option value="">Loading creatives...</option>
+        </select>
+      </div>
+      <div id="creative-info" style="font-size: 12px; color: #666; margin-top: 10px;"></div>
     </div>
 
     <h2>Current Configuration</h2>
@@ -447,7 +523,7 @@
       <h2>Publisher Configuration Options</h2>
 
       <div class="paragraph">
-        Publishers can customize Echo Ads behavior through the Prebid.js configuration:
+        Publishers can customize Exit Ads behavior through the Prebid.js configuration:
       </div>
 
       <ul>
@@ -506,8 +582,8 @@
 
     <div class="footer">
       <h2>End of Content</h2>
-      <p>If you've scrolled this far, the Echo Ad should have appeared!</p>
-      <p>Echo Ads Module v1.0.0 - GumGum Test Demo</p>
+      <p>If you've scrolled this far, the Exit Ad should have appeared!</p>
+      <p>Exit Ads Module v1.0.0 - GumGum Test Demo</p>
     </div>
   </div>
 </body>

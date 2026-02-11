@@ -1,19 +1,19 @@
 #!/bin/bash
 
 # GitHub Pages Deployment Script
-# Deploys the Echo Ads demo to GitHub Pages
+# Deploys the Exit Ads demo to GitHub Pages
 
 set -e
 
 PREBID_BUNDLE="build/dev/prebid.js"
 DOCS_DIR="docs"
 
-echo "🚀 Deploying Echo Ads Demo to GitHub Pages..."
+echo "🚀 Deploying Exit Ads Demo to GitHub Pages..."
 
 # Check if prebid bundle exists
 if [ ! -f "$PREBID_BUNDLE" ]; then
     echo "⚠️  Prebid bundle not found, building now..."
-    npx gulp build-bundle-dev --modules=echoAdsModule,gumgumBidAdapter --nolint
+    npx gulp build-bundle-dev --modules=exitAdsModule,gumgumBidAdapter --nolint
 
     if [ ! -f "$PREBID_BUNDLE" ]; then
         echo "❌ Error: Build failed, bundle still not found"
@@ -33,6 +33,6 @@ git push origin master
 
 echo "✅ Deployment complete!"
 echo ""
-echo "🌐 Demo URL: https://gumgum.github.io/echoads/"
+echo "🌐 Demo URL: https://gumgum.github.io/exit-ads/"
 echo ""
 echo "💡 Note: GitHub Pages may take 1-2 minutes to update"
