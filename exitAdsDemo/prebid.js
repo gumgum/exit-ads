@@ -14650,7 +14650,7 @@ function getConnectionType() {
   \****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-/* unused harmony exports init, triggerEchoAd, reset */
+/* unused harmony exports init, triggerExitAd, reset */
 /* harmony import */ var _src_prebidGlobal_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../src/prebidGlobal.js */ "./src/prebidGlobal.js");
 /* harmony import */ var _src_config_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../src/config.js */ "./src/config.js");
 /* harmony import */ var _src_utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../src/utils.js */ "./src/utils.js");
@@ -14679,7 +14679,7 @@ function getConnectionType() {
 
 
 
-const MODULE_NAME = 'echoAds';
+const MODULE_NAME = 'exitAds';
 const VERSION = '1.0.0';
 
 // Storage manager
@@ -14697,9 +14697,9 @@ let auctionInProgress = false;
 let hasBeenTriggered = false;
 
 // Storage keys for frequency capping
-const STORAGE_KEY_SESSION = 'echoAds_session_count';
-const STORAGE_KEY_DAILY = 'echoAds_daily_count';
-const STORAGE_KEY_LAST_SHOWN = 'echoAds_last_shown';
+const STORAGE_KEY_SESSION = 'exitAds_session_count';
+const STORAGE_KEY_DAILY = 'exitAds_daily_count';
+const STORAGE_KEY_LAST_SHOWN = 'exitAds_last_shown';
 
 /**
  * Initialize the Exit Ads module
@@ -14711,17 +14711,17 @@ function init(pbjs) {
   }
   const confListener = _src_config_js__WEBPACK_IMPORTED_MODULE_1__.config.getConfig(MODULE_NAME, _ref => {
     let {
-      echoAds
+      exitAds
     } = _ref;
-    if (!echoAds) {
+    if (!exitAds) {
       (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)("".concat(MODULE_NAME, ": Missing configuration"));
       return;
     }
-    if (!echoAds.adUnit) {
+    if (!exitAds.adUnit) {
       (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)("".concat(MODULE_NAME, ": Missing adUnit configuration"));
       return;
     }
-    moduleConfig = echoAds;
+    moduleConfig = exitAds;
     confListener(); // unsubscribe
 
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Initialized v").concat(VERSION));
@@ -14755,8 +14755,8 @@ function onAuctionEnd(auctionData) {
   if (!moduleConfig || !auctionInProgress) return;
 
   // Find our Exit Ads ad unit
-  const echoAdUnit = (_auctionData$adUnits = auctionData.adUnits) === null || _auctionData$adUnits === void 0 ? void 0 : _auctionData$adUnits.find(unit => unit.code === moduleConfig.adUnit.code);
-  if (!echoAdUnit) return;
+  const exitAdUnit = (_auctionData$adUnits = auctionData.adUnits) === null || _auctionData$adUnits === void 0 ? void 0 : _auctionData$adUnits.find(unit => unit.code === moduleConfig.adUnit.code);
+  if (!exitAdUnit) return;
 
   // Get the winning bid for this ad unit
   const bids = (_auctionData$bidsRece = auctionData.bidsReceived) === null || _auctionData$bidsRece === void 0 ? void 0 : _auctionData$bidsRece.filter(bid => bid.adUnitCode === moduleConfig.adUnit.code);
@@ -14775,7 +14775,7 @@ function onAuctionEnd(auctionData) {
       });
     }
   } else {
-    (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": No bids received for Echo Ad unit"));
+    (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": No bids received for Exit Ad unit"));
     cachedBid = null;
   }
   auctionInProgress = false;
@@ -14999,7 +14999,7 @@ function onTriggerActivated() {
       if (cachedBid) {
         clearInterval(checkInterval);
         (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Bid received, showing ad"));
-        showEchoAd();
+        showExitAd();
       } else if (attempts >= maxAttempts) {
         clearInterval(checkInterval);
         (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Timeout waiting for bids, no ad to show"));
@@ -15008,7 +15008,7 @@ function onTriggerActivated() {
   } else if (cachedBid) {
     // Show ad immediately
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Using cached bid"));
-    showEchoAd();
+    showExitAd();
   } else if (auctionInProgress) {
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Auction in progress, waiting for completion..."));
     // Wait for auction to complete
@@ -15019,7 +15019,7 @@ function onTriggerActivated() {
       if (cachedBid) {
         clearInterval(checkInterval);
         (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Bid received, showing ad"));
-        showEchoAd();
+        showExitAd();
       } else if (attempts >= maxAttempts) {
         clearInterval(checkInterval);
         (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Timeout waiting for bids, no ad to show"));
@@ -15111,14 +15111,14 @@ function updateFrequencyCap() {
 }
 
 /**
- * Show the Echo Ad
+ * Show the Exit Ad
  */
-function showEchoAd() {
+function showExitAd() {
   if (!cachedBid) {
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": No cached bid to display"));
     return;
   }
-  (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Displaying Echo Ad"), cachedBid);
+  (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Displaying Exit Ad"), cachedBid);
   const displayConfig = moduleConfig.display || {};
   const displayType = displayConfig.type || 'overlay';
   if (displayType === 'overlay') {
@@ -15146,14 +15146,14 @@ function showOverlay() {
   const displayConfig = moduleConfig.display || {};
 
   // Remove any existing overlay from previous ad displays
-  const existingOverlay = document.getElementById('echo-ads-overlay');
+  const existingOverlay = document.getElementById('exit-ads-overlay');
   if (existingOverlay) {
     existingOverlay.parentNode.removeChild(existingOverlay);
   }
 
   // Create overlay container
   const overlay = document.createElement('div');
-  overlay.id = 'echo-ads-overlay';
+  overlay.id = 'exit-ads-overlay';
   overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background: rgba(0, 0, 0, 0.8);\n    z-index: 999999;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    opacity: 1;\n    transition: opacity 0.2s ease-out;\n  ";
 
   // Create ad container
@@ -15218,7 +15218,7 @@ function showOverlay() {
     closeButton.onclick = e => {
       e.stopPropagation();
       e.preventDefault();
-      closeEchoAd();
+      closeExitAd();
     };
     adContainer.appendChild(closeButton);
   }
@@ -15238,8 +15238,8 @@ function showInterstitial() {
 /**
  * Close the Exit Ad
  */
-function closeEchoAd() {
-  const overlay = document.getElementById('echo-ads-overlay');
+function closeExitAd() {
+  const overlay = document.getElementById('exit-ads-overlay');
   if (overlay) {
     // Instead of removing the overlay (which triggers mobile adapter lifecycle issues),
     // just hide it completely. This prevents the "dismissed => dismissed" state error.
@@ -15266,7 +15266,7 @@ function closeEchoAd() {
  * Manual trigger function (exposed to publishers)
  * Unlike automatic triggers, manual triggers can be called multiple times per session
  */
-function triggerEchoAd() {
+function triggerExitAd() {
   if (!isInitialized) {
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Module not initialized"));
     return;
@@ -15302,7 +15302,7 @@ function triggerEchoAd() {
       if (cachedBid) {
         clearInterval(checkInterval);
         (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Bid received, showing ad"));
-        showEchoAd();
+        showExitAd();
       } else if (attempts >= maxAttempts) {
         clearInterval(checkInterval);
         (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Timeout waiting for bids, no ad to show"));
@@ -15311,7 +15311,7 @@ function triggerEchoAd() {
   } else if (cachedBid) {
     // Show ad immediately
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Using cached bid"));
-    showEchoAd();
+    showExitAd();
   } else if (auctionInProgress) {
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Auction in progress, waiting for completion..."));
     // Wait for auction to complete
@@ -15322,7 +15322,7 @@ function triggerEchoAd() {
       if (cachedBid) {
         clearInterval(checkInterval);
         (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Bid received, showing ad"));
-        showEchoAd();
+        showExitAd();
       } else if (attempts >= maxAttempts) {
         clearInterval(checkInterval);
         (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Timeout waiting for bids, no ad to show"));
@@ -15351,8 +15351,8 @@ const pbjs = (0,_src_prebidGlobal_js__WEBPACK_IMPORTED_MODULE_0__.getGlobal)();
 init(pbjs);
 
 // Expose API on pbjs global
-pbjs.echoAds = {
-  trigger: triggerEchoAd,
+pbjs.exitAds = {
+  trigger: triggerExitAd,
   reset: reset,
   version: VERSION
 };

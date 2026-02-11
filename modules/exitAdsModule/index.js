@@ -19,7 +19,7 @@ import { EVENTS } from '../../src/constants.js';
 import { getWinDimensions } from '../../src/utils/winDimensions.js';
 import { getStorageManager } from '../../src/storageManager.js';
 
-const MODULE_NAME = 'echoAds';
+const MODULE_NAME = 'exitAds';
 const VERSION = '1.0.0';
 
 // Storage manager
@@ -34,9 +34,9 @@ let auctionInProgress = false;
 let hasBeenTriggered = false;
 
 // Storage keys for frequency capping
-const STORAGE_KEY_SESSION = 'echoAds_session_count';
-const STORAGE_KEY_DAILY = 'echoAds_daily_count';
-const STORAGE_KEY_LAST_SHOWN = 'echoAds_last_shown';
+const STORAGE_KEY_SESSION = 'exitAds_session_count';
+const STORAGE_KEY_DAILY = 'exitAds_daily_count';
+const STORAGE_KEY_LAST_SHOWN = 'exitAds_last_shown';
 
 /**
  * Initialize the Exit Ads module
@@ -47,18 +47,18 @@ export function init(pbjs) {
     return;
   }
 
-  const confListener = config.getConfig(MODULE_NAME, ({ echoAds }) => {
-    if (!echoAds) {
+  const confListener = config.getConfig(MODULE_NAME, ({ exitAds }) => {
+    if (!exitAds) {
       logError(`${MODULE_NAME}: Missing configuration`);
       return;
     }
 
-    if (!echoAds.adUnit) {
+    if (!exitAds.adUnit) {
       logError(`${MODULE_NAME}: Missing adUnit configuration`);
       return;
     }
 
-    moduleConfig = echoAds;
+    moduleConfig = exitAds;
     confListener(); // unsubscribe
 
     logInfo(`${MODULE_NAME}: Initialized v${VERSION}`);
@@ -91,11 +91,11 @@ function onAuctionEnd(auctionData) {
   if (!moduleConfig || !auctionInProgress) return;
 
   // Find our Exit Ads ad unit
-  const echoAdUnit = auctionData.adUnits?.find(
+  const exitAdUnit = auctionData.adUnits?.find(
     unit => unit.code === moduleConfig.adUnit.code
   );
 
-  if (!echoAdUnit) return;
+  if (!exitAdUnit) return;
 
   // Get the winning bid for this ad unit
   const bids = auctionData.bidsReceived?.filter(
@@ -117,7 +117,7 @@ function onAuctionEnd(auctionData) {
       });
     }
   } else {
-    logWarn(`${MODULE_NAME}: No bids received for Echo Ad unit`);
+    logWarn(`${MODULE_NAME}: No bids received for Exit Ad unit`);
     cachedBid = null;
   }
 
@@ -349,7 +349,7 @@ function onTriggerActivated() {
       if (cachedBid) {
         clearInterval(checkInterval);
         logInfo(`${MODULE_NAME}: Bid received, showing ad`);
-        showEchoAd();
+        showExitAd();
       } else if (attempts >= maxAttempts) {
         clearInterval(checkInterval);
         logWarn(`${MODULE_NAME}: Timeout waiting for bids, no ad to show`);
@@ -358,7 +358,7 @@ function onTriggerActivated() {
   } else if (cachedBid) {
     // Show ad immediately
     logInfo(`${MODULE_NAME}: Using cached bid`);
-    showEchoAd();
+    showExitAd();
   } else if (auctionInProgress) {
     logInfo(`${MODULE_NAME}: Auction in progress, waiting for completion...`);
     // Wait for auction to complete
@@ -369,7 +369,7 @@ function onTriggerActivated() {
       if (cachedBid) {
         clearInterval(checkInterval);
         logInfo(`${MODULE_NAME}: Bid received, showing ad`);
-        showEchoAd();
+        showExitAd();
       } else if (attempts >= maxAttempts) {
         clearInterval(checkInterval);
         logWarn(`${MODULE_NAME}: Timeout waiting for bids, no ad to show`);
@@ -459,15 +459,15 @@ function updateFrequencyCap() {
 }
 
 /**
- * Show the Echo Ad
+ * Show the Exit Ad
  */
-function showEchoAd() {
+function showExitAd() {
   if (!cachedBid) {
     logWarn(`${MODULE_NAME}: No cached bid to display`);
     return;
   }
 
-  logInfo(`${MODULE_NAME}: Displaying Echo Ad`, cachedBid);
+  logInfo(`${MODULE_NAME}: Displaying Exit Ad`, cachedBid);
 
   const displayConfig = moduleConfig.display || {};
   const displayType = displayConfig.type || 'overlay';
@@ -497,14 +497,14 @@ function showOverlay() {
   const displayConfig = moduleConfig.display || {};
 
   // Remove any existing overlay from previous ad displays
-  const existingOverlay = document.getElementById('echo-ads-overlay');
+  const existingOverlay = document.getElementById('exit-ads-overlay');
   if (existingOverlay) {
     existingOverlay.parentNode.removeChild(existingOverlay);
   }
 
   // Create overlay container
   const overlay = document.createElement('div');
-  overlay.id = 'echo-ads-overlay';
+  overlay.id = 'exit-ads-overlay';
   overlay.style.cssText = `
     position: fixed;
     top: 0;
@@ -616,7 +616,7 @@ function showOverlay() {
     closeButton.onclick = (e) => {
       e.stopPropagation();
       e.preventDefault();
-      closeEchoAd();
+      closeExitAd();
     };
 
     adContainer.appendChild(closeButton);
@@ -638,8 +638,8 @@ function showInterstitial() {
 /**
  * Close the Exit Ad
  */
-function closeEchoAd() {
-  const overlay = document.getElementById('echo-ads-overlay');
+function closeExitAd() {
+  const overlay = document.getElementById('exit-ads-overlay');
   if (overlay) {
     // Instead of removing the overlay (which triggers mobile adapter lifecycle issues),
     // just hide it completely. This prevents the "dismissed => dismissed" state error.
@@ -667,7 +667,7 @@ function closeEchoAd() {
  * Manual trigger function (exposed to publishers)
  * Unlike automatic triggers, manual triggers can be called multiple times per session
  */
-export function triggerEchoAd() {
+export function triggerExitAd() {
   if (!isInitialized) {
     logWarn(`${MODULE_NAME}: Module not initialized`);
     return;
@@ -705,7 +705,7 @@ export function triggerEchoAd() {
       if (cachedBid) {
         clearInterval(checkInterval);
         logInfo(`${MODULE_NAME}: Bid received, showing ad`);
-        showEchoAd();
+        showExitAd();
       } else if (attempts >= maxAttempts) {
         clearInterval(checkInterval);
         logWarn(`${MODULE_NAME}: Timeout waiting for bids, no ad to show`);
@@ -714,7 +714,7 @@ export function triggerEchoAd() {
   } else if (cachedBid) {
     // Show ad immediately
     logInfo(`${MODULE_NAME}: Using cached bid`);
-    showEchoAd();
+    showExitAd();
   } else if (auctionInProgress) {
     logInfo(`${MODULE_NAME}: Auction in progress, waiting for completion...`);
     // Wait for auction to complete
@@ -725,7 +725,7 @@ export function triggerEchoAd() {
       if (cachedBid) {
         clearInterval(checkInterval);
         logInfo(`${MODULE_NAME}: Bid received, showing ad`);
-        showEchoAd();
+        showExitAd();
       } else if (attempts >= maxAttempts) {
         clearInterval(checkInterval);
         logWarn(`${MODULE_NAME}: Timeout waiting for bids, no ad to show`);
@@ -754,8 +754,8 @@ const pbjs = getGlobal();
 init(pbjs);
 
 // Expose API on pbjs global
-pbjs.echoAds = {
-  trigger: triggerEchoAd,
+pbjs.exitAds = {
+  trigger: triggerExitAd,
   reset: reset,
   version: VERSION
 };

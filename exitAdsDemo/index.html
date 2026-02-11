@@ -167,10 +167,10 @@
       logEvent('Configuring Exit Ads module with GumGum test placement...');
 
       pbjs.setConfig({
-        echoAds: {
+        exitAds: {
           // Ad unit with GumGum test credentials
           adUnit: {
-            code: 'echo-ad-gumgum',
+            code: 'exit-ad-gumgum',
             mediaTypes: {
               banner: {
                 sizes: [[300, 250]]
@@ -218,13 +218,13 @@
             logEvent('✓ Bid cached: ' + bidInfo.bidder + ' $' + bidInfo.cpm.toFixed(2) + ' CPM (' + bidInfo.size + ')');
           },
           onTrigger: function() {
-            logEvent('✓ Trigger activated! Preparing to show Echo Ad...');
+            logEvent('✓ Trigger activated! Preparing to show Exit Ad...');
           },
           onAdRender: function() {
-            logEvent('✓ Echo Ad rendered successfully');
+            logEvent('✓ Exit Ad rendered successfully');
           },
           onAdClose: function() {
-            logEvent('✓ Echo Ad closed by user');
+            logEvent('✓ Exit Ad closed by user');
           },
           onFrequencyCapReached: function() {
             logEvent('⚠ Frequency cap reached - ad not shown');
@@ -240,8 +240,8 @@
     function manualTrigger() {
       logEvent('Manual trigger button clicked');
       pbjs.que.push(function() {
-        if (pbjs.echoAds) {
-          pbjs.echoAds.trigger();
+        if (pbjs.exitAds) {
+          pbjs.exitAds.trigger();
         } else {
           logEvent('ERROR: Exit Ads module not loaded');
         }
@@ -251,9 +251,9 @@
     // Clear frequency caps
     function clearFrequencyCaps() {
       try {
-        sessionStorage.removeItem('echoAds_session_count');
-        localStorage.removeItem('echoAds_daily_count');
-        localStorage.removeItem('echoAds_last_shown');
+        sessionStorage.removeItem('exitAds_session_count');
+        localStorage.removeItem('exitAds_daily_count');
+        localStorage.removeItem('exitAds_last_shown');
         logEvent('✓ Frequency caps cleared');
         updateFrequencyDisplay();
       } catch (e) {
@@ -264,8 +264,8 @@
     // Show current frequency cap status
     function updateFrequencyDisplay() {
       try {
-        const sessionCount = parseInt(sessionStorage.getItem('echoAds_session_count') || '0');
-        const dailyData = localStorage.getItem('echoAds_daily_count');
+        const sessionCount = parseInt(sessionStorage.getItem('exitAds_session_count') || '0');
+        const dailyData = localStorage.getItem('exitAds_daily_count');
         let dailyCount = 0;
         if (dailyData) {
           const { date, count } = JSON.parse(dailyData);
@@ -352,17 +352,17 @@
     loadCreatives();
 
     // Reset
-    function resetEchoAds() {
-      if (pbjs.echoAds && pbjs.echoAds.reset) {
-        pbjs.echoAds.reset();
+    function resetExitAds() {
+      if (pbjs.exitAds && pbjs.exitAds.reset) {
+        pbjs.exitAds.reset();
         logEvent('Exit Ads state reset - reconfiguring...');
 
         setTimeout(function() {
           pbjs.que.push(function() {
             pbjs.setConfig({
-              echoAds: {
+              exitAds: {
                 adUnit: {
-                  code: 'echo-ad-gumgum',
+                  code: 'exit-ad-gumgum',
                   mediaTypes: {
                     banner: {
                       sizes: [[300, 250]]
@@ -405,10 +405,10 @@
                   logEvent('✓ Trigger activated!');
                 },
                 onAdRender: function() {
-                  logEvent('✓ Echo Ad rendered successfully');
+                  logEvent('✓ Exit Ad rendered successfully');
                 },
                 onAdClose: function() {
-                  logEvent('✓ Echo Ad closed by user');
+                  logEvent('✓ Exit Ad closed by user');
                 },
                 onFrequencyCapReached: function() {
                   logEvent('⚠ Frequency cap reached - ad not shown');
@@ -459,7 +459,7 @@
       <div style="margin-bottom: 15px;">
         <span class="metric">Frequency Caps: <span id="frequency-status">Session: 0/5 | Daily: 0/10</span></span>
       </div>
-      <button onclick="manualTrigger()">Manual Trigger Echo Ad</button>
+      <button onclick="manualTrigger()">Manual Trigger Exit Ad</button>
       <button onclick="clearFrequencyCaps()">Clear Frequency Caps</button>
     </div>
 
@@ -513,7 +513,7 @@
       <h2>Testing Instructions</h2>
 
       <ul>
-        <li>Click <strong>"Manual Trigger Echo Ad"</strong> to test immediately</li>
+        <li>Click <strong>"Manual Trigger Exit Ad"</strong> to test immediately</li>
         <li>Scroll to 90% to trigger automatically (watch the scroll depth meter)</li>
         <li>Wait 45 seconds to trigger via time-on-page</li>
         <li>Use <strong>"Clear Frequency Caps"</strong> to reset counters for repeated testing</li>

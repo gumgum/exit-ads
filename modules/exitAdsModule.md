@@ -16,9 +16,9 @@ The Exit Ads module enables publisher-controlled ad units that appear when users
 
 ```javascript
 pbjs.setConfig({
-  echoAds: {
+  exitAds: {
     adUnit: {
-      code: 'echo-ad-slot',
+      code: 'exit-ad-slot',
       mediaTypes: {
         banner: {
           sizes: [[300, 250], [728, 90]]  // Control eligible ad sizes
@@ -50,13 +50,13 @@ pbjs.setConfig({
       }
     },
     onTrigger: function() {
-      console.log('Echo Ad triggered!');
+      console.log('Exit Ad triggered!');
     },
     onAdRender: function() {
-      console.log('Echo Ad rendered!');
+      console.log('Exit Ad rendered!');
     },
     onAdClose: function() {
-      console.log('Echo Ad closed!');
+      console.log('Exit Ad closed!');
     }
   }
 });
@@ -75,7 +75,7 @@ Standard Prebid.js ad unit configuration. This determines which bidders particip
 
 ### `trigger` (required)
 
-Defines when the Echo Ad should appear. Multiple trigger types can be combined (OR logic).
+Defines when the Exit Ad should appear. Multiple trigger types can be combined (OR logic).
 
 **Options:**
 - `scroll`: Object with `depth` (percentage, 0-100)
@@ -102,7 +102,7 @@ Controls when bids are fetched to reduce latency.
 - `lazyTriggerPoint`: Same format as `trigger` - defines when to start fetching bids
 
 **Strategies:**
-- **Eager**: Best for high-engagement content where Echo Ad is likely to show
+- **Eager**: Best for high-engagement content where Exit Ad is likely to show
 - **Lazy**: Best for reducing wasted bid requests on low-engagement pages
 
 ### `display` (optional)
@@ -156,20 +156,20 @@ adUnit: {
 Publishers can manually trigger Exit Ads using the API:
 
 ```javascript
-pbjs.echoAds.trigger();
+pbjs.exitAds.trigger();
 ```
 
 This is useful for integrating with custom CMS or reader experiences.
 
 ## Examples
 
-### Simple Scroll-Based Echo Ad
+### Simple Scroll-Based Exit Ad
 
 ```javascript
 pbjs.setConfig({
-  echoAds: {
+  exitAds: {
     adUnit: {
-      code: 'echo-ad-slot',
+      code: 'exit-ad-slot',
       mediaTypes: {
         banner: { sizes: [[300, 250]] }
       },
@@ -187,13 +187,13 @@ pbjs.setConfig({
 });
 ```
 
-### Time-Based Echo Ad with Pre-fetch
+### Time-Based Exit Ad with Pre-fetch
 
 ```javascript
 pbjs.setConfig({
-  echoAds: {
+  exitAds: {
     adUnit: {
-      code: 'echo-ad-slot',
+      code: 'exit-ad-slot',
       mediaTypes: {
         banner: { sizes: [[728, 90], [300, 250]] }
       },
@@ -216,9 +216,9 @@ pbjs.setConfig({
 
 ```javascript
 pbjs.setConfig({
-  echoAds: {
+  exitAds: {
     adUnit: {
-      code: 'echo-ad-slot',
+      code: 'exit-ad-slot',
       mediaTypes: {
         banner: { sizes: [[300, 600]] }
       },
