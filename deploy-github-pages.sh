@@ -6,9 +6,17 @@
 set -e
 
 PREBID_BUNDLE="build/dev/prebid.js"
+SOURCE_DEMO_DIR="exitAdsDemo"
 DOCS_DIR="docs"
+DEFAULT_BRANCH="master"
 
 echo "🚀 Deploying Exit Ads Demo to GitHub Pages..."
+
+# Check if source demo folder exists
+if [ ! -d "$SOURCE_DEMO_DIR" ]; then
+    echo "❌ Error: Source demo directory not found at $SOURCE_DEMO_DIR"
+    exit 1
+fi
 
 # Check if prebid bundle exists
 if [ ! -f "$PREBID_BUNDLE" ]; then
@@ -21,15 +29,20 @@ if [ ! -f "$PREBID_BUNDLE" ]; then
     fi
 fi
 
-# Copy prebid.js to docs folder
-echo "📤 Copying prebid.js to docs folder..."
+# Sync demo content into docs/ (GitHub Pages source)
+echo "📁 Syncing $SOURCE_DEMO_DIR to $DOCS_DIR..."
+mkdir -p "$DOCS_DIR"
+rsync -a --delete "$SOURCE_DEMO_DIR"/ "$DOCS_DIR"/
+
+# Copy latest prebid.js to docs folder
+echo "📤 Copying latest prebid.js to $DOCS_DIR..."
 cp "$PREBID_BUNDLE" "$DOCS_DIR/prebid.js"
 
 # Commit and push
 echo "📝 Committing changes..."
-git add "$DOCS_DIR/prebid.js" "$DOCS_DIR/index.html" "$DOCS_DIR/creatives/"
+git add "$DOCS_DIR/"
 git commit -m "Update GitHub Pages demo" || echo "No changes to commit"
-git push origin master
+git push origin "$DEFAULT_BRANCH"
 
 echo "✅ Deployment complete!"
 echo ""

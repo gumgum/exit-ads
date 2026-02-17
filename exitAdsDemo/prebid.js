@@ -1,5 +1,5 @@
 /* prebid.js v10.25.0-pre
-Updated: 2026-02-11
+Updated: 2026-02-16
 Modules: exitAdsModule, gumgumBidAdapter */
 
 if (!window.pbjs || !window.pbjs.libLoaded) {
@@ -7,11 +7,11 @@ if (!window.pbjs || !window.pbjs.libLoaded) {
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "../../node_modules/@babel/runtime/helpers/esm/defineProperty.js":
+/***/ "../../node_modules/@babel/runtime/helpers/esm/defineProperty.js"
 /*!***********************************************************************!*\
   !*** ../../node_modules/@babel/runtime/helpers/esm/defineProperty.js ***!
   \***********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -29,13 +29,13 @@ function _defineProperty(e, r, t) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "../../node_modules/@babel/runtime/helpers/esm/toPrimitive.js":
+/***/ "../../node_modules/@babel/runtime/helpers/esm/toPrimitive.js"
 /*!********************************************************************!*\
   !*** ../../node_modules/@babel/runtime/helpers/esm/toPrimitive.js ***!
   \********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -55,13 +55,13 @@ function toPrimitive(t, r) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "../../node_modules/@babel/runtime/helpers/esm/toPropertyKey.js":
+/***/ "../../node_modules/@babel/runtime/helpers/esm/toPropertyKey.js"
 /*!**********************************************************************!*\
   !*** ../../node_modules/@babel/runtime/helpers/esm/toPropertyKey.js ***!
   \**********************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -77,13 +77,13 @@ function toPropertyKey(t) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "../../node_modules/@babel/runtime/helpers/esm/typeof.js":
+/***/ "../../node_modules/@babel/runtime/helpers/esm/typeof.js"
 /*!***************************************************************!*\
   !*** ../../node_modules/@babel/runtime/helpers/esm/typeof.js ***!
   \***************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -100,13 +100,13 @@ function _typeof(o) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "../../node_modules/dlv/index.js":
+/***/ "../../node_modules/dlv/index.js"
 /*!***************************************!*\
   !*** ../../node_modules/dlv/index.js ***!
   \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -121,13 +121,13 @@ function dlv(obj, key, def, p, undef) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "../../node_modules/dset/dist/index.mjs":
+/***/ "../../node_modules/dset/dist/index.mjs"
 /*!**********************************************!*\
   !*** ../../node_modules/dset/dist/index.mjs ***!
   \**********************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -144,13 +144,13 @@ function dset(obj, keys, val) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "../../node_modules/fun-hooks/no-eval/index.js":
+/***/ "../../node_modules/fun-hooks/no-eval/index.js"
 /*!*****************************************************!*\
   !*** ../../node_modules/fun-hooks/no-eval/index.js ***!
   \*****************************************************/
-/***/ ((module) => {
+(module) {
 
 /*
 * @license MIT
@@ -472,13 +472,13 @@ function create(config) {
 module.exports = create;
 
 
-/***/ }),
+/***/ },
 
-/***/ "../../node_modules/klona/json/index.mjs":
+/***/ "../../node_modules/klona/json/index.mjs"
 /*!***********************************************!*\
   !*** ../../node_modules/klona/json/index.mjs ***!
   \***********************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -514,13 +514,13 @@ function klona(val) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./buildOptions.mjs":
+/***/ "./buildOptions.mjs"
 /*!**************************!*\
   !*** ./buildOptions.mjs ***!
   \**************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -542,7 +542,7 @@ function klona(val) {
   "skipCalls": {}
 });
 
-/***/ })
+/***/ }
 
 /******/ 	});
 /************************************************************************/
@@ -555,6 +555,12 @@ function klona(val) {
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
 /******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Check if module exists (development only)
+/******/ 		if (__webpack_modules__[moduleId] === undefined) {
+/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
@@ -725,11 +731,11 @@ function klona(val) {
 "use strict";
 (self["pbjsChunk"] = self["pbjsChunk"] || []).push([["chunk-core"],{
 
-/***/ "./src/Renderer.js":
+/***/ "./src/Renderer.js"
 /*!*************************!*\
   !*** ./src/Renderer.js ***!
   \*************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Renderer: () => (/* binding */ Renderer),
@@ -919,13 +925,13 @@ function isRendererPreferredFromAdUnit(adUnitCode) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/activities/activities.js":
+/***/ "./src/activities/activities.js"
 /*!**************************************!*\
   !*** ./src/activities/activities.js ***!
   \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ACTIVITY_ACCESS_DEVICE: () => (/* binding */ ACTIVITY_ACCESS_DEVICE),
@@ -1010,13 +1016,13 @@ const ACTIVITY_ACCESS_REQUEST_CREDENTIALS = 'accessRequestCredentials';
 const ACTIVITY_ADD_BID_RESPONSE = 'acceptBid';
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/activities/activityParams.js":
+/***/ "./src/activities/activityParams.js"
 /*!******************************************!*\
   !*** ./src/activities/activityParams.js ***!
   \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   activityParams: () => (/* binding */ activityParams)
@@ -1033,13 +1039,13 @@ const ACTIVITY_ADD_BID_RESPONSE = 'acceptBid';
 const activityParams = (0,_params_js__WEBPACK_IMPORTED_MODULE_1__.activityParamsBuilder)(alias => _adapterManager_js__WEBPACK_IMPORTED_MODULE_0__["default"].resolveAlias(alias));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/activities/modules.js":
+/***/ "./src/activities/modules.js"
 /*!***********************************!*\
   !*** ./src/activities/modules.js ***!
   \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   MODULE_TYPE_ANALYTICS: () => (/* binding */ MODULE_TYPE_ANALYTICS),
@@ -1054,13 +1060,13 @@ const MODULE_TYPE_RTD = 'rtd';
 const MODULE_TYPE_ANALYTICS = 'analytics';
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/activities/params.js":
+/***/ "./src/activities/params.js"
 /*!**********************************!*\
   !*** ./src/activities/params.js ***!
   \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ACTIVITY_PARAM_ADAPTER_CODE: () => (/* binding */ ACTIVITY_PARAM_ADAPTER_CODE),
@@ -1155,13 +1161,13 @@ function activityParamsBuilder(resolveAlias) {
 const buildActivityParams = (0,_hook_js__WEBPACK_IMPORTED_MODULE_1__.hook)('sync', params => params);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/activities/redactor.js":
+/***/ "./src/activities/redactor.js"
 /*!************************************!*\
   !*** ./src/activities/redactor.js ***!
   \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   redactor: () => (/* binding */ redactor)
@@ -1374,13 +1380,13 @@ const redactor = redactorFactory();
 });
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/activities/rules.js":
+/***/ "./src/activities/rules.js"
 /*!*********************************!*\
   !*** ./src/activities/rules.js ***!
   \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isActivityAllowed: () => (/* binding */ isActivityAllowed),
@@ -1505,13 +1511,13 @@ function ruleRegistry() {
 const [registerActivityControl, isActivityAllowed] = ruleRegistry();
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/adRendering.js":
+/***/ "./src/adRendering.js"
 /*!****************************!*\
   !*** ./src/adRendering.js ***!
   \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   deferRendering: () => (/* binding */ deferRendering),
@@ -1967,13 +1973,13 @@ function insertLocatorFrame() {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/adUnits.js":
+/***/ "./src/adUnits.js"
 /*!************************!*\
   !*** ./src/adUnits.js ***!
   \************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getAuctionsCounter: () => (/* binding */ getAuctionsCounter),
@@ -2066,13 +2072,13 @@ const getBidderWinsCounter = getter(WINS, true);
 const getAuctionsCounter = getter(AUCTIONS, false);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/adapter.js":
+/***/ "./src/adapter.js"
 /*!************************!*\
   !*** ./src/adapter.js ***!
   \************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Adapter)
@@ -2094,13 +2100,13 @@ function Adapter(code) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/adapterManager.js":
+/***/ "./src/adapterManager.js"
 /*!*******************************!*\
   !*** ./src/adapterManager.js ***!
   \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   activityParams: () => (/* binding */ activityParams),
@@ -2109,8 +2115,8 @@ function Adapter(code) {
 /* harmony export */ });
 /* unused harmony exports PBS_ADAPTER_NAME, PARTITIONS, dep, s2sActivityParams, filterBidsForAdUnit, setupAdUnitMediaTypes, _partitionBidders, partitionBidders */
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "../../node_modules/@babel/runtime/helpers/esm/defineProperty.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils.js */ "./src/utils/objects.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils.js */ "./src/utils.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils.js */ "./src/utils.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils.js */ "./src/utils/objects.js");
 /* harmony import */ var _native_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./native.js */ "./src/native.js");
 /* harmony import */ var _adapters_bidderFactory_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./adapters/bidderFactory.js */ "./src/adapters/bidderFactory.js");
 /* harmony import */ var _ajax_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ajax.js */ "./src/ajax.js");
@@ -2171,7 +2177,7 @@ const _analyticsRegistry = {};
 let _s2sConfigs = [];
 _config_js__WEBPACK_IMPORTED_MODULE_6__.config.getConfig('s2sConfig', config => {
   if (config && config.s2sConfig) {
-    _s2sConfigs = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.isArray)(config.s2sConfig) ? config.s2sConfig : [config.s2sConfig];
+    _s2sConfigs = (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.isArray)(config.s2sConfig) ? config.s2sConfig : [config.s2sConfig];
   }
 });
 const activityParams = (0,_activities_params_js__WEBPACK_IMPORTED_MODULE_18__.activityParamsBuilder)(alias => adapterManager.resolveAlias(alias));
@@ -2210,20 +2216,20 @@ function getBids(_ref) {
       var _bid$ortb2Imp$ext$tid, _bid$ortb2Imp, _adUnit$ortb2Imp, _mediaTypes$banner, _mediaTypes$video;
       const [tid, tidSource] = getTid(bid.bidder, adUnit.transactionId, (_bid$ortb2Imp$ext$tid = (_bid$ortb2Imp = bid.ortb2Imp) === null || _bid$ortb2Imp === void 0 || (_bid$ortb2Imp = _bid$ortb2Imp.ext) === null || _bid$ortb2Imp === void 0 ? void 0 : _bid$ortb2Imp.tid) !== null && _bid$ortb2Imp$ext$tid !== void 0 ? _bid$ortb2Imp$ext$tid : (_adUnit$ortb2Imp = adUnit.ortb2Imp) === null || _adUnit$ortb2Imp === void 0 || (_adUnit$ortb2Imp = _adUnit$ortb2Imp.ext) === null || _adUnit$ortb2Imp === void 0 ? void 0 : _adUnit$ortb2Imp.tid);
       bid = Object.assign({}, bid, {
-        ortb2Imp: (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.mergeDeep)({}, adUnit.ortb2Imp, bid.ortb2Imp, {
+        ortb2Imp: (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.mergeDeep)({}, adUnit.ortb2Imp, bid.ortb2Imp, {
           ext: {
             tid,
             tidSource
           }
         })
-      }, (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.getDefinedParams)(adUnit, ADUNIT_BID_PROPERTIES));
+      }, (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.getDefinedParams)(adUnit, ADUNIT_BID_PROPERTIES));
       const mediaTypes = bid.mediaTypes == null ? adUnit.mediaTypes : bid.mediaTypes;
-      if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.isValidMediaTypes)(mediaTypes)) {
+      if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.isValidMediaTypes)(mediaTypes)) {
         bid = Object.assign({}, bid, {
           mediaTypes
         });
       } else {
-        (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)("mediaTypes is not correctly configured for adunit ".concat(adUnit.code));
+        (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logError)("mediaTypes is not correctly configured for adunit ".concat(adUnit.code));
       }
       if (src === 'client') {
         (0,_adUnits_js__WEBPACK_IMPORTED_MODULE_8__.incrementBidderRequestsCounter)(adUnit.code, bidderCode);
@@ -2233,7 +2239,7 @@ function getBids(_ref) {
         transactionId: adUnit.transactionId,
         adUnitId: adUnit.adUnitId,
         sizes: (mediaTypes === null || mediaTypes === void 0 || (_mediaTypes$banner = mediaTypes.banner) === null || _mediaTypes$banner === void 0 ? void 0 : _mediaTypes$banner.sizes) || (mediaTypes === null || mediaTypes === void 0 || (_mediaTypes$video = mediaTypes.video) === null || _mediaTypes$video === void 0 ? void 0 : _mediaTypes$video.playerSize) || [],
-        bidId: bid.bid_id || (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.generateUUID)(),
+        bidId: bid.bid_id || (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.generateUUID)(),
         bidderRequestId,
         auctionId,
         src,
@@ -2247,7 +2253,7 @@ function getBids(_ref) {
       return bids;
     }, []));
     return result;
-  }, []).reduce(_utils_js__WEBPACK_IMPORTED_MODULE_2__.flatten, []).filter(val => val !== '');
+  }, []).reduce(_utils_js__WEBPACK_IMPORTED_MODULE_1__.flatten, []).filter(val => val !== '');
 }
 
 /**
@@ -2275,7 +2281,7 @@ const filterBidsForAdUnit = (0,_hook_js__WEBPACK_IMPORTED_MODULE_7__.hook)('sync
   }
 }, 'filterBidsForAdUnit');
 function getAdUnitCopyForPrebidServer(adUnits, s2sConfig) {
-  let adUnitsCopy = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.deepClone)(adUnits);
+  let adUnitsCopy = (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.deepClone)(adUnits);
   let hasModuleBids = false;
   adUnitsCopy.forEach(adUnit => {
     // filter out client side bids
@@ -2286,12 +2292,12 @@ function getAdUnitCopyForPrebidServer(adUnits, s2sConfig) {
     if (s2sBids.length === 1) {
       adUnit.s2sBid = s2sBids[0];
       hasModuleBids = true;
-      adUnit.ortb2Imp = (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.mergeDeep)({}, adUnit.s2sBid.ortb2Imp, adUnit.ortb2Imp);
+      adUnit.ortb2Imp = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.mergeDeep)({}, adUnit.s2sBid.ortb2Imp, adUnit.ortb2Imp);
     } else if (s2sBids.length > 1) {
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)('Multiple "module" bids for the same s2s configuration; all will be ignored', s2sBids);
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logWarn)('Multiple "module" bids for the same s2s configuration; all will be ignored', s2sBids);
     }
     adUnit.bids = filterBidsForAdUnit(adUnit.bids, s2sConfig).map(bid => {
-      bid.bid_id = (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.getUniqueIdentifierStr)();
+      bid.bid_id = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.getUniqueIdentifierStr)();
       return bid;
     });
   });
@@ -2309,7 +2315,7 @@ function getAdUnitCopyForPrebidServer(adUnits, s2sConfig) {
   };
 }
 function getAdUnitCopyForClientAdapters(adUnits) {
-  let adUnitsClientCopy = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.deepClone)(adUnits);
+  let adUnitsClientCopy = (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.deepClone)(adUnits);
   adUnitsClientCopy.forEach(adUnit => {
     adUnit.bids = filterBidsForAdUnit(adUnit.bids, null);
   });
@@ -2338,7 +2344,7 @@ const setupAdUnitMediaTypes = (0,_hook_js__WEBPACK_IMPORTED_MODULE_7__.hook)('sy
  *                        as defined in `s2sConfigs`
  */
 function getS2SBidderSet(s2sConfigs) {
-  if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.isArray)(s2sConfigs)) s2sConfigs = [s2sConfigs];
+  if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.isArray)(s2sConfigs)) s2sConfigs = [s2sConfigs];
   // `null` represents the "no bid bidder" - when an ad unit is meant only for S2S adapters, like stored impressions
   const serverBidders = new Set([null]);
   s2sConfigs.filter(s2s => s2s && s2s.enabled).flatMap(s2s => s2s.bidders).forEach(bidder => serverBidders.add(bidder));
@@ -2357,7 +2363,7 @@ function _partitionBidders(adUnits, s2sConfigs) {
     getS2SBidders = getS2SBidderSet
   } = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
   const serverBidders = getS2SBidders(s2sConfigs);
-  return (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.getBidderCodes)(adUnits).reduce((memo, bidder) => {
+  return (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.getBidderCodes)(adUnits).reduce((memo, bidder) => {
     const partition = serverBidders.has(bidder) ? PARTITIONS.SERVER : PARTITIONS.CLIENT;
     memo[partition].push(bidder);
     return memo;
@@ -2382,7 +2388,7 @@ function tidFactory() {
           tids[bidderCode] = {};
         }
         if (!tids[bidderCode].hasOwnProperty(saneTid)) {
-          tids[bidderCode][saneTid] = "u".concat((0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.generateUUID)());
+          tids[bidderCode][saneTid] = "u".concat((0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.generateUUID)());
         }
         return tids[bidderCode][saneTid];
       };
@@ -2411,7 +2417,7 @@ const adapterManager = {
     if (true) {
       (0,_native_js__WEBPACK_IMPORTED_MODULE_3__.decorateAdUnitsWithNativeParams)(adUnits);
     }
-    adUnits.map(adUnit => adUnit.code).filter(_utils_js__WEBPACK_IMPORTED_MODULE_2__.uniques).forEach(_adUnits_js__WEBPACK_IMPORTED_MODULE_8__.incrementAuctionsCounter);
+    adUnits.map(adUnit => adUnit.code).filter(_utils_js__WEBPACK_IMPORTED_MODULE_1__.uniques).forEach(_adUnits_js__WEBPACK_IMPORTED_MODULE_8__.incrementAuctionsCounter);
     const ortb2 = ortb2Fragments.global || {};
     const bidderOrtb2 = ortb2Fragments.bidder || {};
     const getTid = tidFactory();
@@ -2429,7 +2435,7 @@ const adapterManager = {
           return [fpdCache[cacheKey], redact];
         }
         const [tid, tidSource] = getTid(bidderCode, auctionId, (_bidderOrtb2$bidderCo = (_bidderOrtb2$bidderCo2 = bidderOrtb2[bidderCode]) === null || _bidderOrtb2$bidderCo2 === void 0 || (_bidderOrtb2$bidderCo2 = _bidderOrtb2$bidderCo2.source) === null || _bidderOrtb2$bidderCo2 === void 0 ? void 0 : _bidderOrtb2$bidderCo2.tid) !== null && _bidderOrtb2$bidderCo !== void 0 ? _bidderOrtb2$bidderCo : (_ortb2$source = ortb2.source) === null || _ortb2$source === void 0 ? void 0 : _ortb2$source.tid);
-        const fpd = Object.freeze(redact.ortb2((0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.mergeDeep)({}, ortb2, bidderOrtb2[bidderCode], {
+        const fpd = Object.freeze(redact.ortb2((0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.mergeDeep)({}, ortb2, bidderOrtb2[bidderCode], {
           source: {
             tid,
             ext: {
@@ -2447,7 +2453,7 @@ const adapterManager = {
     } = partitionBidders(adUnits, _s2sConfigs);
     const allowedBidders = new Set();
     adUnits.forEach(au => {
-      if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(au.mediaTypes)) {
+      if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.isPlainObject)(au.mediaTypes)) {
         au.mediaTypes = {};
       }
 
@@ -2475,7 +2481,7 @@ const adapterManager = {
     serverBidders = serverBidders.filter(bidder => allowedBidders.has(bidder));
     adUnits = setupAdUnitMediaTypes(adUnits, labels);
     if (_config_js__WEBPACK_IMPORTED_MODULE_6__.config.getConfig('bidderSequence') === _config_js__WEBPACK_IMPORTED_MODULE_6__.RANDOM) {
-      clientBidders = (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.shuffle)(clientBidders);
+      clientBidders = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.shuffle)(clientBidders);
     }
     const refererInfo = (0,_refererDetection_js__WEBPACK_IMPORTED_MODULE_9__.getRefererInfo)();
     const bidRequests = [];
@@ -2491,7 +2497,7 @@ const adapterManager = {
     const pbjsInstance = (0,_prebidGlobal_js__WEBPACK_IMPORTED_MODULE_21__.getGlobal)();
     function getPageViewIdForBidder(bidderCode) {
       if (!pbjsInstance.pageViewIdPerBidder.has(bidderCode)) {
-        pbjsInstance.pageViewIdPerBidder.set(bidderCode, (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.generateUUID)());
+        pbjsInstance.pageViewIdPerBidder.set(bidderCode, (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.generateUUID)());
       }
       return pbjsInstance.pageViewIdPerBidder.get(bidderCode);
     }
@@ -2504,9 +2510,9 @@ const adapterManager = {
         } = getAdUnitCopyForPrebidServer(adUnits, s2sConfig);
 
         // uniquePbsTid is so we know which server to send which bids to during the callBids function
-        const uniquePbsTid = (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.generateUUID)();
+        const uniquePbsTid = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.generateUUID)();
         (serverBidders.length === 0 && hasModuleBids ? [null] : serverBidders).forEach(bidderCode => {
-          const bidderRequestId = (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.generateUUID)();
+          const bidderRequestId = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.generateUUID)();
           const pageViewId = getPageViewIdForBidder(bidderCode);
           const metrics = auctionMetrics.fork();
           const bidderRequest = addOrtb2({
@@ -2519,7 +2525,7 @@ const adapterManager = {
               bidderCode,
               auctionId,
               bidderRequestId,
-              'adUnits': (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.deepClone)(adUnitsS2SCopy),
+              'adUnits': (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.deepClone)(adUnitsS2SCopy),
               src: _constants_js__WEBPACK_IMPORTED_MODULE_12__.S2S.SRC,
               metrics,
               getTid
@@ -2554,7 +2560,7 @@ const adapterManager = {
     const adUnitsClientCopy = getAdUnitCopyForClientAdapters(adUnits);
     clientBidders.forEach(bidderCode => {
       var _adapter$getSpec;
-      const bidderRequestId = (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.generateUUID)();
+      const bidderRequestId = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.generateUUID)();
       const pageViewId = getPageViewIdForBidder(bidderCode);
       const metrics = auctionMetrics.fork();
       const adapter = _bidderRegistry[bidderCode];
@@ -2567,7 +2573,7 @@ const adapterManager = {
           bidderCode,
           auctionId,
           bidderRequestId,
-          'adUnits': (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.deepClone)(adUnitsClientCopy),
+          'adUnits': (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.deepClone)(adUnitsClientCopy),
           src: 'client',
           metrics,
           getTid
@@ -2580,7 +2586,7 @@ const adapterManager = {
         alwaysHasCapacity: adapter === null || adapter === void 0 || (_adapter$getSpec = adapter.getSpec) === null || _adapter$getSpec === void 0 ? void 0 : _adapter$getSpec.call(adapter).alwaysHasCapacity
       });
       if (!adapter) {
-        (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)("Trying to make a request for bidder that does not exist: ".concat(bidderCode));
+        (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logError)("Trying to make a request for bidder that does not exist: ".concat(bidderCode));
       }
       if (adapter && bidderRequest.bids && bidderRequest.bids.length !== 0) {
         bidRequests.push(bidderRequest);
@@ -2602,7 +2608,7 @@ const adapterManager = {
   callBids(adUnits, bidRequests, addBidResponse, doneCb, requestCallbacks, requestBidsTimeout, onTimelyResponse) {
     let ortb2Fragments = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : {};
     if (!bidRequests.length) {
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)('callBids executed with no bidRequests.  Were they filtered by labels or sizing?');
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logWarn)('callBids executed with no bidRequests.  Were they filtered by labels or sizing?');
       return;
     }
     const [clientBidderRequests, serverBidderRequests] = bidRequests.reduce((partitions, bidRequest) => {
@@ -2644,7 +2650,7 @@ const adapterManager = {
           };
           if (s2sBidRequest.ad_units.length) {
             const doneCbs = uniqueServerRequests.map(bidRequest => {
-              bidRequest.start = (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.timestamp)();
+              bidRequest.start = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.timestamp)();
               return function (timedOut) {
                 if (!timedOut) {
                   onTimelyResponse(bidRequest.bidderRequestId);
@@ -2655,8 +2661,8 @@ const adapterManager = {
                 doneCb.apply(bidRequest, [timedOut, ...args]);
               };
             });
-            const bidders = (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.getBidderCodes)(s2sBidRequest.ad_units).filter(bidder => adaptersServerSide.includes(bidder));
-            (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logMessage)("CALLING S2S HEADER BIDDERS ==== ".concat(bidders.length > 0 ? bidders.join(', ') : 'No bidder specified, using "ortb2Imp" definition(s) only'));
+            const bidders = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.getBidderCodes)(s2sBidRequest.ad_units).filter(bidder => adaptersServerSide.includes(bidder));
+            (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logMessage)("CALLING S2S HEADER BIDDERS ==== ".concat(bidders.length > 0 ? bidders.join(', ') : 'No bidder specified, using "ortb2Imp" definition(s) only'));
 
             // fire BID_REQUESTED event for each s2s bidRequest
             uniqueServerRequests.forEach(bidRequest => {
@@ -2670,7 +2676,7 @@ const adapterManager = {
             s2sAdapter.callBids(s2sBidRequest, serverBidderRequests, addBidResponse, timedOut => doneCbs.forEach(done => done(timedOut)), s2sAjax);
           }
         } else {
-          (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)('missing ' + s2sConfig.adapter);
+          (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logError)('missing ' + s2sConfig.adapter);
         }
         counter++;
       }
@@ -2678,10 +2684,10 @@ const adapterManager = {
 
     // handle client adapter requests
     clientBidderRequests.forEach(bidderRequest => {
-      bidderRequest.start = (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.timestamp)();
+      bidderRequest.start = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.timestamp)();
       const adapter = _bidderRegistry[bidderRequest.bidderCode];
       _config_js__WEBPACK_IMPORTED_MODULE_6__.config.runWithBidder(bidderRequest.bidderCode, () => {
-        (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logMessage)("CALLING BIDDER");
+        (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logMessage)("CALLING BIDDER");
         _events_js__WEBPACK_IMPORTED_MODULE_11__.emit(_constants_js__WEBPACK_IMPORTED_MODULE_12__.EVENTS.BID_REQUESTED, bidderRequest);
       });
       const ajax = (0,_ajax_js__WEBPACK_IMPORTED_MODULE_5__.ajaxBuilder)(requestBidsTimeout, requestCallbacks ? {
@@ -2692,7 +2698,7 @@ const adapterManager = {
       try {
         _config_js__WEBPACK_IMPORTED_MODULE_6__.config.runWithBidder(bidderRequest.bidderCode, adapter.callBids.bind(adapter, bidderRequest, addBidResponse, adapterDone, ajax, () => onTimelyResponse(bidderRequest.bidderRequestId), _config_js__WEBPACK_IMPORTED_MODULE_6__.config.callbackWithBidder(bidderRequest.bidderCode)));
       } catch (e) {
-        (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)("".concat(bidderRequest.bidderCode, " Bid Adapter emitted an uncaught error when parsing their bidRequest"), {
+        (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logError)("".concat(bidderRequest.bidderCode, " Bid Adapter emitted an uncaught error when parsing their bidRequest"), {
           e,
           bidRequest: bidderRequest
         });
@@ -2717,10 +2723,10 @@ const adapterManager = {
           _native_js__WEBPACK_IMPORTED_MODULE_3__.nativeAdapters.push(bidderCode);
         }
       } else {
-        (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)('Bidder adaptor error for bidder code: ' + bidderCode + 'bidder must implement a callBids() function');
+        (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logError)('Bidder adaptor error for bidder code: ' + bidderCode + 'bidder must implement a callBids() function');
       }
     } else {
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)('bidAdapter or bidderCode not specified');
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logError)('bidAdapter or bidderCode not specified');
     }
   },
   aliasBidAdapter(bidderCode, alias, options) {
@@ -2741,7 +2747,7 @@ const adapterManager = {
           }
         });
         nonS2SAlias.forEach(bidderCode => {
-          (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)('bidderCode "' + bidderCode + '" is not an existing bidder.', 'adapterManager.aliasBidAdapter');
+          (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logError)('bidderCode "' + bidderCode + '" is not an existing bidder.', 'adapterManager.aliasBidAdapter');
         });
       } else {
         try {
@@ -2759,7 +2765,7 @@ const adapterManager = {
             const spec = bidAdapter.getSpec();
             const gvlid = useBaseGvlid ? spec.gvlid : options === null || options === void 0 ? void 0 : options.gvlid;
             if (gvlid == null && spec.gvlid != null) {
-              (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("Alias '".concat(alias, "' will NOT re-use the GVL ID of the original adapter ('").concat(spec.code, "', gvlid: ").concat(spec.gvlid, "). Functionality that requires TCF consent may not work as expected."));
+              (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logWarn)("Alias '".concat(alias, "' will NOT re-use the GVL ID of the original adapter ('").concat(spec.code, "', gvlid: ").concat(spec.gvlid, "). Functionality that requires TCF consent may not work as expected."));
             }
             const skipPbsAliasing = options && options.skipPbsAliasing;
             newAdapter = (0,_adapters_bidderFactory_js__WEBPACK_IMPORTED_MODULE_4__.newBidder)(Object.assign({}, spec, {
@@ -2773,11 +2779,11 @@ const adapterManager = {
             supportedMediaTypes
           });
         } catch (e) {
-          (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)(bidderCode + ' bidder does not currently support aliasing.', 'adapterManager.aliasBidAdapter');
+          (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logError)(bidderCode + ' bidder does not currently support aliasing.', 'adapterManager.aliasBidAdapter');
         }
       }
     } else {
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logMessage)('alias name "' + alias + '" has been already specified.');
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logMessage)('alias name "' + alias + '" has been already specified.');
     }
   },
   resolveAlias(alias) {
@@ -2804,14 +2810,14 @@ const adapterManager = {
         };
         _consentHandler_js__WEBPACK_IMPORTED_MODULE_10__.GDPR_GVLIDS.register(_activities_modules_js__WEBPACK_IMPORTED_MODULE_15__.MODULE_TYPE_ANALYTICS, code, gvlid);
       } else {
-        (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)("Prebid Error: Analytics adaptor error for analytics \"".concat(code, "\"\n        analytics adapter must implement an enableAnalytics() function"));
+        (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logError)("Prebid Error: Analytics adaptor error for analytics \"".concat(code, "\"\n        analytics adapter must implement an enableAnalytics() function"));
       }
     } else {
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)('Prebid Error: analyticsAdapter or analyticsCode not specified');
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logError)('Prebid Error: analyticsAdapter or analyticsCode not specified');
     }
   },
   enableAnalytics(config) {
-    if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.isArray)(config)) {
+    if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.isArray)(config)) {
       config = [config];
     }
     config.forEach(adapterConfig => {
@@ -2823,7 +2829,7 @@ const adapterManager = {
           entry.adapter.enableAnalytics(adapterConfig);
         }
       } else {
-        (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)("Prebid Error: no analytics adapter found in registry for '".concat(adapterConfig.provider, "'."));
+        (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logError)("Prebid Error: no analytics adapter found in registry for '".concat(adapterConfig.provider, "'."));
       }
     });
   },
@@ -2836,18 +2842,18 @@ const adapterManager = {
   callTimedOutBidders(adUnits, timedOutBidders, cbTimeout) {
     timedOutBidders = timedOutBidders.map(timedOutBidder => {
       // Adding user configured params & timeout to timeout event data
-      timedOutBidder.params = (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.getUserConfiguredParams)(adUnits, timedOutBidder.adUnitCode, timedOutBidder.bidder);
+      timedOutBidder.params = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.getUserConfiguredParams)(adUnits, timedOutBidder.adUnitCode, timedOutBidder.bidder);
       timedOutBidder.timeout = cbTimeout;
       return timedOutBidder;
     });
-    timedOutBidders = (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.groupBy)(timedOutBidders, 'bidder');
+    timedOutBidders = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.groupBy)(timedOutBidders, 'bidder');
     Object.keys(timedOutBidders).forEach(bidder => {
       tryCallBidderMethod(bidder, 'onTimeout', timedOutBidders[bidder]);
     });
   },
   callBidWonBidder(bidder, bid, adUnits) {
     // Adding user configured params to bidWon event data
-    bid.params = (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.getUserConfiguredParams)(adUnits, bid.adUnitCode, bid.bidder);
+    bid.params = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.getUserConfiguredParams)(adUnits, bid.adUnitCode, bid.bidder);
     (0,_adUnits_js__WEBPACK_IMPORTED_MODULE_8__.incrementBidderWinsCounter)(bid.adUnitCode, bid.bidder);
     tryCallBidderMethod(bidder, 'onBidWon', bid);
   },
@@ -2857,7 +2863,7 @@ const adapterManager = {
       if (!BILLED.has(bid)) {
         var _parseEventTrackers$E;
         BILLED.add(bid);
-        (((_parseEventTrackers$E = (0,_eventTrackers_js__WEBPACK_IMPORTED_MODULE_20__.parseEventTrackers)(bid.eventtrackers)[_eventTrackers_js__WEBPACK_IMPORTED_MODULE_20__.EVENT_TYPE_IMPRESSION]) === null || _parseEventTrackers$E === void 0 ? void 0 : _parseEventTrackers$E[_eventTrackers_js__WEBPACK_IMPORTED_MODULE_20__.TRACKER_METHOD_IMG]) || []).forEach(url => _utils_js__WEBPACK_IMPORTED_MODULE_2__.internal.triggerPixel(url));
+        (((_parseEventTrackers$E = (0,_eventTrackers_js__WEBPACK_IMPORTED_MODULE_20__.parseEventTrackers)(bid.eventtrackers)[_eventTrackers_js__WEBPACK_IMPORTED_MODULE_20__.EVENT_TYPE_IMPRESSION]) === null || _parseEventTrackers$E === void 0 ? void 0 : _parseEventTrackers$E[_eventTrackers_js__WEBPACK_IMPORTED_MODULE_20__.TRACKER_METHOD_IMG]) || []).forEach(url => _utils_js__WEBPACK_IMPORTED_MODULE_1__.internal.triggerPixel(url));
         tryCallBidderMethod(bid.bidder, 'onBidBillable', bid);
       }
     };
@@ -2909,7 +2915,7 @@ const adapterManager = {
         try {
           fn.apply(entry.adapter, args);
         } catch (e) {
-          (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)("error calling ".concat(method, " of ").concat(name), e);
+          (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logError)("error calling ".concat(method, " of ").concat(name), e);
         }
       }
     });
@@ -2930,13 +2936,13 @@ function getBidderMethod(bidder, method) {
 }
 function invokeBidderMethod(bidder, method, spec, fn) {
   try {
-    (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("Invoking ".concat(bidder, ".").concat(method));
+    (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logInfo)("Invoking ".concat(bidder, ".").concat(method));
     for (var _len3 = arguments.length, params = new Array(_len3 > 4 ? _len3 - 4 : 0), _key3 = 4; _key3 < _len3; _key3++) {
       params[_key3 - 4] = arguments[_key3];
     }
     _config_js__WEBPACK_IMPORTED_MODULE_6__.config.runWithBidder(bidder, fn.bind(spec, ...params));
   } catch (e) {
-    (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("Error calling ".concat(method, " of ").concat(bidder));
+    (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logWarn)("Error calling ".concat(method, " of ").concat(bidder));
   }
 }
 function tryCallBidderMethod(bidder, method, param) {
@@ -2958,13 +2964,13 @@ function resolveAlias(alias) {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (adapterManager);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/adapters/bidderFactory.js":
+/***/ "./src/adapters/bidderFactory.js"
 /*!***************************************!*\
   !*** ./src/adapters/bidderFactory.js ***!
   \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   newBidder: () => (/* binding */ newBidder),
@@ -2980,8 +2986,8 @@ function resolveAlias(alias) {
 /* harmony import */ var _video_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../video.js */ "./src/video.js");
 /* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../constants.js */ "./src/constants.js");
 /* harmony import */ var _events_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../events.js */ "./src/events.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils.js */ "./src/utils/objects.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../utils.js */ "./src/utils.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils.js */ "./src/utils.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../utils.js */ "./src/utils/objects.js");
 /* harmony import */ var _hook_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../hook.js */ "./src/hook.js");
 /* harmony import */ var _auctionManager_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../auctionManager.js */ "./src/auctionManager.js");
 /* harmony import */ var _bidderSettings_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../bidderSettings.js */ "./src/bidderSettings.js");
@@ -3091,7 +3097,7 @@ function registerBidder(spec) {
       let aliasCode = alias;
       let gvlid;
       let skipPbsAliasing;
-      if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.isPlainObject)(alias)) {
+      if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.isPlainObject)(alias)) {
         aliasCode = alias.code;
         gvlid = alias.gvlid;
         skipPbsAliasing = alias.skipPbsAliasing;
@@ -3105,7 +3111,7 @@ function registerBidder(spec) {
     });
   }
 }
-const guardTids = (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.memoize)(_ref => {
+const guardTids = (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.memoize)(_ref => {
   let {
     bidderCode
   } = _ref;
@@ -3128,7 +3134,7 @@ const guardTids = (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.memoize)(_ref => {
     });
     return proxy;
   }
-  const bidRequest = (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.memoize)(br => privateAccessProxy(br, {
+  const bidRequest = (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.memoize)(br => privateAccessProxy(br, {
     get
   }), arg => arg.bidId);
   /**
@@ -3207,7 +3213,7 @@ function newBidder(spec) {
           if (bidRequest) {
             addPaapiConfig(bidRequest, paapiConfig);
           } else {
-            (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.logWarn)('Received fledge auction configuration for an unknown bidId', paapiConfig);
+            (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.logWarn)('Received fledge auction configuration for an unknown bidId', paapiConfig);
           }
         },
         // If the server responds with an error, there's not much we can do beside logging.
@@ -3220,7 +3226,7 @@ function newBidder(spec) {
             error,
             bidderRequest
           });
-          (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.logError)("Server call for ".concat(spec.code, " failed: ").concat(errorMessage, " ").concat(error.status, ". Continuing without bids."), {
+          (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.logError)("Server call for ".concat(spec.code, " failed: ").concat(errorMessage, " ").concat(error.status, ". Continuing without bids."), {
             bidRequests: validBidRequests
           });
         },
@@ -3231,7 +3237,7 @@ function newBidder(spec) {
             var _bidResponse$deferRen;
             bid.adapterCode = bidRequest.bidder;
             if (isInvalidAlternateBidder(bidResponse.bidderCode, bidRequest.bidder)) {
-              (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.logWarn)("".concat(bidResponse.bidderCode, " is not a registered partner or known bidder of ").concat(bidRequest.bidder, ", hence continuing without bid. If you wish to support this bidder, please mark allowAlternateBidderCodes as true in bidderSettings."));
+              (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.logWarn)("".concat(bidResponse.bidderCode, " is not a registered partner or known bidder of ").concat(bidRequest.bidder, ", hence continuing without bid. If you wish to support this bidder, please mark allowAlternateBidderCodes as true in bidderSettings."));
               addBidResponse.reject(bidRequest.adUnitCode, bidResponse, _constants_js__WEBPACK_IMPORTED_MODULE_7__.REJECTION_REASON.BIDDER_DISALLOWED);
               return;
             }
@@ -3241,10 +3247,10 @@ function newBidder(spec) {
             bid.meta = bidResponse.meta || Object.assign({}, bidResponse[bidRequest.bidder]);
             bid.deferBilling = bidRequest.deferBilling;
             bid.deferRendering = bid.deferBilling && ((_bidResponse$deferRen = bidResponse.deferRendering) !== null && _bidResponse$deferRen !== void 0 ? _bidResponse$deferRen : typeof spec.onBidBillable !== 'function');
-            const prebidBid = Object.assign((0,_bidfactory_js__WEBPACK_IMPORTED_MODULE_3__.createBid)(bidRequest), bid, (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.pick)(bidRequest, Object.keys(TIDS)));
+            const prebidBid = Object.assign((0,_bidfactory_js__WEBPACK_IMPORTED_MODULE_3__.createBid)(bidRequest), bid, (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.pick)(bidRequest, Object.keys(TIDS)));
             addBidWithCode(bidRequest.adUnitCode, prebidBid);
           } else {
-            (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.logWarn)("Bidder ".concat(spec.code, " made bid for unknown request ID: ").concat(bidResponse.requestId, ". Ignoring."));
+            (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.logWarn)("Bidder ".concat(spec.code, " made bid for unknown request ID: ").concat(bidResponse.requestId, ". Ignoring."));
             addBidResponse.reject(null, bidResponse, _constants_js__WEBPACK_IMPORTED_MODULE_7__.REJECTION_REASON.INVALID_REQUEST_ID);
           }
         },
@@ -3256,8 +3262,8 @@ function newBidder(spec) {
     const allowAlternateBidderCodes = _bidderSettings_js__WEBPACK_IMPORTED_MODULE_13__.bidderSettings.get(requestBidder, 'allowAlternateBidderCodes') || false;
     let alternateBiddersList = _bidderSettings_js__WEBPACK_IMPORTED_MODULE_13__.bidderSettings.get(requestBidder, 'allowedAlternateBidderCodes');
     if (!!responseBidder && !!requestBidder && requestBidder !== responseBidder) {
-      alternateBiddersList = (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.isArray)(alternateBiddersList) ? alternateBiddersList.map(val => val.trim().toLowerCase()).filter(val => !!val).filter(_utils_js__WEBPACK_IMPORTED_MODULE_10__.uniques) : alternateBiddersList;
-      if (!allowAlternateBidderCodes || (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.isArray)(alternateBiddersList) && alternateBiddersList[0] !== '*' && !alternateBiddersList.includes(responseBidder)) {
+      alternateBiddersList = (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.isArray)(alternateBiddersList) ? alternateBiddersList.map(val => val.trim().toLowerCase()).filter(val => !!val).filter(_utils_js__WEBPACK_IMPORTED_MODULE_9__.uniques) : alternateBiddersList;
+      if (!allowAlternateBidderCodes || (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.isArray)(alternateBiddersList) && alternateBiddersList[0] !== '*' && !alternateBiddersList.includes(responseBidder)) {
         return true;
       }
     }
@@ -3268,7 +3274,7 @@ function newBidder(spec) {
   }
   function filterAndWarn(bid) {
     if (!spec.isBidRequestValid(bid)) {
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.logWarn)("Invalid bid sent to bidder ".concat(spec.code, ": ").concat(JSON.stringify(bid)));
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.logWarn)("Invalid bid sent to bidder ".concat(spec.code, ": ").concat(JSON.stringify(bid)));
       return false;
     }
     return true;
@@ -3305,7 +3311,7 @@ const processBidderRequests = (0,_hook_js__WEBPACK_IMPORTED_MODULE_11__.hook)('a
     onCompletion();
     return;
   }
-  const requestDone = (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.delayExecution)(onCompletion, requests.length);
+  const requestDone = (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.delayExecution)(onCompletion, requests.length);
   requests.forEach(request => {
     var _request$options;
     const requestMetrics = metrics.fork();
@@ -3331,7 +3337,7 @@ const processBidderRequests = (0,_hook_js__WEBPACK_IMPORTED_MODULE_11__.hook)('a
       try {
         response = requestMetrics.measureTime('interpretResponse', () => spec.interpretResponse(response, request));
       } catch (err) {
-        (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.logError)("Bidder ".concat(spec.code, " failed to interpret the server's response. Continuing without bids"), null, err);
+        (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.logError)("Bidder ".concat(spec.code, " failed to interpret the server's response. Continuing without bids"), null, err);
         requestDone();
         return;
       }
@@ -3348,11 +3354,11 @@ const processBidderRequests = (0,_hook_js__WEBPACK_IMPORTED_MODULE_11__.hook)('a
       } else {
         bids = response;
       }
-      if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.isArray)(paapiConfigs)) {
+      if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.isArray)(paapiConfigs)) {
         paapiConfigs.forEach(onPaapi);
       }
       if (bids) {
-        if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.isArray)(bids)) {
+        if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.isArray)(bids)) {
           bids.forEach(addBid);
         } else {
           addBid(bids);
@@ -3372,7 +3378,7 @@ const processBidderRequests = (0,_hook_js__WEBPACK_IMPORTED_MODULE_11__.hook)('a
     });
     onRequest(request);
     const networkDone = requestMetrics.startTiming('net');
-    const debugMode = (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.getParameterByName)(_constants_js__WEBPACK_IMPORTED_MODULE_7__.DEBUG_MODE).toUpperCase() === 'TRUE' || (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.debugTurnedOn)();
+    const debugMode = (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.getParameterByName)(_constants_js__WEBPACK_IMPORTED_MODULE_7__.DEBUG_MODE).toUpperCase() === 'TRUE' || (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.debugTurnedOn)();
     function getOptions(defaults) {
       var _bidderSettings$get;
       const ro = request.options;
@@ -3408,10 +3414,10 @@ const processBidderRequests = (0,_hook_js__WEBPACK_IMPORTED_MODULE_11__.hook)('a
           }));
         };
         if (enableGZipCompression && debugMode) {
-          (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.logWarn)("Skipping GZIP compression for ".concat(spec.code, " as debug mode is enabled"));
+          (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.logWarn)("Skipping GZIP compression for ".concat(spec.code, " as debug mode is enabled"));
         }
-        if (enableGZipCompression && !debugMode && (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.isGzipCompressionSupported)()) {
-          (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.compressDataWithGZip)(request.data).then(compressedPayload => {
+        if (enableGZipCompression && !debugMode && (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.isGzipCompressionSupported)()) {
+          (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.compressDataWithGZip)(request.data).then(compressedPayload => {
             const url = new URL(request.url);
             if (!url.searchParams.has('gzip')) {
               url.searchParams.set('gzip', '1');
@@ -3429,12 +3435,12 @@ const processBidderRequests = (0,_hook_js__WEBPACK_IMPORTED_MODULE_11__.hook)('a
         }
         break;
       default:
-        (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.logWarn)("Skipping invalid request from ".concat(spec.code, ". Request type ").concat(request.method, " must be GET or POST"));
+        (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.logWarn)("Skipping invalid request from ".concat(spec.code, ". Request type ").concat(request.method, " must be GET or POST"));
         requestDone();
     }
     function formatGetParameters(data) {
       if (data) {
-        return "?".concat(typeof data === 'object' ? (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.parseQueryStringParameters)(data) : data);
+        return "?".concat(typeof data === 'object' ? (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.parseQueryStringParameters)(data) : data);
       }
       return '';
     }
@@ -3477,7 +3483,7 @@ function validBidSize(adUnitCode, bid) {
   const bidRequest = index.getBidRequest(bid);
   const mediaTypes = index.getMediaTypes(bid);
   const sizes = bidRequest && bidRequest.sizes || mediaTypes && mediaTypes.banner && mediaTypes.banner.sizes;
-  const parsedSizes = (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.parseSizesInput)(sizes);
+  const parsedSizes = (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.parseSizesInput)(sizes);
 
   // if a banner impression has one valid size, we assign that size to any bid
   // response that does not explicitly set width or height
@@ -3503,33 +3509,33 @@ function isValid(adUnitCode, bid) {
     return "Invalid bid from ".concat(bid.bidderCode, ". Ignoring bid: ").concat(msg);
   }
   if (!adUnitCode) {
-    (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.logWarn)('No adUnitCode was supplied to addBidResponse.');
+    (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.logWarn)('No adUnitCode was supplied to addBidResponse.');
     return false;
   }
   if (!bid) {
-    (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.logWarn)("Some adapter tried to add an undefined bid for ".concat(adUnitCode, "."));
+    (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.logWarn)("Some adapter tried to add an undefined bid for ".concat(adUnitCode, "."));
     return false;
   }
   if (!hasValidKeys()) {
-    (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.logError)(errorMessage("Bidder ".concat(bid.bidderCode, " is missing required params. Check http://prebid.org/dev-docs/bidder-adapter-1.html for list of params.")));
+    (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.logError)(errorMessage("Bidder ".concat(bid.bidderCode, " is missing required params. Check http://prebid.org/dev-docs/bidder-adapter-1.html for list of params.")));
     return false;
   }
   if ( true && bid.mediaType === 'native' && !(0,_native_js__WEBPACK_IMPORTED_MODULE_5__.nativeBidIsValid)(bid, {
     index
   })) {
-    (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.logError)(errorMessage('Native bid missing some required properties.'));
+    (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.logError)(errorMessage('Native bid missing some required properties.'));
     return false;
   }
   if ( true && bid.mediaType === 'video' && !(0,_video_js__WEBPACK_IMPORTED_MODULE_6__.isValidVideoBid)(bid, {
     index
   })) {
-    (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.logError)(errorMessage("Video bid does not have required vastUrl or renderer property"));
+    (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.logError)(errorMessage("Video bid does not have required vastUrl or renderer property"));
     return false;
   }
   if (bid.mediaType === 'banner' && !validBidSize(adUnitCode, bid, {
     index
   })) {
-    (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.logError)(errorMessage("Banner bids require a width and height"));
+    (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.logError)(errorMessage("Banner bids require a width and height"));
     return false;
   }
   return true;
@@ -3539,13 +3545,13 @@ function adapterMetrics(bidderRequest) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/adloader.js":
+/***/ "./src/adloader.js"
 /*!*************************!*\
   !*** ./src/adloader.js ***!
   \*************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   loadExternalScript: () => (/* binding */ loadExternalScript)
@@ -3660,13 +3666,13 @@ function loadExternalScript(url, moduleType, moduleCode, callback, doc, attribut
 ;
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/ajax.js":
+/***/ "./src/ajax.js"
 /*!*********************!*\
   !*** ./src/ajax.js ***!
   \*********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ajaxBuilder: () => (/* binding */ ajaxBuilder)
@@ -3896,13 +3902,13 @@ const ajax = ajaxBuilder();
 const fetch = fetcherFactory();
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/auction.js":
+/***/ "./src/auction.js"
 /*!************************!*\
   !*** ./src/auction.js ***!
   \************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   AUCTION_COMPLETED: () => (/* binding */ AUCTION_COMPLETED),
@@ -4766,13 +4772,13 @@ function isValidPrice(bid) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/auctionIndex.js":
+/***/ "./src/auctionIndex.js"
 /*!*****************************!*\
   !*** ./src/auctionIndex.js ***!
   \*****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   AuctionIndex: () => (/* binding */ AuctionIndex)
@@ -4869,13 +4875,13 @@ function AuctionIndex(getAuctions) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/auctionManager.js":
+/***/ "./src/auctionManager.js"
 /*!*******************************!*\
   !*** ./src/auctionManager.js ***!
   \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   auctionManager: () => (/* binding */ auctionManager)
@@ -5027,21 +5033,21 @@ function newAuctionManager() {
 const auctionManager = newAuctionManager();
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/audio.js":
+/***/ "./src/audio.js"
 /*!**********************!*\
   !*** ./src/audio.js ***!
   \**********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ORTB_AUDIO_PARAMS: () => (/* binding */ ORTB_AUDIO_PARAMS),
 /* harmony export */   fillAudioDefaults: () => (/* binding */ fillAudioDefaults)
 /* harmony export */ });
 /* unused harmony exports OUTSTREAM, INSTREAM, isValidAudioBid, checkAudioBidSetup */
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ "./src/utils/objects.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils.js */ "./src/utils.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ "./src/utils.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils.js */ "./src/utils/objects.js");
 /* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./config.js */ "./src/config.js");
 /* harmony import */ var _hook_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./hook.js */ "./src/hook.js");
 /* harmony import */ var _auctionManager_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./auctionManager.js */ "./src/auctionManager.js");
@@ -5053,7 +5059,7 @@ const auctionManager = newAuctionManager();
 
 const OUTSTREAM = 'outstream';
 const INSTREAM = 'instream';
-const ORTB_PARAMS = [['mimes', value => Array.isArray(value) && value.length > 0 && value.every(v => typeof v === 'string')], ['minduration', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['maxduration', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['startdelay', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['maxseq', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['poddur', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['protocols', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isArrayOfNums], ['battr', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isArrayOfNums], ['maxextended', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['minbitrate', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['maxbitrate', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['delivery', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isArrayOfNums], ['api', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isArrayOfNums], ['companiontype', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isArrayOfNums], ['feed', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['stitched', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['nvol', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger]];
+const ORTB_PARAMS = [['mimes', value => Array.isArray(value) && value.length > 0 && value.every(v => typeof v === 'string')], ['minduration', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['maxduration', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['startdelay', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['maxseq', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['poddur', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['protocols', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isArrayOfNums], ['battr', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isArrayOfNums], ['maxextended', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['minbitrate', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['maxbitrate', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['delivery', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isArrayOfNums], ['api', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isArrayOfNums], ['companiontype', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isArrayOfNums], ['feed', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['stitched', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['nvol', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger]];
 
 /**
  * List of OpenRTB 2.x audio object properties with simple validators.
@@ -5088,7 +5094,7 @@ const checkAudioBidSetup = (0,_hook_js__WEBPACK_IMPORTED_MODULE_3__.hook)('sync'
       useLocal
     } = _config_js__WEBPACK_IMPORTED_MODULE_2__.config.getConfig('cache') || {};
     if (!url && !useLocal && bid.vastXml && !bid.vastUrl) {
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logError)("\n        This bid contains only vastXml and will not work when a prebid cache url is not specified.\n        Try enabling either prebid cache with ".concat((0,_buildOptions_js__WEBPACK_IMPORTED_MODULE_5__.getGlobalVarName)(), ".setConfig({ cache: {url: \"...\"} });\n        or local cache with ").concat((0,_buildOptions_js__WEBPACK_IMPORTED_MODULE_5__.getGlobalVarName)(), ".setConfig({ cache: { useLocal: true }});\n      "));
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.logError)("\n        This bid contains only vastXml and will not work when a prebid cache url is not specified.\n        Try enabling either prebid cache with ".concat((0,_buildOptions_js__WEBPACK_IMPORTED_MODULE_5__.getGlobalVarName)(), ".setConfig({ cache: {url: \"...\"} });\n        or local cache with ").concat((0,_buildOptions_js__WEBPACK_IMPORTED_MODULE_5__.getGlobalVarName)(), ".setConfig({ cache: { useLocal: true }});\n      "));
       return false;
     }
     return !!(bid.vastUrl || bid.vastXml);
@@ -5102,13 +5108,13 @@ const checkAudioBidSetup = (0,_hook_js__WEBPACK_IMPORTED_MODULE_3__.hook)('sync'
 }, 'checkAudioBidSetup');
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/banner.js":
+/***/ "./src/banner.js"
 /*!***********************!*\
   !*** ./src/banner.js ***!
   \***********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ORTB_BANNER_PARAMS: () => (/* binding */ ORTB_BANNER_PARAMS)
@@ -5125,13 +5131,13 @@ const ORTB_PARAMS = [['format', value => Array.isArray(value) && value.length > 
 const ORTB_BANNER_PARAMS = new Map(ORTB_PARAMS);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/bidTTL.js":
+/***/ "./src/bidTTL.js"
 /*!***********************!*\
   !*** ./src/bidTTL.js ***!
   \***********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getBufferedTTL: () => (/* binding */ getBufferedTTL),
@@ -5172,21 +5178,21 @@ function onMinBidCacheTTLChange(listener) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/bidderSettings.js":
+/***/ "./src/bidderSettings.js"
 /*!*******************************!*\
   !*** ./src/bidderSettings.js ***!
   \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   bidderSettings: () => (/* binding */ bidderSettings)
 /* harmony export */ });
 /* unused harmony export ScopedSettings */
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "../../node_modules/@babel/runtime/helpers/esm/defineProperty.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils.js */ "../../node_modules/dlv/index.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils.js */ "./src/utils.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils.js */ "./src/utils.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils.js */ "../../node_modules/dlv/index.js");
 /* harmony import */ var _prebidGlobal_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./prebidGlobal.js */ "./src/prebidGlobal.js");
 /* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./constants.js */ "./src/constants.js");
 
@@ -5225,7 +5231,7 @@ class ScopedSettings {
    */
   getOwn(scope, path) {
     scope = _assertClassBrand(_ScopedSettings_brand, this, _resolveScope).call(this, scope);
-    return (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"])(this.getSettings(), "".concat(scope, ".").concat(path));
+    return (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__["default"])(this.getSettings(), "".concat(scope, ".").concat(path));
   }
 
   /**
@@ -5239,7 +5245,7 @@ class ScopedSettings {
    * @returns all settings in the given scope, merged with the settings for the default scope.
    */
   settingsFor(scope) {
-    return (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.mergeDeep)({}, this.ownSettingsFor(null), this.ownSettingsFor(scope));
+    return (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.mergeDeep)({}, this.ownSettingsFor(null), this.ownSettingsFor(scope));
   }
 
   /**
@@ -5260,13 +5266,13 @@ function _resolveScope(scope) {
 const bidderSettings = new ScopedSettings(() => (0,_prebidGlobal_js__WEBPACK_IMPORTED_MODULE_3__.getGlobal)().bidderSettings || {}, _constants_js__WEBPACK_IMPORTED_MODULE_4__.JSON_MAPPING.BD_SETTING_STANDARD);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/bidfactory.js":
+/***/ "./src/bidfactory.js"
 /*!***************************!*\
   !*** ./src/bidfactory.js ***!
   \***************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createBid: () => (/* binding */ createBid)
@@ -5328,13 +5334,13 @@ function createBid(identifiers) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/buildOptions.js":
+/***/ "./src/buildOptions.js"
 /*!*****************************!*\
   !*** ./src/buildOptions.js ***!
   \*****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getDistUrlBase: () => (/* binding */ getDistUrlBase),
@@ -5358,13 +5364,13 @@ function getDistUrlBase() {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/config.js":
+/***/ "./src/config.js"
 /*!***********************!*\
   !*** ./src/config.js ***!
   \***********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   RANDOM: () => (/* binding */ RANDOM),
@@ -5374,8 +5380,8 @@ function getDistUrlBase() {
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "../../node_modules/@babel/runtime/helpers/esm/defineProperty.js");
 /* harmony import */ var _cpmBucketManager_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cpmBucketManager.js */ "./src/cpmBucketManager.js");
 /* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils.js */ "./src/utils.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils.js */ "./src/utils/objects.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils.js */ "../../node_modules/dlv/index.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils.js */ "../../node_modules/dlv/index.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils.js */ "./src/utils/objects.js");
 /* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./constants.js */ "./src/constants.js");
 
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
@@ -5425,7 +5431,7 @@ function attachProperties(config) {
     const arrKeys = ['secondaryBidders'];
     const allKeys = [].concat(boolKeys).concat(arrKeys);
     return function validateauctionOptions(val) {
-      if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isPlainObject)(val)) {
+      if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isPlainObject)(val)) {
         (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)('Auction Options must be an object');
         return false;
       }
@@ -5435,15 +5441,15 @@ function attachProperties(config) {
           return false;
         }
         if (arrKeys.includes(k)) {
-          if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isArray)(val[k])) {
+          if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isArray)(val[k])) {
             (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("Auction Options ".concat(k, " must be of type Array"));
             return false;
-          } else if (!val[k].every(_utils_js__WEBPACK_IMPORTED_MODULE_3__.isStr)) {
+          } else if (!val[k].every(_utils_js__WEBPACK_IMPORTED_MODULE_4__.isStr)) {
             (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("Auction Options ".concat(k, " must be only string"));
             return false;
           }
         } else if (boolKeys.includes(k)) {
-          if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isBoolean)(val[k])) {
+          if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isBoolean)(val[k])) {
             (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("Auction Options ".concat(k, " must be of type boolean"));
             return false;
           }
@@ -5477,7 +5483,7 @@ function attachProperties(config) {
         if (validatePriceGranularity(val)) {
           if (typeof val === 'string') {
             setProp('priceGranularity', hasGranularity(val) ? val : GRANULARITY_OPTIONS.MEDIUM);
-          } else if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isPlainObject)(val)) {
+          } else if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isPlainObject)(val)) {
             setProp('customPriceBucket', val);
             setProp('priceGranularity', GRANULARITY_OPTIONS.CUSTOM);
             (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logMessage)('Using custom price granularity');
@@ -5492,7 +5498,7 @@ function attachProperties(config) {
           if (validatePriceGranularity(val[item])) {
             if (typeof val === 'string') {
               aggregate[item] = hasGranularity(val[item]) ? val[item] : getProp('priceGranularity');
-            } else if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isPlainObject)(val)) {
+            } else if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isPlainObject)(val)) {
               aggregate[item] = val[item];
               (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logMessage)("Using custom price granularity for ".concat(item));
             }
@@ -5542,7 +5548,7 @@ function attachProperties(config) {
       if (!hasGranularity(val)) {
         (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)('Prebid Warning: setPriceGranularity was called with invalid setting, using `medium` as default.');
       }
-    } else if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isPlainObject)(val)) {
+    } else if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isPlainObject)(val)) {
       if (!(0,_cpmBucketManager_js__WEBPACK_IMPORTED_MODULE_1__.isValidPriceConfig)(val)) {
         (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)('Invalid custom price value passed to `setPriceGranularity()`');
         return false;
@@ -5596,14 +5602,14 @@ function newConfig() {
    * @private
    */
   function _getConfig() {
-    if (currBidder && bidderConfig && (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isPlainObject)(bidderConfig[currBidder])) {
+    if (currBidder && bidderConfig && (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isPlainObject)(bidderConfig[currBidder])) {
       const curr = bidderConfig[currBidder];
       const topics = new Set([...Object.keys(config), ...Object.keys(curr)]);
       const merged = {};
       for (const topic of topics) {
         const base = config[topic];
         const override = curr[topic];
-        merged[topic] = override === undefined ? base : base === undefined ? override : (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isPlainObject)(override) ? (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.mergeDeep)({}, base, override) : override;
+        merged[topic] = override === undefined ? base : base === undefined ? override : (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isPlainObject)(override) ? (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.mergeDeep)({}, base, override) : override;
       }
       return merged;
     }
@@ -5635,7 +5641,7 @@ function newConfig() {
     return function getConfig() {
       if (arguments.length <= 1 && typeof (arguments.length <= 0 ? undefined : arguments[0]) !== 'function') {
         const option = arguments.length <= 0 ? undefined : arguments[0];
-        return option ? (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__["default"])(accessor(), option) : _getConfig();
+        return option ? (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__["default"])(accessor(), option) : _getConfig();
       }
       return subscribe(...arguments);
     };
@@ -5647,7 +5653,7 @@ function newConfig() {
     return function readConfig() {
       let res = wrapee(...arguments);
       if (res && typeof res === 'object') {
-        res = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.deepClone)(res);
+        res = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.deepClone)(res);
       }
       return res;
     };
@@ -5664,7 +5670,7 @@ function newConfig() {
    * Set configuration.
    */
   function setConfig(options) {
-    if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isPlainObject)(options)) {
+    if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isPlainObject)(options)) {
       (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)('setConfig options must be an object');
       return;
     }
@@ -5672,7 +5678,7 @@ function newConfig() {
     const topicalConfig = {};
     topics.forEach(topic => {
       let option = options[topic];
-      if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isPlainObject)(defaults[topic]) && (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isPlainObject)(option)) {
+      if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isPlainObject)(defaults[topic]) && (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isPlainObject)(option)) {
         option = Object.assign({}, defaults[topic], option);
       }
       try {
@@ -5689,7 +5695,7 @@ function newConfig() {
    * @param {object} options
    */
   function setDefaults(options) {
-    if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isPlainObject)(defaults)) {
+    if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isPlainObject)(defaults)) {
       (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)('defaults must be an object');
       return;
     }
@@ -5785,7 +5791,7 @@ function newConfig() {
         Object.keys(config.config).forEach(topic => {
           const option = config.config[topic];
           const currentConfig = bidderConfig[bidder][topic];
-          if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isPlainObject)(option) && (currentConfig == null || (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isPlainObject)(currentConfig))) {
+          if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isPlainObject)(option) && (currentConfig == null || (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isPlainObject)(currentConfig))) {
             const func = mergeFlag ? _utils_js__WEBPACK_IMPORTED_MODULE_2__.mergeDeep : Object.assign;
             bidderConfig[bidder][topic] = func({}, currentConfig || {}, option);
           } else {
@@ -5797,19 +5803,19 @@ function newConfig() {
       (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)(e);
     }
     function check(obj) {
-      if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isPlainObject)(obj)) {
+      if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isPlainObject)(obj)) {
         throw new Error('setBidderConfig bidder options must be an object');
       }
       if (!(Array.isArray(obj.bidders) && obj.bidders.length)) {
         throw new Error('setBidderConfig bidder options must contain a bidders list with at least 1 bidder');
       }
-      if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isPlainObject)(obj.config)) {
+      if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isPlainObject)(obj.config)) {
         throw new Error('setBidderConfig bidder options must contain a config object');
       }
     }
   }
   function mergeConfig(config) {
-    if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.isPlainObject)(config)) {
+    if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.isPlainObject)(config)) {
       (0,_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)('mergeConfig input must be an object');
       return;
     }
@@ -5879,13 +5885,13 @@ function newConfig() {
 const config = newConfig();
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/consentHandler.js":
+/***/ "./src/consentHandler.js"
 /*!*******************************!*\
   !*** ./src/consentHandler.js ***!
   \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   GDPR_GVLIDS: () => (/* binding */ GDPR_GVLIDS),
@@ -6150,13 +6156,13 @@ function multiHandler() {
 const allConsent = multiHandler();
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/constants.js":
+/***/ "./src/constants.js"
 /*!**************************!*\
   !*** ./src/constants.js ***!
   \**************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   AD_RENDER_FAILED_REASON: () => (/* binding */ AD_RENDER_FAILED_REASON),
@@ -6362,13 +6368,13 @@ const MESSAGES = {
 const PB_LOCATOR = '__pb_locator__';
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/cpmBucketManager.js":
+/***/ "./src/cpmBucketManager.js"
 /*!*********************************!*\
   !*** ./src/cpmBucketManager.js ***!
   \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getPriceBucketString: () => (/* binding */ getPriceBucketString),
@@ -6522,13 +6528,13 @@ function getCpmTarget(cpm, bucket, granularityMultiplier) {
 
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/creativeRenderers.js":
+/***/ "./src/creativeRenderers.js"
 /*!**********************************!*\
   !*** ./src/creativeRenderers.js ***!
   \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PUC_MIN_VERSION: () => (/* binding */ PUC_MIN_VERSION),
@@ -6575,13 +6581,13 @@ const getCreativeRenderer = function () {
 }();
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/debugging.js":
+/***/ "./src/debugging.js"
 /*!**************************!*\
   !*** ./src/debugging.js ***!
   \**************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   loadSession: () => (/* binding */ loadSession)
@@ -6722,13 +6728,13 @@ _config_js__WEBPACK_IMPORTED_MODULE_0__.config.getConfig('debugging', function (
 });
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/eventTrackers.js":
+/***/ "./src/eventTrackers.js"
 /*!******************************!*\
   !*** ./src/eventTrackers.js ***!
   \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   EVENT_TYPE_IMPRESSION: () => (/* binding */ EVENT_TYPE_IMPRESSION),
@@ -6767,13 +6773,13 @@ function parseEventTrackers(eventTrackers) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/events.js":
+/***/ "./src/events.js"
 /*!***********************!*\
   !*** ./src/events.js ***!
   \***********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   emit: () => (/* binding */ emit),
@@ -6947,13 +6953,13 @@ function clearEvents() {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/fpd/enrichment.js":
+/***/ "./src/fpd/enrichment.js"
 /*!*******************************!*\
   !*** ./src/fpd/enrichment.js ***!
   \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   enrichFPD: () => (/* binding */ enrichFPD)
@@ -7169,13 +7175,13 @@ function clientEnrichment(ortb2, ri) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/fpd/normalize.js":
+/***/ "./src/fpd/normalize.js"
 /*!******************************!*\
   !*** ./src/fpd/normalize.js ***!
   \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   normalizeFPD: () => (/* binding */ normalizeFPD)
@@ -7251,13 +7257,13 @@ function makeNormalizer(preferred, fallback, dest) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/fpd/oneClient.js":
+/***/ "./src/fpd/oneClient.js"
 /*!******************************!*\
   !*** ./src/fpd/oneClient.js ***!
   \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   CLIENT_SECTIONS: () => (/* binding */ CLIENT_SECTIONS),
@@ -7291,13 +7297,13 @@ function hasSection(ortb2, section) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/fpd/rootDomain.js":
+/***/ "./src/fpd/rootDomain.js"
 /*!*******************************!*\
   !*** ./src/fpd/rootDomain.js ***!
   \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   findRootDomain: () => (/* binding */ findRootDomain)
@@ -7338,13 +7344,13 @@ const findRootDomain = (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.memoize)(functi
 });
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/fpd/sua.js":
+/***/ "./src/fpd/sua.js"
 /*!************************!*\
   !*** ./src/fpd/sua.js ***!
   \************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getHighEntropySUA: () => (/* binding */ getHighEntropySUA),
@@ -7460,13 +7466,13 @@ function uaDataToSUA(source, uaData) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/hook.js":
+/***/ "./src/hook.js"
 /*!*********************!*\
   !*** ./src/hook.js ***!
   \*********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getHook: () => (/* binding */ getHook),
@@ -7566,13 +7572,13 @@ function ignoreCallbackArg(hook) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/mediaTypes.js":
+/***/ "./src/mediaTypes.js"
 /*!***************************!*\
   !*** ./src/mediaTypes.js ***!
   \***************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ADPOD: () => (/* binding */ ADPOD),
@@ -7597,13 +7603,13 @@ const AUDIO = 'audio';
 const ALL_MEDIATYPES = [NATIVE, VIDEO, BANNER, AUDIO];
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/native.js":
+/***/ "./src/native.js"
 /*!***********************!*\
   !*** ./src/native.js ***!
   \***********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   decorateAdUnitsWithNativeParams: () => (/* binding */ decorateAdUnitsWithNativeParams),
@@ -8393,13 +8399,13 @@ function inverse(obj) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/prebid.js":
+/***/ "./src/prebid.js"
 /*!***********************!*\
   !*** ./src/prebid.js ***!
   \***********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* unused harmony exports syncOrtb2, validateOrtbFields, adUnitSetupChecks, checkAdUnitSetup, addApiMethod, requestBids, startAuction, executeCallbacks, resetQueSetup */
 /* harmony import */ var _prebidGlobal_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./prebidGlobal.js */ "./src/prebidGlobal.js");
@@ -9496,13 +9502,13 @@ addApiMethod('refreshPageViewId', refreshPageViewId);
 /* unused harmony default export */ var __WEBPACK_DEFAULT_EXPORT__ = (pbjsInstance);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/prebidGlobal.js":
+/***/ "./src/prebidGlobal.js"
 /*!*****************************!*\
   !*** ./src/prebidGlobal.js ***!
   \*****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getGlobal: () => (/* binding */ getGlobal),
@@ -9530,13 +9536,13 @@ function registerModule(name) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/refererDetection.js":
+/***/ "./src/refererDetection.js"
 /*!*********************************!*\
   !*** ./src/refererDetection.js ***!
   \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getRefererInfo: () => (/* binding */ getRefererInfo),
@@ -9822,13 +9828,13 @@ function cacheWithLocation(fn) {
 const getRefererInfo = cacheWithLocation(detectReferer(window));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/secureCreatives.js":
+/***/ "./src/secureCreatives.js"
 /*!********************************!*\
   !*** ./src/secureCreatives.js ***!
   \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   listenMessagesFromCreative: () => (/* binding */ listenMessagesFromCreative)
@@ -10072,13 +10078,13 @@ function resizeRemoteCreative(_ref2) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/storageManager.js":
+/***/ "./src/storageManager.js"
 /*!*******************************!*\
   !*** ./src/storageManager.js ***!
   \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   canSetCookie: () => (/* binding */ canSetCookie),
@@ -10423,13 +10429,13 @@ function resetData() {
 const discloseStorageUse = (0,_hook_js__WEBPACK_IMPORTED_MODULE_8__.hook)('sync', (moduleName, disclosure) => {});
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/targeting.js":
+/***/ "./src/targeting.js"
 /*!**************************!*\
   !*** ./src/targeting.js ***!
   \**************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   filters: () => (/* binding */ filters),
@@ -10446,8 +10452,8 @@ const discloseStorageUse = (0,_hook_js__WEBPACK_IMPORTED_MODULE_8__.hook)('sync'
 /* harmony import */ var _hook_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./hook.js */ "./src/hook.js");
 /* harmony import */ var _mediaTypes_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./mediaTypes.js */ "./src/mediaTypes.js");
 /* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./utils.js */ "./src/utils.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./utils.js */ "./src/utils/objects.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./utils.js */ "../../node_modules/dlv/index.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./utils.js */ "../../node_modules/dlv/index.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./utils.js */ "./src/utils/objects.js");
 /* harmony import */ var _utils_reducers_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./utils/reducers.js */ "./src/utils/reducers.js");
 /* harmony import */ var _targeting_lock_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./targeting/lock.js */ "./src/targeting/lock.js");
 
@@ -10566,8 +10572,8 @@ function sortByDealAndPriceBucketOrCpm() {
 function getGPTSlotsForAdUnits(adUnitCodes, customSlotMatching) {
   let getSlots = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : () => window.googletag.pubads().getSlots();
   return getSlots().reduce((auToSlots, slot) => {
-    const customMatch = (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.isFn)(customSlotMatching) && customSlotMatching(slot);
-    Object.keys(auToSlots).filter((0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.isFn)(customMatch) ? customMatch : (0,_utils_js__WEBPACK_IMPORTED_MODULE_8__.isAdUnitCodeMatchingSlot)(slot)).forEach(au => auToSlots[au].push(slot));
+    const customMatch = (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.isFn)(customSlotMatching) && customSlotMatching(slot);
+    Object.keys(auToSlots).filter((0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.isFn)(customMatch) ? customMatch : (0,_utils_js__WEBPACK_IMPORTED_MODULE_8__.isAdUnitCodeMatchingSlot)(slot)).forEach(au => auToSlots[au].push(slot));
     return auToSlots;
   }, Object.fromEntries(adUnitCodes.map(au => [au, []])));
 }
@@ -10737,7 +10743,7 @@ function newTargeting(auctionManager) {
         Object.keys(astTargeting[targetId]).forEach(key => {
           (0,_utils_js__WEBPACK_IMPORTED_MODULE_8__.logMessage)("Attempting to set targeting for targetId: ".concat(targetId, " key: ").concat(key, " value: ").concat(astTargeting[targetId][key]));
           // setKeywords supports string and array as value
-          if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.isStr)(astTargeting[targetId][key]) || (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.isArray)(astTargeting[targetId][key])) {
+          if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.isStr)(astTargeting[targetId][key]) || (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.isArray)(astTargeting[targetId][key])) {
             const keywordsObj = {};
             const regex = /pt[0-9]/;
             if (key.search(regex) < 0) {
@@ -10754,7 +10760,7 @@ function newTargeting(auctionManager) {
       });
     },
     isApntagDefined() {
-      if (window.apntag && (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.isFn)(window.apntag.setKeywords)) {
+      if (window.apntag && (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.isFn)(window.apntag.setKeywords)) {
         return true;
       }
     }
@@ -10876,7 +10882,7 @@ function newTargeting(auctionManager) {
 
   // warn about conflicting configuration
   _config_js__WEBPACK_IMPORTED_MODULE_3__.config.getConfig('targetingControls', function (config) {
-    if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_10__["default"])(config, CFG_ALLOW_TARGETING_KEYS) != null && (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__["default"])(config, CFG_ADD_TARGETING_KEYS) != null) {
+    if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_9__["default"])(config, CFG_ALLOW_TARGETING_KEYS) != null && (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__["default"])(config, CFG_ADD_TARGETING_KEYS) != null) {
       (0,_utils_js__WEBPACK_IMPORTED_MODULE_8__.logError)(TARGETING_KEY_CONFIGURATION_ERROR_MSG);
     }
   });
@@ -10892,7 +10898,7 @@ function newTargeting(auctionManager) {
   }
   function filterTargetingKeys(targeting, auctionKeysThreshold) {
     // read each targeting.adUnit object and sort the adUnits into a list of adUnitCodes based on priorization setting (eg CPM)
-    const targetingCopy = (0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.deepClone)(targeting);
+    const targetingCopy = (0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.deepClone)(targeting);
     const targetingMap = Object.keys(targetingCopy).map(adUnitCode => {
       return {
         adUnitCode,
@@ -10976,7 +10982,7 @@ function newTargeting(auctionManager) {
   function getAdUnitCodes(adUnitCode) {
     if (typeof adUnitCode === 'string') {
       return [adUnitCode];
-    } else if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.isArray)(adUnitCode)) {
+    } else if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.isArray)(adUnitCode)) {
       return adUnitCode;
     }
     return auctionManager.getAdUnitCodes() || [];
@@ -11091,8 +11097,8 @@ function newTargeting(auctionManager) {
     function getTargetingValues(adUnit) {
       const aut = getTargetingObj(adUnit);
       return Object.keys(aut).map(function (key) {
-        if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.isStr)(aut[key])) aut[key] = aut[key].split(',').map(s => s.trim());
-        if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_9__.isArray)(aut[key])) aut[key] = [aut[key]];
+        if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.isStr)(aut[key])) aut[key] = aut[key].split(',').map(s => s.trim());
+        if (!(0,_utils_js__WEBPACK_IMPORTED_MODULE_10__.isArray)(aut[key])) aut[key] = [aut[key]];
         return {
           [key]: aut[key]
         };
@@ -11111,13 +11117,13 @@ function newTargeting(auctionManager) {
 const targeting = newTargeting(_auctionManager_js__WEBPACK_IMPORTED_MODULE_0__.auctionManager);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/targeting/lock.js":
+/***/ "./src/targeting/lock.js"
 /*!*******************************!*\
   !*** ./src/targeting/lock.js ***!
   \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   lock: () => (/* binding */ lock)
@@ -11191,20 +11197,20 @@ function targetingLock() {
 const lock = targetingLock();
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/userSync.js":
+/***/ "./src/userSync.js"
 /*!*************************!*\
   !*** ./src/userSync.js ***!
   \*************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   userSync: () => (/* binding */ userSync)
 /* harmony export */ });
 /* unused harmony exports USERSYNC_DEFAULT_CONFIG, newUserSync */
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ "./src/utils/objects.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils.js */ "./src/utils.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ "./src/utils.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils.js */ "./src/utils/objects.js");
 /* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./config.js */ "./src/config.js");
 /* harmony import */ var _storageManager_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./storageManager.js */ "./src/storageManager.js");
 /* harmony import */ var _activities_rules_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./activities/rules.js */ "./src/activities/rules.js");
@@ -11235,7 +11241,7 @@ const USERSYNC_DEFAULT_CONFIG = {
 
 // Set userSync default values
 _config_js__WEBPACK_IMPORTED_MODULE_2__.config.setDefaults({
-  'userSync': (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.deepClone)(USERSYNC_DEFAULT_CONFIG)
+  'userSync': (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.deepClone)(USERSYNC_DEFAULT_CONFIG)
 });
 const storage = (0,_storageManager_js__WEBPACK_IMPORTED_MODULE_3__.getCoreStorageManager)('usersync');
 
@@ -11270,7 +11276,7 @@ function newUserSync(deps) {
     // if userSync.filterSettings does not contain image/all configs, merge in default image config to ensure image pixels are fired
     if (conf.userSync) {
       const fs = conf.userSync.filterSettings;
-      if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.isPlainObject)(fs)) {
+      if ((0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.isPlainObject)(fs)) {
         if (!fs.image && !fs.all) {
           conf.userSync.filterSettings.image = {
             bidders: '*',
@@ -11328,7 +11334,7 @@ function newUserSync(deps) {
       // Image pixels
       fireImagePixels();
     } catch (e) {
-      return (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logError)('Error firing user syncs', e);
+      return (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.logError)('Error firing user syncs', e);
     }
     // Reset the user sync queue
     queue = getDefaultQueue();
@@ -11337,7 +11343,7 @@ function newUserSync(deps) {
     // Randomize the order of the pixels before firing
     // This is to avoid giving any bidder who has registered multiple syncs
     // any preferential treatment and balancing them out
-    (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.shuffle)(queue).forEach(fn);
+    (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.shuffle)(queue).forEach(fn);
   }
 
   /**
@@ -11351,9 +11357,9 @@ function newUserSync(deps) {
     }
     forEachFire(queue.image, sync => {
       const [bidderName, trackingPixelUrl] = sync;
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logMessage)("Invoking image pixel user sync for bidder: ".concat(bidderName));
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.logMessage)("Invoking image pixel user sync for bidder: ".concat(bidderName));
       // Create image object and add the src url
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.triggerPixel)(trackingPixelUrl);
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.triggerPixel)(trackingPixelUrl);
     });
   }
 
@@ -11368,9 +11374,9 @@ function newUserSync(deps) {
     }
     forEachFire(queue.iframe, sync => {
       const [bidderName, iframeUrl] = sync;
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logMessage)("Invoking iframe user sync for bidder: ".concat(bidderName));
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.logMessage)("Invoking iframe user sync for bidder: ".concat(bidderName));
       // Insert iframe into DOM
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.insertUserSyncIframe)(iframeUrl);
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.insertUserSyncIframe)(iframeUrl);
       // for a bidder, if iframe sync is present then remove image pixel
       removeImagePixelsForBidder(queue, bidderName);
     });
@@ -11412,16 +11418,16 @@ function newUserSync(deps) {
    */
   publicApi.registerSync = (type, bidder, url) => {
     if (hasFiredBidder.has(bidder)) {
-      return (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logMessage)("already fired syncs for \"".concat(bidder, "\", ignoring registerSync call"));
+      return (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.logMessage)("already fired syncs for \"".concat(bidder, "\", ignoring registerSync call"));
     }
-    if (!usConfig.syncEnabled || !(0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.isArray)(queue[type])) {
-      return (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logWarn)("User sync type \"".concat(type, "\" not supported"));
+    if (!usConfig.syncEnabled || !(0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.isArray)(queue[type])) {
+      return (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.logWarn)("User sync type \"".concat(type, "\" not supported"));
     }
     if (!bidder) {
-      return (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logWarn)("Bidder is required for registering sync");
+      return (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.logWarn)("Bidder is required for registering sync");
     }
     if (usConfig.syncsPerBidder !== 0 && Number(numAdapterBids[bidder]) >= usConfig.syncsPerBidder) {
-      return (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logWarn)("Number of user syncs exceeded for \"".concat(bidder, "\""));
+      return (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.logWarn)("Number of user syncs exceeded for \"".concat(bidder, "\""));
     }
     if (deps.isAllowed(_activities_activities_js__WEBPACK_IMPORTED_MODULE_5__.ACTIVITY_SYNC_USER, (0,_activities_activityParams_js__WEBPACK_IMPORTED_MODULE_8__.activityParams)(_activities_modules_js__WEBPACK_IMPORTED_MODULE_7__.MODULE_TYPE_BIDDER, bidder, {
       [_activities_params_js__WEBPACK_IMPORTED_MODULE_6__.ACTIVITY_PARAM_SYNC_TYPE]: type,
@@ -11477,7 +11483,7 @@ function newUserSync(deps) {
    */
   function isFilterConfigValid(filterConfig, type) {
     if (filterConfig.all && filterConfig[type]) {
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logWarn)("Detected presence of the \"filterSettings.all\" and \"filterSettings.".concat(type, "\" in userSync config.  You cannot mix \"all\" with \"iframe/image\" configs; they are mutually exclusive."));
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.logWarn)("Detected presence of the \"filterSettings.all\" and \"filterSettings.".concat(type, "\" in userSync config.  You cannot mix \"all\" with \"iframe/image\" configs; they are mutually exclusive."));
       return false;
     }
     const activeConfig = filterConfig.all ? filterConfig.all : filterConfig[type];
@@ -11491,11 +11497,11 @@ function newUserSync(deps) {
     const filterField = activeConfig.filter;
     const biddersField = activeConfig.bidders;
     if (filterField && filterField !== 'include' && filterField !== 'exclude') {
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logWarn)("UserSync \"filterSettings.".concat(activeConfigName, ".filter\" setting '").concat(filterField, "' is not a valid option; use either 'include' or 'exclude'."));
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.logWarn)("UserSync \"filterSettings.".concat(activeConfigName, ".filter\" setting '").concat(filterField, "' is not a valid option; use either 'include' or 'exclude'."));
       return false;
     }
-    if (biddersField !== '*' && !(Array.isArray(biddersField) && biddersField.length > 0 && biddersField.every(bidderInList => (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.isStr)(bidderInList) && bidderInList !== '*'))) {
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logWarn)("Detected an invalid setup in userSync \"filterSettings.".concat(activeConfigName, ".bidders\"; use either '*' (to represent all bidders) or an array of bidders."));
+    if (biddersField !== '*' && !(Array.isArray(biddersField) && biddersField.length > 0 && biddersField.every(bidderInList => (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.isStr)(bidderInList) && bidderInList !== '*'))) {
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.logWarn)("Detected an invalid setup in userSync \"filterSettings.".concat(activeConfigName, ".bidders\"; use either '*' (to represent all bidders) or an array of bidders."));
       return false;
     }
     return true;
@@ -11543,7 +11549,7 @@ const userSync = newUserSync(Object.defineProperties({
   browserSupportsCookies: {
     get: function () {
       // call storage lazily to give time for consent data to be available
-      return !(0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.isSafariBrowser)() && storage.cookiesAreEnabled();
+      return !(0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.isSafariBrowser)() && storage.cookiesAreEnabled();
     }
   }
 }));
@@ -11559,13 +11565,13 @@ const userSync = newUserSync(Object.defineProperties({
  */
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/utils.js":
+/***/ "./src/utils.js"
 /*!**********************!*\
   !*** ./src/utils.js ***!
   \**********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -12906,13 +12912,13 @@ async function compressDataWithGZip(data) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/utils/cachedApiWrapper.js":
+/***/ "./src/utils/cachedApiWrapper.js"
 /*!***************************************!*\
   !*** ./src/utils/cachedApiWrapper.js ***!
   \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   CachedApiWrapper: () => (/* binding */ CachedApiWrapper)
@@ -12950,13 +12956,13 @@ function CachedApiWrapper(getTarget, props) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/utils/cpm.js":
+/***/ "./src/utils/cpm.js"
 /*!**************************!*\
   !*** ./src/utils/cpm.js ***!
   \**************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   adjustCpm: () => (/* binding */ adjustCpm)
@@ -12989,13 +12995,13 @@ function adjustCpm(cpm, bidResponse, bidRequest) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/utils/focusTimeout.js":
+/***/ "./src/utils/focusTimeout.js"
 /*!***********************************!*\
   !*** ./src/utils/focusTimeout.js ***!
   \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   setFocusTimeout: () => (/* binding */ setFocusTimeout)
@@ -13059,13 +13065,13 @@ function setFocusTimeout(callback, milliseconds) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/utils/ipUtils.js":
+/***/ "./src/utils/ipUtils.js"
 /*!******************************!*\
   !*** ./src/utils/ipUtils.js ***!
   \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   scrubIPv4: () => (/* binding */ scrubIPv4),
@@ -13111,13 +13117,13 @@ function scrubIPv6(ip) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/utils/objects.js":
+/***/ "./src/utils/objects.js"
 /*!******************************!*\
   !*** ./src/utils/objects.js ***!
   \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   deepClone: () => (/* binding */ deepClone),
@@ -13194,13 +13200,13 @@ function isArrayOfNums(val, size) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/utils/perfMetrics.js":
+/***/ "./src/utils/perfMetrics.js"
 /*!**********************************!*\
   !*** ./src/utils/perfMetrics.js ***!
   \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   newMetrics: () => (/* binding */ newMetrics),
@@ -13600,13 +13606,13 @@ const timedAuctionHook = hookTimer('requestBids.', req => req.metrics);
 const timedBidResponseHook = hookTimer('addBidResponse.', (_, bid) => bid.metrics);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/utils/prerendering.js":
+/***/ "./src/utils/prerendering.js"
 /*!***********************************!*\
   !*** ./src/utils/prerendering.js ***!
   \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   delayIfPrerendering: () => (/* binding */ delayIfPrerendering)
@@ -13639,13 +13645,13 @@ function delayIfPrerendering(isDelayEnabled, fn) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/utils/promise.js":
+/***/ "./src/utils/promise.js"
 /*!******************************!*\
   !*** ./src/utils/promise.js ***!
   \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   PbPromise: () => (/* binding */ PbPromise),
@@ -13686,13 +13692,13 @@ function defer() {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/utils/reducers.js":
+/***/ "./src/utils/reducers.js"
 /*!*******************************!*\
   !*** ./src/utils/reducers.js ***!
   \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getHighestCpm: () => (/* binding */ getHighestCpm),
@@ -13746,13 +13752,13 @@ const getOldestHighestCpmBid = maximum(tiebreakCompare(cpmCompare, reverseCompar
 const getLatestHighestCpmBid = maximum(tiebreakCompare(cpmCompare, timestampCompare));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/utils/ttlCollection.js":
+/***/ "./src/utils/ttlCollection.js"
 /*!************************************!*\
   !*** ./src/utils/ttlCollection.js ***!
   \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ttlCollection: () => (/* binding */ ttlCollection)
@@ -13915,13 +13921,13 @@ function ttlCollection() {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/utils/winDimensions.js":
+/***/ "./src/utils/winDimensions.js"
 /*!************************************!*\
   !*** ./src/utils/winDimensions.js ***!
   \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getScreenOrientation: () => (/* binding */ getScreenOrientation),
@@ -13989,13 +13995,13 @@ function getScreenOrientation(win) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/utils/yield.js":
+/***/ "./src/utils/yield.js"
 /*!****************************!*\
   !*** ./src/utils/yield.js ***!
   \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   yieldAll: () => (/* binding */ yieldAll),
@@ -14060,13 +14066,13 @@ function serialize(fns, cb) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/video.js":
+/***/ "./src/video.js"
 /*!**********************!*\
   !*** ./src/video.js ***!
   \**********************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ORTB_VIDEO_PARAMS: () => (/* binding */ ORTB_VIDEO_PARAMS),
@@ -14075,8 +14081,8 @@ function serialize(fns, cb) {
 /* harmony export */   isValidVideoBid: () => (/* binding */ isValidVideoBid)
 /* harmony export */ });
 /* unused harmony exports INSTREAM, checkVideoBidSetup */
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ "./src/utils/objects.js");
-/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils.js */ "./src/utils.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ "./src/utils.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils.js */ "./src/utils/objects.js");
 /* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./config.js */ "./src/config.js");
 /* harmony import */ var _hook_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./hook.js */ "./src/hook.js");
 /* harmony import */ var _auctionManager_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./auctionManager.js */ "./src/auctionManager.js");
@@ -14088,11 +14094,11 @@ function serialize(fns, cb) {
 
 const OUTSTREAM = 'outstream';
 const INSTREAM = 'instream';
-const ORTB_PARAMS = [['mimes', value => Array.isArray(value) && value.length > 0 && value.every(v => typeof v === 'string')], ['minduration', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['maxduration', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['startdelay', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['maxseq', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['poddur', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['protocols', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isArrayOfNums], ['w', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['h', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['podid', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isStr], ['podseq', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['rqddurs', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isArrayOfNums], ['placement', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger],
+const ORTB_PARAMS = [['mimes', value => Array.isArray(value) && value.length > 0 && value.every(v => typeof v === 'string')], ['minduration', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['maxduration', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['startdelay', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['maxseq', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['poddur', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['protocols', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isArrayOfNums], ['w', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['h', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['podid', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isStr], ['podseq', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['rqddurs', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isArrayOfNums], ['placement', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger],
 // deprecated, see plcmt
-['plcmt', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['linearity', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['skip', value => [1, 0].includes(value)], ['skipmin', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['skipafter', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['sequence', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger],
+['plcmt', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['linearity', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['skip', value => [1, 0].includes(value)], ['skipmin', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['skipafter', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['sequence', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger],
 // deprecated
-['slotinpod', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['mincpmpersec', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isNumber], ['battr', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isArrayOfNums], ['maxextended', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['minbitrate', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['maxbitrate', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['boxingallowed', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['playbackmethod', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isArrayOfNums], ['playbackend', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['delivery', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isArrayOfNums], ['pos', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isInteger], ['api', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isArrayOfNums], ['companiontype', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isArrayOfNums], ['poddedupe', _utils_js__WEBPACK_IMPORTED_MODULE_0__.isArrayOfNums]];
+['slotinpod', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['mincpmpersec', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isNumber], ['battr', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isArrayOfNums], ['maxextended', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['minbitrate', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['maxbitrate', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['boxingallowed', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['playbackmethod', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isArrayOfNums], ['playbackend', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['delivery', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isArrayOfNums], ['pos', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isInteger], ['api', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isArrayOfNums], ['companiontype', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isArrayOfNums], ['poddedupe', _utils_js__WEBPACK_IMPORTED_MODULE_1__.isArrayOfNums]];
 
 /**
  * List of OpenRTB 2.x video object properties with simple validators.
@@ -14112,8 +14118,8 @@ function fillVideoDefaults(adUnit) {
         video.plcmt = 2;
       }
     }
-    const playerSize = (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.isArrayOfNums)(video.playerSize, 2) ? video.playerSize : Array.isArray(video.playerSize) && (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.isArrayOfNums)(video.playerSize[0]) ? video.playerSize[0] : null;
-    const size = (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.isNumber)(video.w) && (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.isNumber)(video.h) ? [video.w, video.h] : null;
+    const playerSize = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.isArrayOfNums)(video.playerSize, 2) ? video.playerSize : Array.isArray(video.playerSize) && (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.isArrayOfNums)(video.playerSize[0]) ? video.playerSize[0] : null;
+    const size = (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.isNumber)(video.w) && (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.isNumber)(video.h) ? [video.w, video.h] : null;
     let conflict = false;
     if (playerSize == null) {
       if (size != null) {
@@ -14133,7 +14139,7 @@ function fillVideoDefaults(adUnit) {
       });
     }
     if (conflict) {
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logWarn)("Ad unit \"".concat(adUnit.code, " has conflicting playerSize and w/h"), adUnit);
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.logWarn)("Ad unit \"".concat(adUnit.code, " has conflicting playerSize and w/h"), adUnit);
     }
   }
 }
@@ -14163,7 +14169,7 @@ const checkVideoBidSetup = (0,_hook_js__WEBPACK_IMPORTED_MODULE_3__.hook)('sync'
       useLocal
     } = _config_js__WEBPACK_IMPORTED_MODULE_2__.config.getConfig('cache') || {};
     if (!url && !useLocal && bid.vastXml && !bid.vastUrl) {
-      (0,_utils_js__WEBPACK_IMPORTED_MODULE_1__.logError)("\n        This bid contains only vastXml and will not work when a prebid cache url is not specified.\n        Try enabling either prebid cache with ".concat((0,_buildOptions_js__WEBPACK_IMPORTED_MODULE_5__.getGlobalVarName)(), ".setConfig({ cache: {url: \"...\"} });\n        or local cache with ").concat((0,_buildOptions_js__WEBPACK_IMPORTED_MODULE_5__.getGlobalVarName)(), ".setConfig({ cache: { useLocal: true }});\n      "));
+      (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.logError)("\n        This bid contains only vastXml and will not work when a prebid cache url is not specified.\n        Try enabling either prebid cache with ".concat((0,_buildOptions_js__WEBPACK_IMPORTED_MODULE_5__.getGlobalVarName)(), ".setConfig({ cache: {url: \"...\"} });\n        or local cache with ").concat((0,_buildOptions_js__WEBPACK_IMPORTED_MODULE_5__.getGlobalVarName)(), ".setConfig({ cache: { useLocal: true }});\n      "));
       return false;
     }
     return !!(bid.vastUrl || bid.vastXml);
@@ -14177,13 +14183,13 @@ const checkVideoBidSetup = (0,_hook_js__WEBPACK_IMPORTED_MODULE_3__.hook)('sync'
 }, 'checkVideoBidSetup');
 
 
-/***/ }),
+/***/ },
 
-/***/ "./src/videoCache.js":
+/***/ "./src/videoCache.js"
 /*!***************************!*\
   !*** ./src/videoCache.js ***!
   \***************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   batchAndStore: () => (/* binding */ batchAndStore),
@@ -14416,18 +14422,18 @@ const batchingCache = function () {
 const batchAndStore = batchingCache();
 
 
-/***/ })
+/***/ }
 
 }]);
 
 "use strict";
 (self["pbjsChunk"] = self["pbjsChunk"] || []).push([["viewport"],{
 
-/***/ "./libraries/viewport/viewport.js":
+/***/ "./libraries/viewport/viewport.js"
 /*!****************************************!*\
   !*** ./libraries/viewport/viewport.js ***!
   \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getViewportSize: () => (/* binding */ getViewportSize)
@@ -14472,18 +14478,18 @@ function getViewportSize() {
 }
 
 
-/***/ })
+/***/ }
 
 }]);
 
 "use strict";
 (self["pbjsChunk"] = self["pbjsChunk"] || []).push([["dnt"],{
 
-/***/ "./libraries/dnt/index.js":
+/***/ "./libraries/dnt/index.js"
 /*!********************************!*\
   !*** ./libraries/dnt/index.js ***!
   \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getDNT: () => (/* binding */ getDNT)
@@ -14502,37 +14508,37 @@ function getDNT() {
 }
 
 
-/***/ })
+/***/ }
 
 }]);
 
 "use strict";
 (self["pbjsChunk"] = self["pbjsChunk"] || []).push([["creative-renderer-display"],{
 
-/***/ "./creative-renderers/display.js":
+/***/ "./creative-renderers/display.js"
 /*!***************************************!*\
   !*** ./creative-renderers/display.js ***!
   \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   RENDERER: () => (/* binding */ RENDERER)
 /* harmony export */ });
 // this file is autogenerated, see creative/README.md
-const RENDERER = "/******/ (() => { // webpackBootstrap\n/******/ \t\"use strict\";\n/******/ \tvar __webpack_modules__ = ({\n\n/***/ \"./creative/constants.js\":\n/*!*******************************!*\\\n  !*** ./creative/constants.js ***!\n  \\*******************************/\n/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {\n\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   BROWSER_INTERVENTION: () => (/* binding */ BROWSER_INTERVENTION),\n/* harmony export */   ERROR_EXCEPTION: () => (/* binding */ ERROR_EXCEPTION),\n/* harmony export */   EVENT_AD_RENDER_FAILED: () => (/* binding */ EVENT_AD_RENDER_FAILED),\n/* harmony export */   EVENT_AD_RENDER_SUCCEEDED: () => (/* binding */ EVENT_AD_RENDER_SUCCEEDED),\n/* harmony export */   MESSAGE_EVENT: () => (/* binding */ MESSAGE_EVENT),\n/* harmony export */   MESSAGE_REQUEST: () => (/* binding */ MESSAGE_REQUEST),\n/* harmony export */   MESSAGE_RESPONSE: () => (/* binding */ MESSAGE_RESPONSE),\n/* harmony export */   PB_LOCATOR: () => (/* reexport safe */ _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.PB_LOCATOR)\n/* harmony export */ });\n/* harmony import */ var _src_constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/constants.js */ \"./src/constants.js\");\n// eslint-disable-next-line prebid/validate-imports\n\n\n// eslint-disable-next-line prebid/validate-imports\n\nconst MESSAGE_REQUEST = _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.MESSAGES.REQUEST;\nconst MESSAGE_RESPONSE = _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.MESSAGES.RESPONSE;\nconst MESSAGE_EVENT = _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.MESSAGES.EVENT;\nconst EVENT_AD_RENDER_FAILED = _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.EVENTS.AD_RENDER_FAILED;\nconst EVENT_AD_RENDER_SUCCEEDED = _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.EVENTS.AD_RENDER_SUCCEEDED;\nconst ERROR_EXCEPTION = _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.AD_RENDER_FAILED_REASON.EXCEPTION;\nconst BROWSER_INTERVENTION = _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.EVENTS.BROWSER_INTERVENTION;\n\n\n/***/ }),\n\n/***/ \"./creative/renderers/display/constants.js\":\n/*!*************************************************!*\\\n  !*** ./creative/renderers/display/constants.js ***!\n  \\*************************************************/\n/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {\n\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   ERROR_NO_AD: () => (/* binding */ ERROR_NO_AD)\n/* harmony export */ });\n/* harmony import */ var _src_constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/constants.js */ \"./src/constants.js\");\n// eslint-disable-next-line prebid/validate-imports\n\nconst ERROR_NO_AD = _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.AD_RENDER_FAILED_REASON.NO_AD;\n\n\n/***/ }),\n\n/***/ \"./creative/reporting.js\":\n/*!*******************************!*\\\n  !*** ./creative/reporting.js ***!\n  \\*******************************/\n/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {\n\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   registerReportingObserver: () => (/* binding */ registerReportingObserver)\n/* harmony export */ });\nfunction registerReportingObserver(callback, types, document) {\n  const view = (document === null || document === void 0 ? void 0 : document.defaultView) || window;\n  if ('ReportingObserver' in view) {\n    try {\n      const observer = new view.ReportingObserver(reports => {\n        callback(reports[0]);\n      }, {\n        buffered: true,\n        types\n      });\n      observer.observe();\n    } catch (e) {}\n  }\n}\n\n\n/***/ }),\n\n/***/ \"./src/constants.js\":\n/*!**************************!*\\\n  !*** ./src/constants.js ***!\n  \\**************************/\n/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {\n\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   AD_RENDER_FAILED_REASON: () => (/* binding */ AD_RENDER_FAILED_REASON),\n/* harmony export */   BID_STATUS: () => (/* binding */ BID_STATUS),\n/* harmony export */   DEBUG_MODE: () => (/* binding */ DEBUG_MODE),\n/* harmony export */   DEFAULT_TARGETING_KEYS: () => (/* binding */ DEFAULT_TARGETING_KEYS),\n/* harmony export */   EVENTS: () => (/* binding */ EVENTS),\n/* harmony export */   EVENT_ID_PATHS: () => (/* binding */ EVENT_ID_PATHS),\n/* harmony export */   GRANULARITY_OPTIONS: () => (/* binding */ GRANULARITY_OPTIONS),\n/* harmony export */   JSON_MAPPING: () => (/* binding */ JSON_MAPPING),\n/* harmony export */   MESSAGES: () => (/* binding */ MESSAGES),\n/* harmony export */   NATIVE_ASSET_TYPES: () => (/* binding */ NATIVE_ASSET_TYPES),\n/* harmony export */   NATIVE_IMAGE_TYPES: () => (/* binding */ NATIVE_IMAGE_TYPES),\n/* harmony export */   NATIVE_KEYS: () => (/* binding */ NATIVE_KEYS),\n/* harmony export */   NATIVE_KEYS_THAT_ARE_NOT_ASSETS: () => (/* binding */ NATIVE_KEYS_THAT_ARE_NOT_ASSETS),\n/* harmony export */   PB_LOCATOR: () => (/* binding */ PB_LOCATOR),\n/* harmony export */   PREBID_NATIVE_DATA_KEYS_TO_ORTB: () => (/* binding */ PREBID_NATIVE_DATA_KEYS_TO_ORTB),\n/* harmony export */   REJECTION_REASON: () => (/* binding */ REJECTION_REASON),\n/* harmony export */   S2S: () => (/* binding */ S2S),\n/* harmony export */   STATUS: () => (/* binding */ STATUS),\n/* harmony export */   TARGETING_KEYS: () => (/* binding */ TARGETING_KEYS)\n/* harmony export */ });\nconst JSON_MAPPING = {\n  PL_CODE: 'code',\n  PL_SIZE: 'sizes',\n  PL_BIDS: 'bids',\n  BD_BIDDER: 'bidder',\n  BD_ID: 'paramsd',\n  BD_PL_ID: 'placementId',\n  ADSERVER_TARGETING: 'adserverTargeting',\n  BD_SETTING_STANDARD: 'standard'\n};\nconst DEBUG_MODE = 'pbjs_debug';\nconst STATUS = {\n  GOOD: 1\n};\nconst EVENTS = {\n  AUCTION_INIT: 'auctionInit',\n  AUCTION_TIMEOUT: 'auctionTimeout',\n  AUCTION_END: 'auctionEnd',\n  BID_ADJUSTMENT: 'bidAdjustment',\n  BID_TIMEOUT: 'bidTimeout',\n  BID_REQUESTED: 'bidRequested',\n  BID_RESPONSE: 'bidResponse',\n  BID_REJECTED: 'bidRejected',\n  NO_BID: 'noBid',\n  SEAT_NON_BID: 'seatNonBid',\n  BID_WON: 'bidWon',\n  BIDDER_DONE: 'bidderDone',\n  BIDDER_ERROR: 'bidderError',\n  SET_TARGETING: 'setTargeting',\n  BEFORE_REQUEST_BIDS: 'beforeRequestBids',\n  BEFORE_BIDDER_HTTP: 'beforeBidderHttp',\n  REQUEST_BIDS: 'requestBids',\n  ADD_AD_UNITS: 'addAdUnits',\n  AD_RENDER_FAILED: 'adRenderFailed',\n  AD_RENDER_SUCCEEDED: 'adRenderSucceeded',\n  TCF2_ENFORCEMENT: 'tcf2Enforcement',\n  AUCTION_DEBUG: 'auctionDebug',\n  BID_VIEWABLE: 'bidViewable',\n  STALE_RENDER: 'staleRender',\n  EXPIRED_RENDER: 'expiredRender',\n  BILLABLE_EVENT: 'billableEvent',\n  BID_ACCEPTED: 'bidAccepted',\n  RUN_PAAPI_AUCTION: 'paapiRunAuction',\n  PBS_ANALYTICS: 'pbsAnalytics',\n  PAAPI_BID: 'paapiBid',\n  PAAPI_NO_BID: 'paapiNoBid',\n  PAAPI_ERROR: 'paapiError',\n  BEFORE_PBS_HTTP: 'beforePBSHttp',\n  BROWSI_INIT: 'browsiInit',\n  BROWSI_DATA: 'browsiData',\n  BROWSER_INTERVENTION: 'browserIntervention'\n};\nconst AD_RENDER_FAILED_REASON = {\n  PREVENT_WRITING_ON_MAIN_DOCUMENT: 'preventWritingOnMainDocument',\n  NO_AD: 'noAd',\n  EXCEPTION: 'exception',\n  CANNOT_FIND_AD: 'cannotFindAd',\n  MISSING_DOC_OR_ADID: 'missingDocOrAdid'\n};\nconst EVENT_ID_PATHS = {\n  bidWon: 'adUnitCode'\n};\nconst GRANULARITY_OPTIONS = {\n  LOW: 'low',\n  MEDIUM: 'medium',\n  HIGH: 'high',\n  AUTO: 'auto',\n  DENSE: 'dense',\n  CUSTOM: 'custom'\n};\nconst TARGETING_KEYS = {\n  BIDDER: 'hb_bidder',\n  AD_ID: 'hb_adid',\n  PRICE_BUCKET: 'hb_pb',\n  SIZE: 'hb_size',\n  DEAL: 'hb_deal',\n  SOURCE: 'hb_source',\n  FORMAT: 'hb_format',\n  UUID: 'hb_uuid',\n  CACHE_ID: 'hb_cache_id',\n  CACHE_HOST: 'hb_cache_host',\n  ADOMAIN: 'hb_adomain',\n  ACAT: 'hb_acat',\n  CRID: 'hb_crid',\n  DSP: 'hb_dsp',\n  VERSION: 'hb_ver'\n};\nconst DEFAULT_TARGETING_KEYS = {\n  BIDDER: 'hb_bidder',\n  AD_ID: 'hb_adid',\n  PRICE_BUCKET: 'hb_pb',\n  SIZE: 'hb_size',\n  DEAL: 'hb_deal',\n  FORMAT: 'hb_format',\n  UUID: 'hb_uuid',\n  CACHE_HOST: 'hb_cache_host',\n  VERSION: 'hb_ver'\n};\nconst NATIVE_KEYS = {\n  title: 'hb_native_title',\n  body: 'hb_native_body',\n  body2: 'hb_native_body2',\n  privacyLink: 'hb_native_privacy',\n  privacyIcon: 'hb_native_privicon',\n  sponsoredBy: 'hb_native_brand',\n  image: 'hb_native_image',\n  icon: 'hb_native_icon',\n  clickUrl: 'hb_native_linkurl',\n  displayUrl: 'hb_native_displayurl',\n  cta: 'hb_native_cta',\n  rating: 'hb_native_rating',\n  address: 'hb_native_address',\n  downloads: 'hb_native_downloads',\n  likes: 'hb_native_likes',\n  phone: 'hb_native_phone',\n  price: 'hb_native_price',\n  salePrice: 'hb_native_saleprice',\n  rendererUrl: 'hb_renderer_url',\n  adTemplate: 'hb_adTemplate'\n};\nconst S2S = {\n  SRC: 's2s',\n  DEFAULT_ENDPOINT: 'https://prebid.adnxs.com/pbs/v1/openrtb2/auction',\n  SYNCED_BIDDERS_KEY: 'pbjsSyncs'\n};\nconst BID_STATUS = {\n  BID_TARGETING_SET: 'targetingSet',\n  RENDERED: 'rendered',\n  BID_REJECTED: 'bidRejected'\n};\nconst REJECTION_REASON = {\n  INVALID: 'Bid has missing or invalid properties',\n  INVALID_REQUEST_ID: 'Invalid request ID',\n  BIDDER_DISALLOWED: 'Bidder code is not allowed by allowedAlternateBidderCodes / allowUnknownBidderCodes',\n  FLOOR_NOT_MET: 'Bid does not meet price floor',\n  CANNOT_CONVERT_CURRENCY: 'Unable to convert currency',\n  DSA_REQUIRED: 'Bid does not provide required DSA transparency info',\n  DSA_MISMATCH: 'Bid indicates inappropriate DSA rendering method',\n  PRICE_TOO_HIGH: 'Bid price exceeds maximum value'\n};\nconst PREBID_NATIVE_DATA_KEYS_TO_ORTB = {\n  body: 'desc',\n  body2: 'desc2',\n  sponsoredBy: 'sponsored',\n  cta: 'ctatext',\n  rating: 'rating',\n  address: 'address',\n  downloads: 'downloads',\n  likes: 'likes',\n  phone: 'phone',\n  price: 'price',\n  salePrice: 'saleprice',\n  displayUrl: 'displayurl'\n};\nconst NATIVE_ASSET_TYPES = {\n  sponsored: 1,\n  desc: 2,\n  rating: 3,\n  likes: 4,\n  downloads: 5,\n  price: 6,\n  saleprice: 7,\n  phone: 8,\n  address: 9,\n  desc2: 10,\n  displayurl: 11,\n  ctatext: 12\n};\nconst NATIVE_IMAGE_TYPES = {\n  ICON: 1,\n  MAIN: 3\n};\nconst NATIVE_KEYS_THAT_ARE_NOT_ASSETS = ['privacyIcon', 'clickUrl', 'adTemplate', 'rendererUrl', 'type'];\nconst MESSAGES = {\n  REQUEST: 'Prebid Request',\n  RESPONSE: 'Prebid Response',\n  NATIVE: 'Prebid Native',\n  EVENT: 'Prebid Event',\n  INTERVENTION: 'Prebid Intervention'\n};\nconst PB_LOCATOR = '__pb_locator__';\n\n\n/***/ })\n\n/******/ \t});\n/************************************************************************/\n/******/ \t// The module cache\n/******/ \tvar __webpack_module_cache__ = {};\n/******/ \t\n/******/ \t// The require function\n/******/ \tfunction __webpack_require__(moduleId) {\n/******/ \t\t// Check if module is in cache\n/******/ \t\tvar cachedModule = __webpack_module_cache__[moduleId];\n/******/ \t\tif (cachedModule !== undefined) {\n/******/ \t\t\treturn cachedModule.exports;\n/******/ \t\t}\n/******/ \t\t// Create a new module (and put it into the cache)\n/******/ \t\tvar module = __webpack_module_cache__[moduleId] = {\n/******/ \t\t\t// no module.id needed\n/******/ \t\t\t// no module.loaded needed\n/******/ \t\t\texports: {}\n/******/ \t\t};\n/******/ \t\n/******/ \t\t// Execute the module function\n/******/ \t\t__webpack_modules__[moduleId](module, module.exports, __webpack_require__);\n/******/ \t\n/******/ \t\t// Return the exports of the module\n/******/ \t\treturn module.exports;\n/******/ \t}\n/******/ \t\n/************************************************************************/\n/******/ \t/* webpack/runtime/define property getters */\n/******/ \t(() => {\n/******/ \t\t// define getter functions for harmony exports\n/******/ \t\t__webpack_require__.d = (exports, definition) => {\n/******/ \t\t\tfor(var key in definition) {\n/******/ \t\t\t\tif(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {\n/******/ \t\t\t\t\tObject.defineProperty(exports, key, { enumerable: true, get: definition[key] });\n/******/ \t\t\t\t}\n/******/ \t\t\t}\n/******/ \t\t};\n/******/ \t})();\n/******/ \t\n/******/ \t/* webpack/runtime/hasOwnProperty shorthand */\n/******/ \t(() => {\n/******/ \t\t__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))\n/******/ \t})();\n/******/ \t\n/******/ \t/* webpack/runtime/make namespace object */\n/******/ \t(() => {\n/******/ \t\t// define __esModule on exports\n/******/ \t\t__webpack_require__.r = (exports) => {\n/******/ \t\t\tif(typeof Symbol !== 'undefined' && Symbol.toStringTag) {\n/******/ \t\t\t\tObject.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });\n/******/ \t\t\t}\n/******/ \t\t\tObject.defineProperty(exports, '__esModule', { value: true });\n/******/ \t\t};\n/******/ \t})();\n/******/ \t\n/************************************************************************/\nvar __webpack_exports__ = {};\n// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.\n(() => {\n/*!************************************************!*\\\n  !*** ./creative/renderers/display/renderer.js ***!\n  \\************************************************/\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   render: () => (/* binding */ render)\n/* harmony export */ });\n/* harmony import */ var _reporting_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../reporting.js */ \"./creative/reporting.js\");\n/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../constants.js */ \"./creative/constants.js\");\n/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants.js */ \"./creative/renderers/display/constants.js\");\n\n\n\nfunction render(_ref, _ref2, win) {\n  let {\n    ad,\n    adUrl,\n    width,\n    height,\n    instl\n  } = _ref;\n  let {\n    mkFrame,\n    sendMessage\n  } = _ref2;\n  (0,_reporting_js__WEBPACK_IMPORTED_MODULE_0__.registerReportingObserver)(report => {\n    sendMessage(_constants_js__WEBPACK_IMPORTED_MODULE_1__.MESSAGE_EVENT, {\n      event: _constants_js__WEBPACK_IMPORTED_MODULE_1__.BROWSER_INTERVENTION,\n      intervention: report\n    });\n  }, ['intervention']);\n  if (!ad && !adUrl) {\n    const err = new Error('Missing ad markup or URL');\n    err.reason = _constants_js__WEBPACK_IMPORTED_MODULE_2__.ERROR_NO_AD;\n    throw err;\n  } else {\n    if (height == null) {\n      var _win$document;\n      const body = (_win$document = win.document) === null || _win$document === void 0 ? void 0 : _win$document.body;\n      [body, body === null || body === void 0 ? void 0 : body.parentElement].filter(elm => (elm === null || elm === void 0 ? void 0 : elm.style) != null).forEach(elm => {\n        elm.style.height = '100%';\n      });\n    }\n    const doc = win.document;\n    const attrs = {\n      width: width !== null && width !== void 0 ? width : '100%',\n      height: height !== null && height !== void 0 ? height : '100%'\n    };\n    if (adUrl && !ad) {\n      attrs.src = adUrl;\n    } else {\n      attrs.srcdoc = ad;\n    }\n    doc.body.appendChild(mkFrame(doc, attrs));\n    if (instl && win.frameElement) {\n      // interstitials are rendered in a nested iframe that needs to be sized\n      const style = win.frameElement.style;\n      style.width = width ? \"\".concat(width, \"px\") : '100vw';\n      style.height = height ? \"\".concat(height, \"px\") : '100vh';\n    }\n  }\n}\nwindow.render = render;\n\n})();\n\n/******/ })()\n;"
+const RENDERER = "/******/ (() => { // webpackBootstrap\n/******/ \t\"use strict\";\n/******/ \tvar __webpack_modules__ = ({\n\n/***/ \"./creative/constants.js\"\n/*!*******************************!*\\\n  !*** ./creative/constants.js ***!\n  \\*******************************/\n(__unused_webpack_module, __webpack_exports__, __webpack_require__) {\n\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   BROWSER_INTERVENTION: () => (/* binding */ BROWSER_INTERVENTION),\n/* harmony export */   ERROR_EXCEPTION: () => (/* binding */ ERROR_EXCEPTION),\n/* harmony export */   EVENT_AD_RENDER_FAILED: () => (/* binding */ EVENT_AD_RENDER_FAILED),\n/* harmony export */   EVENT_AD_RENDER_SUCCEEDED: () => (/* binding */ EVENT_AD_RENDER_SUCCEEDED),\n/* harmony export */   MESSAGE_EVENT: () => (/* binding */ MESSAGE_EVENT),\n/* harmony export */   MESSAGE_REQUEST: () => (/* binding */ MESSAGE_REQUEST),\n/* harmony export */   MESSAGE_RESPONSE: () => (/* binding */ MESSAGE_RESPONSE),\n/* harmony export */   PB_LOCATOR: () => (/* reexport safe */ _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.PB_LOCATOR)\n/* harmony export */ });\n/* harmony import */ var _src_constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/constants.js */ \"./src/constants.js\");\n// eslint-disable-next-line prebid/validate-imports\n\n\n// eslint-disable-next-line prebid/validate-imports\n\nconst MESSAGE_REQUEST = _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.MESSAGES.REQUEST;\nconst MESSAGE_RESPONSE = _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.MESSAGES.RESPONSE;\nconst MESSAGE_EVENT = _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.MESSAGES.EVENT;\nconst EVENT_AD_RENDER_FAILED = _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.EVENTS.AD_RENDER_FAILED;\nconst EVENT_AD_RENDER_SUCCEEDED = _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.EVENTS.AD_RENDER_SUCCEEDED;\nconst ERROR_EXCEPTION = _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.AD_RENDER_FAILED_REASON.EXCEPTION;\nconst BROWSER_INTERVENTION = _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.EVENTS.BROWSER_INTERVENTION;\n\n\n/***/ },\n\n/***/ \"./creative/renderers/display/constants.js\"\n/*!*************************************************!*\\\n  !*** ./creative/renderers/display/constants.js ***!\n  \\*************************************************/\n(__unused_webpack_module, __webpack_exports__, __webpack_require__) {\n\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   ERROR_NO_AD: () => (/* binding */ ERROR_NO_AD)\n/* harmony export */ });\n/* harmony import */ var _src_constants_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../src/constants.js */ \"./src/constants.js\");\n// eslint-disable-next-line prebid/validate-imports\n\nconst ERROR_NO_AD = _src_constants_js__WEBPACK_IMPORTED_MODULE_0__.AD_RENDER_FAILED_REASON.NO_AD;\n\n\n/***/ },\n\n/***/ \"./creative/reporting.js\"\n/*!*******************************!*\\\n  !*** ./creative/reporting.js ***!\n  \\*******************************/\n(__unused_webpack_module, __webpack_exports__, __webpack_require__) {\n\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   registerReportingObserver: () => (/* binding */ registerReportingObserver)\n/* harmony export */ });\nfunction registerReportingObserver(callback, types, document) {\n  const view = (document === null || document === void 0 ? void 0 : document.defaultView) || window;\n  if ('ReportingObserver' in view) {\n    try {\n      const observer = new view.ReportingObserver(reports => {\n        callback(reports[0]);\n      }, {\n        buffered: true,\n        types\n      });\n      observer.observe();\n    } catch (e) {}\n  }\n}\n\n\n/***/ },\n\n/***/ \"./src/constants.js\"\n/*!**************************!*\\\n  !*** ./src/constants.js ***!\n  \\**************************/\n(__unused_webpack_module, __webpack_exports__, __webpack_require__) {\n\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   AD_RENDER_FAILED_REASON: () => (/* binding */ AD_RENDER_FAILED_REASON),\n/* harmony export */   BID_STATUS: () => (/* binding */ BID_STATUS),\n/* harmony export */   DEBUG_MODE: () => (/* binding */ DEBUG_MODE),\n/* harmony export */   DEFAULT_TARGETING_KEYS: () => (/* binding */ DEFAULT_TARGETING_KEYS),\n/* harmony export */   EVENTS: () => (/* binding */ EVENTS),\n/* harmony export */   EVENT_ID_PATHS: () => (/* binding */ EVENT_ID_PATHS),\n/* harmony export */   GRANULARITY_OPTIONS: () => (/* binding */ GRANULARITY_OPTIONS),\n/* harmony export */   JSON_MAPPING: () => (/* binding */ JSON_MAPPING),\n/* harmony export */   MESSAGES: () => (/* binding */ MESSAGES),\n/* harmony export */   NATIVE_ASSET_TYPES: () => (/* binding */ NATIVE_ASSET_TYPES),\n/* harmony export */   NATIVE_IMAGE_TYPES: () => (/* binding */ NATIVE_IMAGE_TYPES),\n/* harmony export */   NATIVE_KEYS: () => (/* binding */ NATIVE_KEYS),\n/* harmony export */   NATIVE_KEYS_THAT_ARE_NOT_ASSETS: () => (/* binding */ NATIVE_KEYS_THAT_ARE_NOT_ASSETS),\n/* harmony export */   PB_LOCATOR: () => (/* binding */ PB_LOCATOR),\n/* harmony export */   PREBID_NATIVE_DATA_KEYS_TO_ORTB: () => (/* binding */ PREBID_NATIVE_DATA_KEYS_TO_ORTB),\n/* harmony export */   REJECTION_REASON: () => (/* binding */ REJECTION_REASON),\n/* harmony export */   S2S: () => (/* binding */ S2S),\n/* harmony export */   STATUS: () => (/* binding */ STATUS),\n/* harmony export */   TARGETING_KEYS: () => (/* binding */ TARGETING_KEYS)\n/* harmony export */ });\nconst JSON_MAPPING = {\n  PL_CODE: 'code',\n  PL_SIZE: 'sizes',\n  PL_BIDS: 'bids',\n  BD_BIDDER: 'bidder',\n  BD_ID: 'paramsd',\n  BD_PL_ID: 'placementId',\n  ADSERVER_TARGETING: 'adserverTargeting',\n  BD_SETTING_STANDARD: 'standard'\n};\nconst DEBUG_MODE = 'pbjs_debug';\nconst STATUS = {\n  GOOD: 1\n};\nconst EVENTS = {\n  AUCTION_INIT: 'auctionInit',\n  AUCTION_TIMEOUT: 'auctionTimeout',\n  AUCTION_END: 'auctionEnd',\n  BID_ADJUSTMENT: 'bidAdjustment',\n  BID_TIMEOUT: 'bidTimeout',\n  BID_REQUESTED: 'bidRequested',\n  BID_RESPONSE: 'bidResponse',\n  BID_REJECTED: 'bidRejected',\n  NO_BID: 'noBid',\n  SEAT_NON_BID: 'seatNonBid',\n  BID_WON: 'bidWon',\n  BIDDER_DONE: 'bidderDone',\n  BIDDER_ERROR: 'bidderError',\n  SET_TARGETING: 'setTargeting',\n  BEFORE_REQUEST_BIDS: 'beforeRequestBids',\n  BEFORE_BIDDER_HTTP: 'beforeBidderHttp',\n  REQUEST_BIDS: 'requestBids',\n  ADD_AD_UNITS: 'addAdUnits',\n  AD_RENDER_FAILED: 'adRenderFailed',\n  AD_RENDER_SUCCEEDED: 'adRenderSucceeded',\n  TCF2_ENFORCEMENT: 'tcf2Enforcement',\n  AUCTION_DEBUG: 'auctionDebug',\n  BID_VIEWABLE: 'bidViewable',\n  STALE_RENDER: 'staleRender',\n  EXPIRED_RENDER: 'expiredRender',\n  BILLABLE_EVENT: 'billableEvent',\n  BID_ACCEPTED: 'bidAccepted',\n  RUN_PAAPI_AUCTION: 'paapiRunAuction',\n  PBS_ANALYTICS: 'pbsAnalytics',\n  PAAPI_BID: 'paapiBid',\n  PAAPI_NO_BID: 'paapiNoBid',\n  PAAPI_ERROR: 'paapiError',\n  BEFORE_PBS_HTTP: 'beforePBSHttp',\n  BROWSI_INIT: 'browsiInit',\n  BROWSI_DATA: 'browsiData',\n  BROWSER_INTERVENTION: 'browserIntervention'\n};\nconst AD_RENDER_FAILED_REASON = {\n  PREVENT_WRITING_ON_MAIN_DOCUMENT: 'preventWritingOnMainDocument',\n  NO_AD: 'noAd',\n  EXCEPTION: 'exception',\n  CANNOT_FIND_AD: 'cannotFindAd',\n  MISSING_DOC_OR_ADID: 'missingDocOrAdid'\n};\nconst EVENT_ID_PATHS = {\n  bidWon: 'adUnitCode'\n};\nconst GRANULARITY_OPTIONS = {\n  LOW: 'low',\n  MEDIUM: 'medium',\n  HIGH: 'high',\n  AUTO: 'auto',\n  DENSE: 'dense',\n  CUSTOM: 'custom'\n};\nconst TARGETING_KEYS = {\n  BIDDER: 'hb_bidder',\n  AD_ID: 'hb_adid',\n  PRICE_BUCKET: 'hb_pb',\n  SIZE: 'hb_size',\n  DEAL: 'hb_deal',\n  SOURCE: 'hb_source',\n  FORMAT: 'hb_format',\n  UUID: 'hb_uuid',\n  CACHE_ID: 'hb_cache_id',\n  CACHE_HOST: 'hb_cache_host',\n  ADOMAIN: 'hb_adomain',\n  ACAT: 'hb_acat',\n  CRID: 'hb_crid',\n  DSP: 'hb_dsp',\n  VERSION: 'hb_ver'\n};\nconst DEFAULT_TARGETING_KEYS = {\n  BIDDER: 'hb_bidder',\n  AD_ID: 'hb_adid',\n  PRICE_BUCKET: 'hb_pb',\n  SIZE: 'hb_size',\n  DEAL: 'hb_deal',\n  FORMAT: 'hb_format',\n  UUID: 'hb_uuid',\n  CACHE_HOST: 'hb_cache_host',\n  VERSION: 'hb_ver'\n};\nconst NATIVE_KEYS = {\n  title: 'hb_native_title',\n  body: 'hb_native_body',\n  body2: 'hb_native_body2',\n  privacyLink: 'hb_native_privacy',\n  privacyIcon: 'hb_native_privicon',\n  sponsoredBy: 'hb_native_brand',\n  image: 'hb_native_image',\n  icon: 'hb_native_icon',\n  clickUrl: 'hb_native_linkurl',\n  displayUrl: 'hb_native_displayurl',\n  cta: 'hb_native_cta',\n  rating: 'hb_native_rating',\n  address: 'hb_native_address',\n  downloads: 'hb_native_downloads',\n  likes: 'hb_native_likes',\n  phone: 'hb_native_phone',\n  price: 'hb_native_price',\n  salePrice: 'hb_native_saleprice',\n  rendererUrl: 'hb_renderer_url',\n  adTemplate: 'hb_adTemplate'\n};\nconst S2S = {\n  SRC: 's2s',\n  DEFAULT_ENDPOINT: 'https://prebid.adnxs.com/pbs/v1/openrtb2/auction',\n  SYNCED_BIDDERS_KEY: 'pbjsSyncs'\n};\nconst BID_STATUS = {\n  BID_TARGETING_SET: 'targetingSet',\n  RENDERED: 'rendered',\n  BID_REJECTED: 'bidRejected'\n};\nconst REJECTION_REASON = {\n  INVALID: 'Bid has missing or invalid properties',\n  INVALID_REQUEST_ID: 'Invalid request ID',\n  BIDDER_DISALLOWED: 'Bidder code is not allowed by allowedAlternateBidderCodes / allowUnknownBidderCodes',\n  FLOOR_NOT_MET: 'Bid does not meet price floor',\n  CANNOT_CONVERT_CURRENCY: 'Unable to convert currency',\n  DSA_REQUIRED: 'Bid does not provide required DSA transparency info',\n  DSA_MISMATCH: 'Bid indicates inappropriate DSA rendering method',\n  PRICE_TOO_HIGH: 'Bid price exceeds maximum value'\n};\nconst PREBID_NATIVE_DATA_KEYS_TO_ORTB = {\n  body: 'desc',\n  body2: 'desc2',\n  sponsoredBy: 'sponsored',\n  cta: 'ctatext',\n  rating: 'rating',\n  address: 'address',\n  downloads: 'downloads',\n  likes: 'likes',\n  phone: 'phone',\n  price: 'price',\n  salePrice: 'saleprice',\n  displayUrl: 'displayurl'\n};\nconst NATIVE_ASSET_TYPES = {\n  sponsored: 1,\n  desc: 2,\n  rating: 3,\n  likes: 4,\n  downloads: 5,\n  price: 6,\n  saleprice: 7,\n  phone: 8,\n  address: 9,\n  desc2: 10,\n  displayurl: 11,\n  ctatext: 12\n};\nconst NATIVE_IMAGE_TYPES = {\n  ICON: 1,\n  MAIN: 3\n};\nconst NATIVE_KEYS_THAT_ARE_NOT_ASSETS = ['privacyIcon', 'clickUrl', 'adTemplate', 'rendererUrl', 'type'];\nconst MESSAGES = {\n  REQUEST: 'Prebid Request',\n  RESPONSE: 'Prebid Response',\n  NATIVE: 'Prebid Native',\n  EVENT: 'Prebid Event',\n  INTERVENTION: 'Prebid Intervention'\n};\nconst PB_LOCATOR = '__pb_locator__';\n\n\n/***/ }\n\n/******/ \t});\n/************************************************************************/\n/******/ \t// The module cache\n/******/ \tvar __webpack_module_cache__ = {};\n/******/ \t\n/******/ \t// The require function\n/******/ \tfunction __webpack_require__(moduleId) {\n/******/ \t\t// Check if module is in cache\n/******/ \t\tvar cachedModule = __webpack_module_cache__[moduleId];\n/******/ \t\tif (cachedModule !== undefined) {\n/******/ \t\t\treturn cachedModule.exports;\n/******/ \t\t}\n/******/ \t\t// Check if module exists (development only)\n/******/ \t\tif (__webpack_modules__[moduleId] === undefined) {\n/******/ \t\t\tvar e = new Error(\"Cannot find module '\" + moduleId + \"'\");\n/******/ \t\t\te.code = 'MODULE_NOT_FOUND';\n/******/ \t\t\tthrow e;\n/******/ \t\t}\n/******/ \t\t// Create a new module (and put it into the cache)\n/******/ \t\tvar module = __webpack_module_cache__[moduleId] = {\n/******/ \t\t\t// no module.id needed\n/******/ \t\t\t// no module.loaded needed\n/******/ \t\t\texports: {}\n/******/ \t\t};\n/******/ \t\n/******/ \t\t// Execute the module function\n/******/ \t\t__webpack_modules__[moduleId](module, module.exports, __webpack_require__);\n/******/ \t\n/******/ \t\t// Return the exports of the module\n/******/ \t\treturn module.exports;\n/******/ \t}\n/******/ \t\n/************************************************************************/\n/******/ \t/* webpack/runtime/define property getters */\n/******/ \t(() => {\n/******/ \t\t// define getter functions for harmony exports\n/******/ \t\t__webpack_require__.d = (exports, definition) => {\n/******/ \t\t\tfor(var key in definition) {\n/******/ \t\t\t\tif(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {\n/******/ \t\t\t\t\tObject.defineProperty(exports, key, { enumerable: true, get: definition[key] });\n/******/ \t\t\t\t}\n/******/ \t\t\t}\n/******/ \t\t};\n/******/ \t})();\n/******/ \t\n/******/ \t/* webpack/runtime/hasOwnProperty shorthand */\n/******/ \t(() => {\n/******/ \t\t__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))\n/******/ \t})();\n/******/ \t\n/******/ \t/* webpack/runtime/make namespace object */\n/******/ \t(() => {\n/******/ \t\t// define __esModule on exports\n/******/ \t\t__webpack_require__.r = (exports) => {\n/******/ \t\t\tif(typeof Symbol !== 'undefined' && Symbol.toStringTag) {\n/******/ \t\t\t\tObject.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });\n/******/ \t\t\t}\n/******/ \t\t\tObject.defineProperty(exports, '__esModule', { value: true });\n/******/ \t\t};\n/******/ \t})();\n/******/ \t\n/************************************************************************/\nvar __webpack_exports__ = {};\n// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.\n(() => {\n/*!************************************************!*\\\n  !*** ./creative/renderers/display/renderer.js ***!\n  \\************************************************/\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   render: () => (/* binding */ render)\n/* harmony export */ });\n/* harmony import */ var _reporting_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../reporting.js */ \"./creative/reporting.js\");\n/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../constants.js */ \"./creative/constants.js\");\n/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants.js */ \"./creative/renderers/display/constants.js\");\n\n\n\nfunction render(_ref, _ref2, win) {\n  let {\n    ad,\n    adUrl,\n    width,\n    height,\n    instl\n  } = _ref;\n  let {\n    mkFrame,\n    sendMessage\n  } = _ref2;\n  (0,_reporting_js__WEBPACK_IMPORTED_MODULE_0__.registerReportingObserver)(report => {\n    sendMessage(_constants_js__WEBPACK_IMPORTED_MODULE_1__.MESSAGE_EVENT, {\n      event: _constants_js__WEBPACK_IMPORTED_MODULE_1__.BROWSER_INTERVENTION,\n      intervention: report\n    });\n  }, ['intervention']);\n  if (!ad && !adUrl) {\n    const err = new Error('Missing ad markup or URL');\n    err.reason = _constants_js__WEBPACK_IMPORTED_MODULE_2__.ERROR_NO_AD;\n    throw err;\n  } else {\n    if (height == null) {\n      var _win$document;\n      const body = (_win$document = win.document) === null || _win$document === void 0 ? void 0 : _win$document.body;\n      [body, body === null || body === void 0 ? void 0 : body.parentElement].filter(elm => (elm === null || elm === void 0 ? void 0 : elm.style) != null).forEach(elm => {\n        elm.style.height = '100%';\n      });\n    }\n    const doc = win.document;\n    const attrs = {\n      width: width !== null && width !== void 0 ? width : '100%',\n      height: height !== null && height !== void 0 ? height : '100%'\n    };\n    if (adUrl && !ad) {\n      attrs.src = adUrl;\n    } else {\n      attrs.srcdoc = ad;\n    }\n    doc.body.appendChild(mkFrame(doc, attrs));\n    if (instl && win.frameElement) {\n      // interstitials are rendered in a nested iframe that needs to be sized\n      const style = win.frameElement.style;\n      style.width = width ? \"\".concat(width, \"px\") : '100vw';\n      style.height = height ? \"\".concat(height, \"px\") : '100vh';\n    }\n  }\n}\nwindow.render = render;\n\n})();\n\n/******/ })()\n;"
 
-/***/ })
+/***/ }
 
 }]);
 
 "use strict";
 (self["pbjsChunk"] = self["pbjsChunk"] || []).push([["devicePixelRatio"],{
 
-/***/ "./libraries/devicePixelRatio/devicePixelRatio.js":
+/***/ "./libraries/devicePixelRatio/devicePixelRatio.js"
 /*!********************************************************!*\
   !*** ./libraries/devicePixelRatio/devicePixelRatio.js ***!
   \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getDevicePixelRatio: () => (/* binding */ getDevicePixelRatio)
@@ -14553,18 +14559,18 @@ function getDevicePixelRatio(win) {
 }
 
 
-/***/ })
+/***/ }
 
 }]);
 
 "use strict";
 (self["pbjsChunk"] = self["pbjsChunk"] || []).push([["connectionInfo"],{
 
-/***/ "./libraries/connectionInfo/connectionUtils.js":
+/***/ "./libraries/connectionInfo/connectionUtils.js"
 /*!*****************************************************!*\
   !*** ./libraries/connectionInfo/connectionUtils.js ***!
   \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getConnectionInfo: () => (/* binding */ getConnectionInfo)
@@ -14637,18 +14643,18 @@ function getConnectionType() {
 }
 
 
-/***/ })
+/***/ }
 
 }]);
 
 "use strict";
 (self["pbjsChunk"] = self["pbjsChunk"] || []).push([["exitAdsModule"],{
 
-/***/ "./modules/exitAdsModule/index.js":
+/***/ "./modules/exitAdsModule/index.js"
 /*!****************************************!*\
   !*** ./modules/exitAdsModule/index.js ***!
   \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* unused harmony exports init, triggerExitAd, reset */
 /* harmony import */ var _src_prebidGlobal_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../src/prebidGlobal.js */ "./src/prebidGlobal.js");
@@ -15360,7 +15366,7 @@ pbjs.exitAds = {
 (0,_src_prebidGlobal_js__WEBPACK_IMPORTED_MODULE_0__.registerModule)('exitAdsModule');
 
 
-/***/ })
+/***/ }
 
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
@@ -15373,19 +15379,19 @@ pbjs.exitAds = {
 "use strict";
 (self["pbjsChunk"] = self["pbjsChunk"] || []).push([["gumgumBidAdapter"],{
 
-/***/ "./modules/gumgumBidAdapter.js":
+/***/ "./modules/gumgumBidAdapter.js"
 /*!*************************************!*\
   !*** ./modules/gumgumBidAdapter.js ***!
   \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 /* unused harmony exports getCids, setIrisId, spec */
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "../../node_modules/@babel/runtime/helpers/esm/defineProperty.js");
 /* harmony import */ var _src_prebidGlobal_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../src/prebidGlobal.js */ "./src/prebidGlobal.js");
 /* harmony import */ var _src_mediaTypes_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../src/mediaTypes.js */ "./src/mediaTypes.js");
 /* harmony import */ var _src_utils_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../src/utils.js */ "./src/utils.js");
-/* harmony import */ var _src_utils_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../src/utils.js */ "./src/utils/winDimensions.js");
-/* harmony import */ var _src_utils_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../src/utils.js */ "../../node_modules/dlv/index.js");
+/* harmony import */ var _src_utils_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../src/utils.js */ "../../node_modules/dlv/index.js");
+/* harmony import */ var _src_utils_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../src/utils.js */ "./src/utils/winDimensions.js");
 /* harmony import */ var _libraries_devicePixelRatio_devicePixelRatio_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../libraries/devicePixelRatio/devicePixelRatio.js */ "./libraries/devicePixelRatio/devicePixelRatio.js");
 /* harmony import */ var _src_config_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../src/config.js */ "./src/config.js");
 /* harmony import */ var _src_storageManager_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../src/storageManager.js */ "./src/storageManager.js");
@@ -15475,8 +15481,8 @@ function _getBrowserParams(topWindowUrl, mosttopLocation) {
     return browserParams;
   }
   browserParams = {
-    vw: (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_4__.getWinDimensions)().innerWidth,
-    vh: (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_4__.getWinDimensions)().innerHeight,
+    vw: (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_5__.getWinDimensions)().innerWidth,
+    vh: (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_5__.getWinDimensions)().innerHeight,
     sw: topScreen.width,
     sh: topScreen.height,
     pu: stripGGParams(topUrl),
@@ -15662,7 +15668,7 @@ function _getFloor(mediaTypes, staticBidFloor, bid) {
  */
 function _getDeviceData(ortb2Data) {
   var _device$ext;
-  const _device = (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_5__["default"])(ortb2Data, 'device') || {};
+  const _device = (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_4__["default"])(ortb2Data, 'device') || {};
 
   // set device data params from ortb2
   const _deviceRequestParams = {
@@ -15758,8 +15764,8 @@ function buildRequests(validBidRequests, bidderRequest) {
       floor
     } = _getFloor(mediaTypes, params.bidfloor, bidRequest);
     const eids = getEids(userId);
-    const gpid = (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_5__["default"])(ortb2Imp, 'ext.gpid');
-    const paapiEligible = (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_5__["default"])(ortb2Imp, 'ext.ae') === 1;
+    const gpid = (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_4__["default"])(ortb2Imp, 'ext.gpid');
+    const paapiEligible = (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_4__["default"])(ortb2Imp, 'ext.ae') === 1;
     let sizes = [1, 1];
     let data = {};
     data.displaymanager = 'Prebid.js - gumgum';
@@ -15865,7 +15871,7 @@ function buildRequests(validBidRequests, bidderRequest) {
       data.gppString = bidderRequest.ortb2.regs.gpp;
       data.gppSid = Array.isArray(bidderRequest.ortb2.regs.gpp_sid) ? bidderRequest.ortb2.regs.gpp_sid.join(',') : '';
     }
-    const dsa = (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_5__["default"])(bidderRequest, 'ortb2.regs.ext.dsa');
+    const dsa = (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_4__["default"])(bidderRequest, 'ortb2.regs.ext.dsa');
     if (dsa) {
       data.dsa = JSON.stringify(dsa);
     }
@@ -15876,7 +15882,7 @@ function buildRequests(validBidRequests, bidderRequest) {
     if (schain && schain.nodes) {
       data.schain = _serializeSupplyChainObj(schain);
     }
-    const tId = (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_5__["default"])(ortb2Imp, 'ext.tid') || (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_5__["default"])(bidderRequest, 'ortb2.source.tid') || '';
+    const tId = (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_4__["default"])(ortb2Imp, 'ext.tid') || (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_4__["default"])(bidderRequest, 'ortb2.source.tid') || '';
     data.tId = tId;
     Object.assign(data, _getBrowserParams(topWindowUrl, mosttopLocation), _getDeviceData(bidderRequest === null || bidderRequest === void 0 ? void 0 : bidderRequest.ortb2));
     bids.push({
@@ -16148,12 +16154,12 @@ const spec = {
 (0,_src_prebidGlobal_js__WEBPACK_IMPORTED_MODULE_1__.registerModule)('gumgumBidAdapter');
 
 
-/***/ })
+/***/ }
 
 },
 /******/ __webpack_require__ => { // webpackRuntimeModules
 /******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-/******/ __webpack_require__.O(0, ["devicePixelRatio","connectionInfo","chunk-core","viewport","dnt","creative-renderer-display"], () => (__webpack_exec__("./modules/gumgumBidAdapter.js")));
+/******/ __webpack_require__.O(0, ["chunk-core","viewport","dnt","creative-renderer-display","devicePixelRatio","connectionInfo"], () => (__webpack_exec__("./modules/gumgumBidAdapter.js")));
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ }
 ]);
