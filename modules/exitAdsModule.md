@@ -128,7 +128,7 @@ Exit Ads supports standard display banner sizes. Publishers can control which si
 
 ```javascript
 adUnit: {
-  code: 'echo-ad-slot',
+  code: 'exit-ad-slot',
   mediaTypes: {
     banner: {
       sizes: [
