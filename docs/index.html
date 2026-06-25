@@ -14,67 +14,148 @@
   <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
 
   <style>
+    :root {
+      color-scheme: light;
+      --accent: #d94f2b;
+      --accent-dark: #b83f20;
+      --ink: #1f2933;
+      --muted: #667085;
+      --line: #d9dee7;
+      --surface: #ffffff;
+      --surface-soft: #f7f8fb;
+      --panel: #eef2f6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      line-height: 1.6;
+      line-height: 1.5;
       margin: 0;
-      padding: 20px;
-      background: #f5f5f5;
+      color: var(--ink);
+      background: #eceff3;
     }
 
     .container {
-      max-width: 800px;
+      max-width: 1160px;
       margin: 0 auto;
-      background: white;
-      padding: 40px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 28px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: flex-start;
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
     }
 
     h1 {
-      color: #333;
-      border-bottom: 3px solid #ff6b35;
-      padding-bottom: 10px;
+      margin: 0 0 6px;
+      color: var(--ink);
+      font-size: 30px;
+      line-height: 1.15;
+      letter-spacing: 0;
     }
 
-    .info-box {
-      background: #fff3e0;
-      border-left: 4px solid #ff6b35;
-      padding: 15px;
-      margin: 20px 0;
+    h2 {
+      margin: 28px 0 12px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 14px;
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      max-width: 680px;
+    }
+
+    .badge {
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 8px 10px;
+      background: var(--surface);
+      color: var(--muted);
+      white-space: nowrap;
+      font-size: 13px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .main-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+    }
+
+    .sticky-panel {
+      position: sticky;
+      top: 16px;
     }
 
     .status {
-      background: #f5f5f5;
-      border: 1px solid #ddd;
-      padding: 15px;
-      margin: 20px 0;
-      border-radius: 4px;
-      height: 200px;
+      background: #111827;
+      border: 1px solid #111827;
+      color: #d1d5db;
+      padding: 14px;
+      margin: 0;
+      border-radius: 6px;
+      height: calc(100vh - 270px);
+      min-height: 280px;
+      max-height: 560px;
       overflow-y: auto;
-      font-family: monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: 12px;
     }
 
-    .controls {
-      margin: 30px 0;
-      padding: 20px;
-      background: #f8f9fa;
-      border-radius: 4px;
+    .control-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 10px;
     }
 
     button {
-      background: #ff6b35;
+      background: var(--accent);
       color: white;
       border: none;
-      padding: 12px 24px;
-      font-size: 16px;
+      padding: 10px 14px;
+      min-height: 42px;
+      font-size: 14px;
       border-radius: 4px;
       cursor: pointer;
-      margin-right: 10px;
     }
 
     button:hover {
-      background: #e55a2b;
+      background: var(--accent-dark);
+    }
+
+    button.secondary {
+      background: #344054;
+    }
+
+    button.secondary:hover {
+      background: #1f2937;
     }
 
     .scroll-indicator {
@@ -82,32 +163,145 @@
       top: 0;
       left: 0;
       height: 4px;
-      background: #ff6b35;
+      background: var(--accent);
       transition: width 0.3s;
       z-index: 1000;
     }
 
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
     .metric {
-      display: inline-block;
-      margin-right: 20px;
-      font-weight: bold;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px;
+      min-height: 64px;
+    }
+
+    .metric-label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .metric-value {
+      display: block;
+      font-weight: 700;
+      font-size: 17px;
+    }
+
+    .section-spaced {
+      margin-top: 18px;
+    }
+
+    .creative-info {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 10px;
     }
 
     .content {
-      margin: 40px 0;
+      margin: 0;
     }
 
-    .paragraph {
-      margin: 20px 0;
-      text-align: justify;
+    .trigger-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .trigger-list li {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    .trigger-name {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .paragraph,
+    .trigger-note {
+      margin: 12px 0 0;
+      color: #344054;
+    }
+
+    .scroll-zone {
+      min-height: 1300px;
+      display: flex;
+      align-items: flex-end;
+      padding: 18px;
+      background: repeating-linear-gradient(
+        180deg,
+        #f7f8fb,
+        #f7f8fb 119px,
+        #edf1f5 120px
+      );
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--muted);
     }
 
     .footer {
-      margin-top: 100px;
-      padding: 40px;
-      background: #ff6b35;
+      padding: 36px;
+      background: #344054;
       color: white;
       text-align: center;
+      border-radius: 8px;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      font-size: 14px;
+      background: white;
+    }
+
+    code {
+      background: var(--panel);
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+
+    @media (max-width: 860px) {
+      .container {
+        padding: 18px;
+      }
+
+      .header,
+      .layout {
+        display: block;
+      }
+
+      .sticky-panel {
+        position: static;
+      }
+
+      .status {
+        height: 260px;
+      }
+
+      .badge {
+        display: inline-block;
+        margin-top: 12px;
+      }
+
+      .panel {
+        margin-bottom: 16px;
+      }
     }
   </style>
 
@@ -117,6 +311,9 @@
 
     // Track events
     var triggerLog = [];
+    var renderCount = 0;
+    var lastTrigger = 'None';
+
     function logEvent(message) {
       var timestamp = new Date().toLocaleTimeString();
       triggerLog.push('[' + timestamp + '] ' + message);
@@ -127,7 +324,7 @@
     function updateStatus() {
       var statusEl = document.getElementById('status');
       if (statusEl) {
-        statusEl.innerHTML = '<strong>Event Log:</strong><br>' + triggerLog.slice(-15).join('<br>');
+        statusEl.innerHTML = '<strong>Event Log</strong><br>' + triggerLog.slice(-15).join('<br>');
         // Auto-scroll to bottom
         statusEl.scrollTop = statusEl.scrollHeight;
       }
@@ -143,6 +340,45 @@
       if (scrollDisplay) {
         scrollDisplay.textContent = Math.round(scrollDepth) + '%';
       }
+    }
+
+    function updateRenderMetrics(triggerName, increment) {
+      if (increment) {
+        renderCount++;
+        lastTrigger = triggerName;
+      }
+
+      var renderDisplay = document.getElementById('render-count');
+      if (renderDisplay) {
+        renderDisplay.textContent = renderCount;
+      }
+
+      var lastTriggerDisplay = document.getElementById('last-trigger');
+      if (lastTriggerDisplay) {
+        lastTriggerDisplay.textContent = lastTrigger;
+      }
+    }
+
+    function describeSuppression(context) {
+      if (context.reason === 'globalRenderInterval') {
+        return 'inside the 30s display gate';
+      }
+      if (context.reason === 'repeatInterval') {
+        return 'inside this trigger repeat interval';
+      }
+      if (context.reason === 'oncePerPageLoad') {
+        return 'this trigger is once per page load';
+      }
+      if (context.reason === 'frequencyCap') {
+        return (context.cap || 'frequency') + ' cap reached';
+      }
+      if (context.reason === 'noBid') {
+        return 'auction finished without a bid';
+      }
+      if (context.reason === 'noCachedBid') {
+        return 'no cached bid was available';
+      }
+      return context.message || 'not eligible to render';
     }
 
     function calculateScrollDepth() {
@@ -162,13 +398,9 @@
     window.addEventListener('scroll', updateScrollIndicator);
     window.addEventListener('load', updateScrollIndicator);
 
-    // Configure Exit Ads with GumGum test placement
-    pbjs.que.push(function() {
-      logEvent('Configuring Exit Ads module with GumGum test placement...');
-
-      pbjs.setConfig({
+    function buildExitAdsConfig() {
+      return {
         exitAds: {
-          // Ad unit with GumGum test credentials
           adUnit: {
             code: 'exit-ad-gumgum',
             mediaTypes: {
@@ -180,59 +412,114 @@
               {
                 bidder: 'gumgum',
                 params: {
-                  zone: 'dc9d6be1',    // GumGum test zone
-                  slot: '15901',       // GumGum test slot
+                  zone: 'dc9d6be1',
+                  slot: '15901',
                   bidfloor: 0.03
                 }
               }
             ]
           },
-
-          // Trigger configuration
-          trigger: {
-            scroll: { depth: 90 },      // Trigger at 90% scroll
-            timeOnPage: 45000           // OR after 45 seconds
-          },
-
-          // Pre-fetch strategy
-          prefetch: {
-            mode: 'lazy',
-            lazyTriggerPoint: {
-              scroll: { depth: 70 }     // Start auction at 70% scroll
-            }
-          },
-
-          // Display configuration
           display: {
-            type: 'overlay',
-            closeButton: true,
-            closeDelay: 3000,           // 3 second delay before close button
+            closeButton: {
+              enabled: true,
+              delay: 3000
+            },
             frequency: {
-              maxPerSession: 5,         // Allow multiple for testing
-              maxPerDay: 10
-            }
-          },
+              maxTriggersPerPage: 5,
+              maxTriggersPerSession: 5,
+              maxTriggersPerDay: 10
+            },
+            trigger: {
+              bottomOfPage: {
+                enabled: true,
+                threshold: 90,
+                prefetchAtThreshold: 70,
+                repeatInterval: 60000
+              },
+              returnToTop: {
+                enabled: true,
+                threshold: 10,
+                prefetchAtThreshold: 50,
+                repeatInterval: 60000
+              },
+              idleTime: {
+                enabled: true,
+                minTime: 45000,
+                prefetchAtTime: 30000,
+                repeatInterval: 60000
+              },
+              tabFocusReturn: {
+                enabled: true,
+                minTime: 1000,
+                repeatInterval: 60000
+              },
+              appFocusReturn: {
+                enabled: true,
+                minTime: 1000,
+                repeatInterval: 60000
+              },
+              custom: {
+                enabled: true,
+                repeatInterval: 60000,
+                setup: function({ trigger }) {
+                  window.addEventListener('exit-ads-demo-custom-trigger', trigger);
 
-          // Callbacks
+                  return function cleanup() {
+                    window.removeEventListener('exit-ads-demo-custom-trigger', trigger);
+                  };
+                }
+              }
+            },
+            cssOverrides: `
+              .exit-ads-overlay {
+              }
+
+              .exit-ads-container {
+              }
+
+              .exit-ads-close-button {
+              }
+
+              .exit-ads-close-button:hover {
+              }
+
+              .exit-ads-close-button--disabled {
+              }
+
+              .exit-ads-close-button--countdown {
+              }
+            `
+          },
           onBidCached: function(bidInfo) {
-            logEvent('✓ Bid cached: ' + bidInfo.bidder + ' $' + bidInfo.cpm.toFixed(2) + ' CPM (' + bidInfo.size + ')');
+            logEvent('Bid cached: ' + bidInfo.bidder + ' $' + bidInfo.cpm.toFixed(2) + ' CPM (' + bidInfo.size + ')');
           },
-          onTrigger: function() {
-            logEvent('✓ Trigger activated! Preparing to show Exit Ad...');
+          onTrigger: function(context) {
+            logEvent('Trigger activated: ' + context.trigger + '. Preparing to show Exit Ad...');
           },
-          onAdRender: function() {
-            logEvent('✓ Exit Ad rendered successfully');
+          onAdRender: function(context) {
+            updateRenderMetrics(context.trigger, true);
+            logEvent('Exit Ad rendered successfully from ' + context.trigger);
           },
-          onAdClose: function() {
-            logEvent('✓ Exit Ad closed by user');
+          onAdClose: function(context) {
+            logEvent('Exit Ad closed by user from ' + context.trigger + '. The 30s display gate restarted.');
           },
-          onFrequencyCapReached: function() {
-            logEvent('⚠ Frequency cap reached - ad not shown');
+          onFrequencyCapReached: function(context) {
+            logEvent('Frequency cap reached for ' + context.trigger + ' - ad not shown');
+          },
+          onTriggerSuppressed: function(context) {
+            logEvent('Trigger suppressed: ' + context.trigger + ' - ' + describeSuppression(context));
           }
         }
-      });
+      };
+    }
 
-      logEvent('Exit Ads configured - scroll to 70% to start auction, 90% to trigger');
+    // Configure Exit Ads with GumGum test placement
+    pbjs.que.push(function() {
+      logEvent('Configuring Exit Ads module with GumGum test placement...');
+
+      pbjs.setConfig(buildExitAdsConfig());
+
+      logEvent('Exit Ads configured - scroll to 70% to prefetch, 90% to trigger');
       logEvent('Using GumGum test zone: dc9d6be1, slot: 15901');
     });
 
@@ -248,14 +535,36 @@
       });
     }
 
+    function customTrigger() {
+      logEvent('Custom trigger event dispatched');
+      window.dispatchEvent(new Event('exit-ads-demo-custom-trigger'));
+    }
+
+    function jumpToBottomTrigger() {
+      logEvent('Scrolling to bottom-of-page trigger zone');
+      window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+    }
+
+    function armReturnToTopTrigger() {
+      logEvent('Arming return-to-top trigger by scrolling deep first');
+      window.scrollTo({ top: document.documentElement.scrollHeight * 0.55, behavior: 'smooth' });
+    }
+
+    function jumpToTopTrigger() {
+      logEvent('Returning to top trigger zone');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     // Clear frequency caps
     function clearFrequencyCaps() {
       try {
-        sessionStorage.removeItem('exitAds_session_count');
-        localStorage.removeItem('exitAds_daily_count');
-        localStorage.removeItem('exitAds_last_shown');
-        logEvent('✓ Frequency caps cleared');
+        sessionStorage.removeItem('exitAds_frequency_session_count');
+        localStorage.removeItem('exitAds_frequency_daily_count');
+        renderCount = 0;
+        lastTrigger = 'None';
+        logEvent('Stored frequency caps cleared. Reload or reset the module to clear the page-load cap.');
         updateFrequencyDisplay();
+        updateRenderMetrics('None', false);
       } catch (e) {
         logEvent('ERROR: Could not clear frequency caps - ' + e.message);
       }
@@ -264,8 +573,8 @@
     // Show current frequency cap status
     function updateFrequencyDisplay() {
       try {
-        const sessionCount = parseInt(sessionStorage.getItem('exitAds_session_count') || '0');
-        const dailyData = localStorage.getItem('exitAds_daily_count');
+        const sessionCount = parseInt(sessionStorage.getItem('exitAds_frequency_session_count') || '0');
+        const dailyData = localStorage.getItem('exitAds_frequency_daily_count');
         let dailyCount = 0;
         if (dailyData) {
           const { date, count } = JSON.parse(dailyData);
@@ -277,7 +586,7 @@
 
         const freqEl = document.getElementById('frequency-status');
         if (freqEl) {
-          freqEl.innerHTML = 'Session: ' + sessionCount + '/5 | Daily: ' + dailyCount + '/10';
+          freqEl.innerHTML = renderCount + '/5 page load | ' + sessionCount + '/5 tab session | ' + dailyCount + '/10 local day';
         }
       } catch (e) {
         // Ignore errors
@@ -355,66 +664,15 @@
     function resetExitAds() {
       if (pbjs.exitAds && pbjs.exitAds.reset) {
         pbjs.exitAds.reset();
+        renderCount = 0;
+        lastTrigger = 'None';
+        updateRenderMetrics('None', false);
+        updateFrequencyDisplay();
         logEvent('Exit Ads state reset - reconfiguring...');
 
         setTimeout(function() {
           pbjs.que.push(function() {
-            pbjs.setConfig({
-              exitAds: {
-                adUnit: {
-                  code: 'exit-ad-gumgum',
-                  mediaTypes: {
-                    banner: {
-                      sizes: [[300, 250]]
-                    }
-                  },
-                  bids: [
-                    {
-                      bidder: 'gumgum',
-                      params: {
-                        zone: 'dc9d6be1',
-                        slot: '15901',
-                        bidfloor: 0.03
-                      }
-                    }
-                  ]
-                },
-                trigger: {
-                  scroll: { depth: 90 },
-                  timeOnPage: 45000
-                },
-                prefetch: {
-                  mode: 'lazy',
-                  lazyTriggerPoint: {
-                    scroll: { depth: 70 }
-                  }
-                },
-                display: {
-                  type: 'overlay',
-                  closeButton: true,
-                  closeDelay: 3000,
-                  frequency: {
-                    maxPerSession: 5,
-                    maxPerDay: 10
-                  }
-                },
-                onBidCached: function(bidInfo) {
-                  logEvent('✓ Bid cached: ' + bidInfo.bidder + ' $' + bidInfo.cpm.toFixed(2) + ' CPM (' + bidInfo.size + ')');
-                },
-                onTrigger: function() {
-                  logEvent('✓ Trigger activated!');
-                },
-                onAdRender: function() {
-                  logEvent('✓ Exit Ad rendered successfully');
-                },
-                onAdClose: function() {
-                  logEvent('✓ Exit Ad closed by user');
-                },
-                onFrequencyCapReached: function() {
-                  logEvent('⚠ Frequency cap reached - ad not shown');
-                }
-              }
-            });
+            pbjs.setConfig(buildExitAdsConfig());
             logEvent('Exit Ads reconfigured');
           });
         }, 100);
@@ -437,153 +695,115 @@
   <div class="scroll-indicator" id="scroll-indicator"></div>
 
   <div class="container">
-    <h1>Exit Ads Module - GumGum Demo</h1>
-
-    <div class="info-box">
-      <strong>Demo Configuration</strong><br>
-      This demo uses a hardcoded bid response (ACME 300x250 creative) for testing purposes.<br>
-      In production, the GumGum adapter would fetch real bids using your zone credentials.
-    </div>
-
-    <div class="status" id="status">
-      <strong>Event Log (last 15):</strong><br>
-      Loading...
-    </div>
-
-    <div class="controls">
-      <h3>Controls & Metrics</h3>
-      <div style="margin-bottom: 15px;">
-        <span class="metric">Scroll Depth: <span id="scroll-depth">0%</span></span>
-        <span class="metric">Time on Page: <span id="time-on-page">0s</span></span>
+    <div class="header">
+      <div>
+        <h1>Exit Ads Module Test Console</h1>
+        <p class="subtitle">GumGum-backed demo for trigger scheduling, per-trigger prefetch, frequency caps, close-button delay, callbacks, and CSS override hooks.</p>
       </div>
-      <div style="margin-bottom: 15px;">
-        <span class="metric">Frequency Caps: <span id="frequency-status">Session: 0/5 | Daily: 0/10</span></span>
-      </div>
-      <button onclick="manualTrigger()">Manual Trigger Exit Ad</button>
-      <button onclick="clearFrequencyCaps()">Clear Frequency Caps</button>
+      <div class="badge">Bundle: <code>exitAdsModule,gumgumBidAdapter</code></div>
     </div>
 
-    <div class="controls">
-      <h3>Test Creative</h3>
-      <div style="margin-bottom: 15px;">
-        <label for="creative-selector" style="display: block; margin-bottom: 5px;">Select Creative:</label>
-        <select id="creative-selector" onchange="selectCreative()" style="width: 100%; padding: 8px; font-size: 14px;">
+    <div class="layout">
+      <main class="main-stack">
+        <section class="panel">
+          <h3>Runtime Metrics</h3>
+          <div class="metrics">
+            <div class="metric">
+              <span class="metric-label">Scroll depth</span>
+              <span class="metric-value" id="scroll-depth">0%</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Time on page</span>
+              <span class="metric-value" id="time-on-page">0s</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Successful renders</span>
+              <span class="metric-value" id="render-count">0</span>
+            </div>
+            <div class="metric">
+              <span class="metric-label">Last trigger</span>
+              <span class="metric-value" id="last-trigger">None</span>
+            </div>
+          </div>
+
+          <h3>Trigger Controls</h3>
+          <div class="control-grid">
+            <button onclick="manualTrigger()">Manual Trigger</button>
+            <button onclick="customTrigger()">Custom Setup Trigger</button>
+            <button class="secondary" onclick="jumpToBottomTrigger()">Bottom-of-page Zone</button>
+            <button class="secondary" onclick="armReturnToTopTrigger()">Arm Return-to-top</button>
+            <button class="secondary" onclick="jumpToTopTrigger()">Return to Top</button>
+            <button class="secondary" onclick="clearFrequencyCaps()">Clear Stored Caps</button>
+            <button class="secondary" onclick="resetExitAds()">Reset Module</button>
+          </div>
+
+          <h3 class="section-spaced">Frequency Caps</h3>
+          <div class="metric">
+            <span class="metric-label">Page load / tab session / local day</span>
+            <span class="metric-value" id="frequency-status">0/5 page load | 0/5 tab session | 0/10 local day</span>
+          </div>
+          <p class="trigger-note">The page-load cap is in memory and resets on reload. The tab-session cap uses <code>sessionStorage</code> and usually resets when this tab closes. The local-day cap uses <code>localStorage</code> and resets when the saved date no longer matches today.</p>
+        </section>
+
+        <section class="panel content">
+          <h2>Default Trigger Scenarios</h2>
+          <p class="paragraph">This demo uses the standard trigger defaults, shortens idle to 45 seconds, and opts into prefetch points so auction timing is visible in the event log. Use the controls below or interact with the browser as described.</p>
+          <ul class="trigger-list">
+            <li>
+              <span class="trigger-name">Bottom-of-page</span>
+              Click <strong>Bottom-of-page Zone</strong>, or scroll until depth reaches 90%. The auction prefetches at 70%.
+            </li>
+            <li>
+              <span class="trigger-name">Return-to-top</span>
+              Click <strong>Arm Return-to-top</strong>, then <strong>Return to Top</strong>. The auction prefetches while scrolling upward through 50%, and the trigger fires when you return to the top 10%.
+            </li>
+            <li>
+              <span class="trigger-name">Idle time</span>
+              Leave the page open. The auction prefetches after 30 seconds, then the trigger fires after 45 seconds.
+            </li>
+            <li>
+              <span class="trigger-name">Tab focus return</span>
+              Switch to another browser tab for at least 1 second, then come back. This tests hidden-to-visible visibility changes.
+            </li>
+            <li>
+              <span class="trigger-name">App focus return</span>
+              Keep this tab visible, switch to another app/window for at least 1 second, then return. This tests blur-to-focus without conflicting with tab return.
+            </li>
+            <li>
+              <span class="trigger-name">Custom setup and manual</span>
+              <strong>Custom Setup Trigger</strong> dispatches the configured publisher event. <strong>Manual Trigger</strong> calls <code>pbjs.exitAds.trigger()</code>.
+            </li>
+          </ul>
+          <p class="trigger-note">Suppressed triggers, no-bid attempts, frequency caps, and the hard 30s display gate are shown in the Event Log.</p>
+        </section>
+
+        <section class="panel content">
+          <h2>Scroll Test Area</h2>
+          <p class="paragraph">This space exists so the scroll triggers have enough page depth. Watch the sticky Event Log while moving through the page.</p>
+          <div class="scroll-zone">
+            End of scroll test area. Returning upward from here can exercise the return-to-top trigger.
+          </div>
+        </section>
+
+        <div class="footer">
+          <h2>End of Content</h2>
+          <p>If you've scrolled this far, the bottom-of-page trigger should have been eligible.</p>
+        </div>
+      </main>
+
+      <aside class="panel sticky-panel">
+        <h3>Event Log</h3>
+        <div class="status" id="status">
+          <strong>Event Log</strong><br>
+          Loading...
+        </div>
+
+        <h3 class="section-spaced">Test Creative</h3>
+        <select id="creative-selector" onchange="selectCreative()">
           <option value="">Loading creatives...</option>
         </select>
-      </div>
-      <div id="creative-info" style="font-size: 12px; color: #666; margin-top: 10px;"></div>
-    </div>
-
-    <h2>Current Configuration</h2>
-
-    <div class="content">
-      <div class="paragraph">
-        <strong>Trigger Conditions:</strong>
-        <ul>
-          <li>Scroll depth reaches <strong>90%</strong>, OR</li>
-          <li>Time on page reaches <strong>45 seconds</strong></li>
-        </ul>
-      </div>
-
-      <div class="paragraph">
-        <strong>Pre-fetch Strategy:</strong>
-        <ul>
-          <li>Mode: <strong>Lazy</strong> (auction starts when scroll reaches 70%)</li>
-          <li>Benefit: Bid is cached and ready when trigger activates at 90%</li>
-        </ul>
-      </div>
-
-      <div class="paragraph">
-        <strong>Display Settings:</strong>
-        <ul>
-          <li>Type: <strong>Overlay</strong> (dark background with centered ad)</li>
-          <li>Close button delay: <strong>3 seconds</strong> (ensures viewability)</li>
-          <li>Ad size: <strong>300x250</strong></li>
-        </ul>
-      </div>
-
-      <div class="paragraph">
-        <strong>Frequency Capping:</strong>
-        <ul>
-          <li>Max per session: <strong>5 ads</strong></li>
-          <li>Max per day: <strong>10 ads</strong></li>
-        </ul>
-      </div>
-
-      <h2>Testing Instructions</h2>
-
-      <ul>
-        <li>Click <strong>"Manual Trigger Exit Ad"</strong> to test immediately</li>
-        <li>Scroll to 90% to trigger automatically (watch the scroll depth meter)</li>
-        <li>Wait 45 seconds to trigger via time-on-page</li>
-        <li>Use <strong>"Clear Frequency Caps"</strong> to reset counters for repeated testing</li>
-        <li>Watch the event log to see module activity in real-time</li>
-      </ul>
-
-      <h2>Publisher Configuration Options</h2>
-
-      <div class="paragraph">
-        Publishers can customize Exit Ads behavior through the Prebid.js configuration:
-      </div>
-
-      <ul>
-        <li><strong>Bidders:</strong> Works with any Prebid bidder (GumGum, AppNexus, etc.)</li>
-        <li><strong>Ad Sizes:</strong> Configure any standard IAB sizes (300x250, 728x90, etc.)</li>
-        <li><strong>Trigger Points:</strong> Set custom scroll depth, time thresholds, or custom functions</li>
-        <li><strong>Pre-fetch Mode:</strong> Choose eager (immediate) or lazy (conditional) auction start</li>
-        <li><strong>Display Type:</strong> Overlay or interstitial formats</li>
-        <li><strong>Close Delay:</strong> Configure viewability guarantee period (0-10 seconds)</li>
-        <li><strong>Frequency Caps:</strong> Set session and daily limits to control user experience</li>
-        <li><strong>Callbacks:</strong> Hook into trigger, render, close, and frequency cap events</li>
-      </ul>
-
-      <h2>Keep Scrolling...</h2>
-
-      <div class="paragraph">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat.
-      </div>
-
-      <div class="paragraph">
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </div>
-
-      <div class="paragraph">
-        Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-        totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
-        dicta sunt explicabo.
-      </div>
-
-      <div class="paragraph">
-        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur
-        magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem
-        ipsum quia dolor sit amet, consectetur, adipisci velit.
-      </div>
-
-      <div class="paragraph">
-        At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-        deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
-        provident.
-      </div>
-
-      <div class="paragraph">
-        Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
-        Et harum quidem rerum facilis est et expedita distinctio.
-      </div>
-
-      <div class="paragraph">
-        Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et
-        voluptates repudiandae sint et molestiae non recusandae.
-      </div>
-    </div>
-
-    <div class="footer">
-      <h2>End of Content</h2>
-      <p>If you've scrolled this far, the Exit Ad should have appeared!</p>
-      <p>Exit Ads Module v1.0.0 - GumGum Test Demo</p>
+        <div id="creative-info" class="creative-info"></div>
+      </aside>
     </div>
   </div>
 </body>

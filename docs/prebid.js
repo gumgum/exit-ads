@@ -1,5 +1,5 @@
 /* prebid.js v10.25.0-pre
-Updated: 2026-02-16
+Updated: 2026-06-25
 Modules: exitAdsModule, gumgumBidAdapter */
 
 if (!window.pbjs || !window.pbjs.libLoaded) {
@@ -14669,11 +14669,7 @@ function getConnectionType() {
  * Exit Ads Module
  *
  * This module enables publisher-controlled ad units that appear when users
- * reach the end of content consumption. Supports:
- * - Configurable triggers (scroll depth, time on page, custom functions)
- * - Bid pre-fetching for reduced latency
- * - Overlay/interstitial rendering
- * - Frequency capping
+ * reach configured content-consumption or return triggers.
  *
  * @module modules/exitAdsModule
  */
@@ -14687,6 +14683,52 @@ function getConnectionType() {
 
 const MODULE_NAME = 'exitAds';
 const VERSION = '1.0.0';
+const GLOBAL_RENDER_INTERVAL = 30000;
+const CUSTOM_POLL_INTERVAL = 1000;
+const BASE_STYLE_ID = 'exit-ads-base-styles';
+const OVERRIDE_STYLE_ID = 'exit-ads-override-styles';
+const DEFAULT_FREQUENCY = {
+  maxTriggersPerPage: 5,
+  maxTriggersPerSession: 5,
+  maxTriggersPerDay: 10
+};
+const DEFAULT_TRIGGER_CONFIG = {
+  bottomOfPage: {
+    enabled: true,
+    threshold: 90,
+    repeatInterval: 60000
+  },
+  returnToTop: {
+    enabled: true,
+    threshold: 10,
+    repeatInterval: 60000
+  },
+  idleTime: {
+    enabled: true,
+    minTime: 60000,
+    repeatInterval: 60000
+  },
+  tabFocusReturn: {
+    enabled: true,
+    minTime: 1000,
+    repeatInterval: 60000
+  },
+  appFocusReturn: {
+    enabled: true,
+    minTime: 1000,
+    repeatInterval: 60000
+  }
+};
+const DEFAULT_DISPLAY_CONFIG = {
+  closeButton: {
+    enabled: true,
+    delay: 3000
+  },
+  frequency: DEFAULT_FREQUENCY,
+  trigger: DEFAULT_TRIGGER_CONFIG,
+  cssOverrides: ''
+};
+const BASE_CSS = "\n.exit-ads-overlay {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(0, 0, 0, 0.8);\n  z-index: 999999;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  opacity: 1;\n  transition: opacity 0.2s ease-out;\n}\n\n.exit-ads-container {\n  position: relative;\n  background: #fff;\n  padding: 20px;\n  border-radius: 8px;\n  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);\n  min-width: var(--exit-ads-container-min-width, 300px);\n  min-height: var(--exit-ads-container-min-height, 250px);\n}\n\n.exit-ads-close-button {\n  position: absolute;\n  top: -12px;\n  right: -12px;\n  background: #000;\n  color: #fff;\n  border: none;\n  border-radius: 50%;\n  width: 28px;\n  height: 28px;\n  min-width: 28px;\n  min-height: 28px;\n  max-width: 28px;\n  max-height: 28px;\n  font-size: 20px;\n  font-weight: normal;\n  line-height: 28px;\n  text-align: center;\n  cursor: pointer;\n  z-index: 2147483647;\n  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);\n  padding: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  pointer-events: auto;\n}\n\n.exit-ads-close-button:hover {\n  background: #333;\n}\n\n.exit-ads-close-button--disabled {\n  opacity: 0.7;\n  cursor: not-allowed;\n}\n\n.exit-ads-close-button--countdown {\n  font-size: 14px;\n  font-weight: bold;\n}\n";
 
 // Storage manager
 const storage = (0,_src_storageManager_js__WEBPACK_IMPORTED_MODULE_6__.getStorageManager)({
@@ -14696,26 +14738,33 @@ const storage = (0,_src_storageManager_js__WEBPACK_IMPORTED_MODULE_6__.getStorag
 
 // Module state
 let moduleConfig = null;
+let displayConfig = null;
 let isInitialized = false;
+let eventListenersSetup = false;
 let triggerMonitorActive = false;
 let cachedBid = null;
 let auctionInProgress = false;
-let hasBeenTriggered = false;
+let lastRenderAt = null;
+let pageTriggerCount = 0;
+let currentOverlayTrigger = null;
+let cleanupCallbacks = [];
+let triggerStates = {};
+let configUnsubscribe = null;
 
-// Storage keys for frequency capping
-const STORAGE_KEY_SESSION = 'exitAds_session_count';
-const STORAGE_KEY_DAILY = 'exitAds_daily_count';
-const STORAGE_KEY_LAST_SHOWN = 'exitAds_last_shown';
+// Storage keys for frequency capping. These intentionally do not reuse the
+// older keys because the cap model changed.
+const STORAGE_KEY_SESSION = 'exitAds_frequency_session_count';
+const STORAGE_KEY_DAILY = 'exitAds_frequency_daily_count';
 
 /**
- * Initialize the Exit Ads module
+ * Initialize the Exit Ads module.
  */
-function init(pbjs) {
+function init() {
   if (isInitialized) {
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Module already initialized"));
     return;
   }
-  const confListener = _src_config_js__WEBPACK_IMPORTED_MODULE_1__.config.getConfig(MODULE_NAME, _ref => {
+  configUnsubscribe = _src_config_js__WEBPACK_IMPORTED_MODULE_1__.config.getConfig(MODULE_NAME, _ref => {
     let {
       exitAds
     } = _ref;
@@ -14727,52 +14776,82 @@ function init(pbjs) {
       (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)("".concat(MODULE_NAME, ": Missing adUnit configuration"));
       return;
     }
-    moduleConfig = exitAds;
-    confListener(); // unsubscribe
-
+    moduleConfig = Object.assign({}, exitAds, {
+      display: normalizeDisplayConfig(exitAds.display)
+    });
+    displayConfig = moduleConfig.display;
+    configUnsubscribe(); // unsubscribe
+    configUnsubscribe = null;
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Initialized v").concat(VERSION));
     isInitialized = true;
-
-    // Setup event listeners
     setupEventListeners();
-
-    // Start monitoring triggers
+    injectStyles();
     startTriggerMonitoring();
-
-    // Handle pre-fetch strategy
-    handlePrefetchStrategy();
   });
+}
+function normalizeDisplayConfig() {
+  let display = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  const closeButton = Object.assign({}, DEFAULT_DISPLAY_CONFIG.closeButton, display.closeButton || {});
+  const frequency = Object.assign({}, DEFAULT_FREQUENCY, display.frequency || {});
+  const normalizedTrigger = Object.keys(DEFAULT_TRIGGER_CONFIG).reduce((result, triggerName) => {
+    result[triggerName] = Object.assign({}, DEFAULT_TRIGGER_CONFIG[triggerName], display.trigger && display.trigger[triggerName] || {});
+    return result;
+  }, {});
+  if (display.trigger && display.trigger.custom) {
+    normalizedTrigger.custom = normalizeCustomTrigger(display.trigger.custom);
+  }
+  return Object.assign({}, DEFAULT_DISPLAY_CONFIG, display, {
+    closeButton,
+    frequency,
+    trigger: normalizedTrigger,
+    cssOverrides: typeof display.cssOverrides === 'string' ? display.cssOverrides : ''
+  });
+}
+function normalizeCustomTrigger(customConfig) {
+  if (typeof customConfig === 'function') {
+    return {
+      enabled: true,
+      repeatInterval: 60000,
+      condition: customConfig
+    };
+  }
+  return Object.assign({
+    enabled: true,
+    repeatInterval: 60000
+  }, customConfig);
 }
 
 /**
- * Setup event listeners for Prebid events
+ * Setup event listeners for Prebid events.
  */
 function setupEventListeners() {
+  if (eventListenersSetup) return;
   _src_events_js__WEBPACK_IMPORTED_MODULE_3__.on(_src_constants_js__WEBPACK_IMPORTED_MODULE_4__.EVENTS.AUCTION_END, onAuctionEnd);
   _src_events_js__WEBPACK_IMPORTED_MODULE_3__.on(_src_constants_js__WEBPACK_IMPORTED_MODULE_4__.EVENTS.BID_WON, onBidWon);
   _src_events_js__WEBPACK_IMPORTED_MODULE_3__.on(_src_constants_js__WEBPACK_IMPORTED_MODULE_4__.EVENTS.AD_RENDER_FAILED, onAdRenderFailed);
+  eventListenersSetup = true;
+}
+function removeEventListeners() {
+  if (!eventListenersSetup) return;
+  _src_events_js__WEBPACK_IMPORTED_MODULE_3__.off(_src_constants_js__WEBPACK_IMPORTED_MODULE_4__.EVENTS.AUCTION_END, onAuctionEnd);
+  _src_events_js__WEBPACK_IMPORTED_MODULE_3__.off(_src_constants_js__WEBPACK_IMPORTED_MODULE_4__.EVENTS.BID_WON, onBidWon);
+  _src_events_js__WEBPACK_IMPORTED_MODULE_3__.off(_src_constants_js__WEBPACK_IMPORTED_MODULE_4__.EVENTS.AD_RENDER_FAILED, onAdRenderFailed);
+  eventListenersSetup = false;
 }
 
 /**
- * Handle auction end event - cache the winning bid
+ * Handle auction end event - cache the winning bid.
  */
 function onAuctionEnd(auctionData) {
   var _auctionData$adUnits, _auctionData$bidsRece;
   if (!moduleConfig || !auctionInProgress) return;
-
-  // Find our Exit Ads ad unit
   const exitAdUnit = (_auctionData$adUnits = auctionData.adUnits) === null || _auctionData$adUnits === void 0 ? void 0 : _auctionData$adUnits.find(unit => unit.code === moduleConfig.adUnit.code);
   if (!exitAdUnit) return;
-
-  // Get the winning bid for this ad unit
   const bids = (_auctionData$bidsRece = auctionData.bidsReceived) === null || _auctionData$bidsRece === void 0 ? void 0 : _auctionData$bidsRece.filter(bid => bid.adUnitCode === moduleConfig.adUnit.code);
   if (bids && bids.length > 0) {
-    // Sort by CPM and get highest
     bids.sort((a, b) => b.cpm - a.cpm);
     cachedBid = bids[0];
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Cached winning bid from ").concat(cachedBid.bidder, " with CPM ").concat(cachedBid.cpm));
-
-    // Call onBidCached callback if provided
     if (moduleConfig.onBidCached && typeof moduleConfig.onBidCached === 'function') {
       moduleConfig.onBidCached({
         bidder: cachedBid.bidder,
@@ -14788,7 +14867,7 @@ function onAuctionEnd(auctionData) {
 }
 
 /**
- * Handle bid won event
+ * Handle bid won event.
  */
 function onBidWon(bid) {
   var _moduleConfig;
@@ -14798,7 +14877,7 @@ function onBidWon(bid) {
 }
 
 /**
- * Handle ad render failure
+ * Handle ad render failure.
  */
 function onAdRenderFailed(data) {
   var _moduleConfig2;
@@ -14808,31 +14887,7 @@ function onAdRenderFailed(data) {
 }
 
 /**
- * Handle pre-fetch strategy (eager or lazy)
- */
-function handlePrefetchStrategy() {
-  if (!moduleConfig.prefetch) return;
-  const mode = moduleConfig.prefetch.mode || 'lazy';
-  if (mode === 'eager') {
-    // Start auction immediately on page load
-    (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Eager prefetch - starting auction immediately"));
-    startAuction();
-  } else if (mode === 'lazy' && moduleConfig.prefetch.lazyTriggerPoint) {
-    // Monitor for lazy trigger point
-    const triggerPoint = moduleConfig.prefetch.lazyTriggerPoint;
-    if (triggerPoint.scroll) {
-      setupScrollMonitor(triggerPoint.scroll.depth, () => {
-        if (!auctionInProgress && !cachedBid) {
-          (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Lazy prefetch trigger reached - starting auction"));
-          startAuction();
-        }
-      });
-    }
-  }
-}
-
-/**
- * Start the ad auction for Exit Ads unit
+ * Start the ad auction for Exit Ads unit.
  */
 function startAuction() {
   if (auctionInProgress) {
@@ -14840,12 +14895,8 @@ function startAuction() {
     return;
   }
   const pbjs = (0,_src_prebidGlobal_js__WEBPACK_IMPORTED_MODULE_0__.getGlobal)();
-
-  // Add the ad unit
   pbjs.addAdUnits([moduleConfig.adUnit]);
   auctionInProgress = true;
-
-  // Request bids
   pbjs.requestBids({
     adUnitCodes: [moduleConfig.adUnit.code],
     bidsBackHandler: function (bids) {
@@ -14853,66 +14904,133 @@ function startAuction() {
     }
   });
 }
+function prefetchBid(triggerName) {
+  if (cachedBid || auctionInProgress) return;
+  (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": ").concat(triggerName, " prefetch point reached - starting auction"));
+  startAuction();
+}
 
 /**
- * Start monitoring for trigger conditions
+ * Start monitoring for trigger conditions.
  */
 function startTriggerMonitoring() {
+  var _triggers$bottomOfPag, _triggers$returnToTop, _triggers$idleTime, _triggers$tabFocusRet, _triggers$appFocusRet, _triggers$custom;
   if (triggerMonitorActive) return;
-  const trigger = moduleConfig.trigger;
-  if (!trigger) {
-    (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": No trigger configuration provided"));
-    return;
-  }
   triggerMonitorActive = true;
-
-  // Setup scroll depth trigger
-  if (trigger.scroll) {
-    setupScrollMonitor(trigger.scroll.depth, onTriggerActivated);
+  triggerStates = {};
+  const triggers = displayConfig.trigger || {};
+  if ((_triggers$bottomOfPag = triggers.bottomOfPage) !== null && _triggers$bottomOfPag !== void 0 && _triggers$bottomOfPag.enabled) {
+    setupBottomOfPageMonitor(triggers.bottomOfPage);
   }
-
-  // Setup time on page trigger
-  if (trigger.timeOnPage) {
-    setupTimeMonitor(trigger.timeOnPage, onTriggerActivated);
+  if ((_triggers$returnToTop = triggers.returnToTop) !== null && _triggers$returnToTop !== void 0 && _triggers$returnToTop.enabled) {
+    setupReturnToTopMonitor(triggers.returnToTop);
   }
-
-  // Setup exit intent trigger
-  if (trigger.exitIntent) {
-    setupExitIntentMonitor(onTriggerActivated);
+  if ((_triggers$idleTime = triggers.idleTime) !== null && _triggers$idleTime !== void 0 && _triggers$idleTime.enabled) {
+    setupIdleTimeMonitor(triggers.idleTime);
   }
-
-  // Setup custom trigger
-  if (typeof trigger.custom === 'function') {
-    setupCustomTriggerMonitor(trigger.custom, onTriggerActivated);
+  if ((_triggers$tabFocusRet = triggers.tabFocusReturn) !== null && _triggers$tabFocusRet !== void 0 && _triggers$tabFocusRet.enabled) {
+    setupTabFocusReturnMonitor(triggers.tabFocusReturn);
+  }
+  if ((_triggers$appFocusRet = triggers.appFocusReturn) !== null && _triggers$appFocusRet !== void 0 && _triggers$appFocusRet.enabled) {
+    setupAppFocusReturnMonitor(triggers.appFocusReturn);
+  }
+  if ((_triggers$custom = triggers.custom) !== null && _triggers$custom !== void 0 && _triggers$custom.enabled) {
+    setupCustomTriggerMonitor(triggers.custom);
   }
   (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Trigger monitoring started"));
 }
-
-/**
- * Setup scroll depth monitoring
- */
-let scrollMonitorCallbacks = [];
-function setupScrollMonitor(targetDepth, callback) {
-  if (scrollMonitorCallbacks.length === 0) {
-    // Only attach listener once
-    window.addEventListener('scroll', handleScroll, {
-      passive: true
-    });
-  }
-  scrollMonitorCallbacks.push({
-    targetDepth,
-    callback,
-    triggered: false
-  });
-}
-function handleScroll() {
-  const scrollDepth = calculateScrollDepth();
-  scrollMonitorCallbacks.forEach(monitor => {
-    if (!monitor.triggered && scrollDepth >= monitor.targetDepth) {
-      monitor.triggered = true;
-      monitor.callback();
+function stopTriggerMonitoring() {
+  cleanupCallbacks.forEach(cleanup => {
+    try {
+      cleanup();
+    } catch (e) {
+      (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)("".concat(MODULE_NAME, ": Error cleaning up trigger monitor"), e);
     }
   });
+  cleanupCallbacks = [];
+  triggerMonitorActive = false;
+  triggerStates = {};
+}
+function addCleanup(cleanup) {
+  cleanupCallbacks.push(cleanup);
+}
+function getTriggerState(triggerName) {
+  triggerStates[triggerName] = triggerStates[triggerName] || {
+    hasRendered: false,
+    lastRenderAt: null
+  };
+  return triggerStates[triggerName];
+}
+
+/**
+ * Setup bottom of page monitoring.
+ */
+function setupBottomOfPageMonitor(triggerConfig) {
+  const triggerName = 'bottomOfPage';
+  const threshold = normalizePercent(triggerConfig.threshold);
+  const prefetchAtThreshold = getNumber(triggerConfig.prefetchAtThreshold);
+  const normalizedPrefetchThreshold = normalizePercent(prefetchAtThreshold);
+  let aboveThreshold = false;
+  let abovePrefetchThreshold = false;
+  const onScroll = () => {
+    const scrollDepth = calculateScrollDepth();
+    if (prefetchAtThreshold != null) {
+      if (!abovePrefetchThreshold && scrollDepth >= normalizedPrefetchThreshold) {
+        abovePrefetchThreshold = true;
+        prefetchBid(triggerName);
+      } else if (scrollDepth < normalizedPrefetchThreshold) {
+        abovePrefetchThreshold = false;
+      }
+    }
+    if (!aboveThreshold && scrollDepth >= threshold) {
+      aboveThreshold = true;
+      onTriggerActivated(triggerName);
+    } else if (scrollDepth < threshold) {
+      aboveThreshold = false;
+    }
+  };
+  window.addEventListener('scroll', onScroll, {
+    passive: true
+  });
+  addCleanup(() => window.removeEventListener('scroll', onScroll));
+}
+
+/**
+ * Setup return-to-top monitoring.
+ */
+function setupReturnToTopMonitor(triggerConfig) {
+  const triggerName = 'returnToTop';
+  const threshold = normalizePercent(triggerConfig.threshold);
+  const prefetchAtThreshold = getNumber(triggerConfig.prefetchAtThreshold);
+  const normalizedPrefetchThreshold = normalizePercent(prefetchAtThreshold);
+  let hasPassedThreshold = false;
+  let hasPassedPrefetchThreshold = false;
+  let lastScrollDepth = calculateScrollDepth();
+  const onScroll = () => {
+    const scrollDepth = calculateScrollDepth();
+    const scrollingUp = scrollDepth < lastScrollDepth;
+    if (prefetchAtThreshold != null) {
+      if (scrollDepth > normalizedPrefetchThreshold) {
+        hasPassedPrefetchThreshold = true;
+      } else if (hasPassedThreshold && hasPassedPrefetchThreshold && scrollingUp && scrollDepth <= normalizedPrefetchThreshold && scrollDepth > threshold) {
+        hasPassedPrefetchThreshold = false;
+        prefetchBid(triggerName);
+      }
+    }
+    lastScrollDepth = scrollDepth;
+    if (scrollDepth > threshold) {
+      hasPassedThreshold = true;
+      return;
+    }
+    if (hasPassedThreshold && scrollDepth <= threshold) {
+      hasPassedThreshold = false;
+      onTriggerActivated(triggerName);
+    }
+  };
+  window.addEventListener('scroll', onScroll, {
+    passive: true
+  });
+  addCleanup(() => window.removeEventListener('scroll', onScroll));
 }
 function calculateScrollDepth() {
   const {
@@ -14921,139 +15039,265 @@ function calculateScrollDepth() {
   const documentHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
   const scrollableHeight = documentHeight - windowHeight;
-
-  // 0% at top, 100% when scrolled to bottom
   if (scrollableHeight <= 0) return 0;
   return scrollTop / scrollableHeight * 100;
 }
 
 /**
- * Setup time on page monitoring
+ * Setup idle time monitoring.
  */
-function setupTimeMonitor(milliseconds, callback) {
-  setTimeout(() => {
-    callback();
-  }, milliseconds);
-}
-
-/**
- * Setup exit intent monitoring
- */
-function setupExitIntentMonitor(callback) {
-  document.addEventListener('mouseout', e => {
-    if (e.clientY <= 0) {
-      callback();
-    }
+function setupIdleTimeMonitor(triggerConfig) {
+  var _getNumber;
+  const triggerName = 'idleTime';
+  const minTime = Math.max(0, (_getNumber = getNumber(triggerConfig.minTime)) !== null && _getNumber !== void 0 ? _getNumber : 0);
+  const prefetchAtTime = getNumber(triggerConfig.prefetchAtTime);
+  const repeatInterval = triggerConfig.repeatInterval;
+  let triggerTimeoutId;
+  let prefetchTimeoutId;
+  if (prefetchAtTime != null && prefetchAtTime >= 0 && prefetchAtTime < minTime) {
+    prefetchTimeoutId = setTimeout(() => prefetchBid(triggerName), prefetchAtTime);
+  }
+  const scheduleNext = delay => {
+    triggerTimeoutId = setTimeout(() => {
+      onTriggerActivated(triggerName);
+      if (repeatInterval !== null) {
+        var _getNumber2;
+        scheduleNext(Math.max(1000, (_getNumber2 = getNumber(repeatInterval)) !== null && _getNumber2 !== void 0 ? _getNumber2 : 0));
+      }
+    }, delay);
+  };
+  scheduleNext(minTime);
+  addCleanup(() => {
+    clearTimeout(triggerTimeoutId);
+    clearTimeout(prefetchTimeoutId);
   });
 }
 
 /**
- * Setup custom trigger monitoring
+ * Setup tab focus return monitoring.
  */
-function setupCustomTriggerMonitor(customFn, callback) {
-  // Poll the custom function
-  const interval = setInterval(() => {
-    try {
-      if (customFn()) {
-        clearInterval(interval);
-        callback();
-      }
-    } catch (e) {
-      (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)("".concat(MODULE_NAME, ": Error in custom trigger function"), e);
+function setupTabFocusReturnMonitor(triggerConfig) {
+  var _getNumber3;
+  const triggerName = 'tabFocusReturn';
+  const minTime = Math.max(0, (_getNumber3 = getNumber(triggerConfig.minTime)) !== null && _getNumber3 !== void 0 ? _getNumber3 : 0);
+  let hiddenAt = null;
+  const onVisibilityChange = () => {
+    if (document.hidden) {
+      hiddenAt = Date.now();
+      return;
     }
-  }, 1000); // Check every second
+    if (hiddenAt != null) {
+      const hiddenDuration = Date.now() - hiddenAt;
+      hiddenAt = null;
+      if (hiddenDuration >= minTime) {
+        onTriggerActivated(triggerName);
+      }
+    }
+  };
+  document.addEventListener('visibilitychange', onVisibilityChange);
+  addCleanup(() => document.removeEventListener('visibilitychange', onVisibilityChange));
 }
 
 /**
- * Called when trigger conditions are met
+ * Setup app focus return monitoring. This only handles blur/focus while the
+ * document remains visible so it does not conflict with tabFocusReturn.
  */
-function onTriggerActivated() {
-  if (hasBeenTriggered) {
-    (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Trigger already activated"));
-    return;
-  }
-
-  // Set flag immediately to prevent other automatic triggers from firing
-  hasBeenTriggered = true;
-
-  // Check frequency cap
-  if (!checkFrequencyCap()) {
-    (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Not showing ad - frequency cap limit reached"));
-
-    // Call onFrequencyCapReached callback if provided
-    if (moduleConfig.onFrequencyCapReached && typeof moduleConfig.onFrequencyCapReached === 'function') {
-      moduleConfig.onFrequencyCapReached();
+function setupAppFocusReturnMonitor(triggerConfig) {
+  var _getNumber4;
+  const triggerName = 'appFocusReturn';
+  const minTime = Math.max(0, (_getNumber4 = getNumber(triggerConfig.minTime)) !== null && _getNumber4 !== void 0 ? _getNumber4 : 0);
+  let blurAt = null;
+  let hiddenDuringBlur = false;
+  const onBlur = () => {
+    if (!document.hidden) {
+      blurAt = Date.now();
+      hiddenDuringBlur = false;
     }
+  };
+  const onVisibilityChange = () => {
+    if (blurAt != null && document.hidden) {
+      hiddenDuringBlur = true;
+    }
+  };
+  const onFocus = () => {
+    if (blurAt == null) return;
+    const blurDuration = Date.now() - blurAt;
+    const shouldTrigger = !hiddenDuringBlur && !document.hidden && blurDuration >= minTime;
+    blurAt = null;
+    hiddenDuringBlur = false;
+    if (shouldTrigger) {
+      onTriggerActivated(triggerName);
+    }
+  };
+  window.addEventListener('blur', onBlur);
+  window.addEventListener('focus', onFocus);
+  document.addEventListener('visibilitychange', onVisibilityChange);
+  addCleanup(() => {
+    window.removeEventListener('blur', onBlur);
+    window.removeEventListener('focus', onFocus);
+    document.removeEventListener('visibilitychange', onVisibilityChange);
+  });
+}
+
+/**
+ * Setup custom trigger monitoring.
+ */
+function setupCustomTriggerMonitor(customConfig) {
+  const triggerName = 'custom';
+  let intervalId;
+  let customCleanup;
+  const trigger = () => onTriggerActivated(triggerName);
+  if (typeof customConfig.setup === 'function') {
+    try {
+      customCleanup = customConfig.setup({
+        trigger
+      });
+    } catch (e) {
+      (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)("".concat(MODULE_NAME, ": Error in custom trigger setup"), e);
+    }
+  }
+  if (typeof customConfig.condition === 'function') {
+    intervalId = setInterval(() => {
+      try {
+        if (customConfig.condition()) {
+          trigger();
+        }
+      } catch (e) {
+        (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)("".concat(MODULE_NAME, ": Error in custom trigger condition"), e);
+      }
+    }, CUSTOM_POLL_INTERVAL);
+  }
+  addCleanup(() => {
+    clearInterval(intervalId);
+    if (typeof customCleanup === 'function') {
+      customCleanup();
+    }
+  });
+}
+function normalizePercent(value) {
+  const number = getNumber(value);
+  if (number == null) return 0;
+  return Math.max(0, Math.min(100, number));
+}
+function getNumber(value) {
+  return typeof value === 'number' && !Number.isNaN(value) ? value : null;
+}
+
+/**
+ * Called when trigger conditions are met.
+ */
+function onTriggerActivated(triggerName) {
+  if (!canTriggerRun(triggerName)) {
     return;
   }
-  (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Trigger activated!"));
-
-  // Call onTrigger callback if provided
+  (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": ").concat(triggerName, " trigger activated"));
   if (moduleConfig.onTrigger && typeof moduleConfig.onTrigger === 'function') {
-    moduleConfig.onTrigger();
+    moduleConfig.onTrigger({
+      trigger: triggerName
+    });
   }
-
-  // If we don't have a cached bid yet, start auction
   if (!cachedBid && !auctionInProgress) {
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": No cached bid, starting auction..."));
     startAuction();
-    // Wait for auction to complete, then show ad
-    let attempts = 0;
-    const maxAttempts = 50; // 5 seconds max
-    const checkInterval = setInterval(() => {
-      attempts++;
-      if (cachedBid) {
-        clearInterval(checkInterval);
-        (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Bid received, showing ad"));
-        showExitAd();
-      } else if (attempts >= maxAttempts) {
-        clearInterval(checkInterval);
-        (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Timeout waiting for bids, no ad to show"));
-      }
-    }, 100);
+    waitForBidAndShow(triggerName);
   } else if (cachedBid) {
-    // Show ad immediately
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Using cached bid"));
-    showExitAd();
+    showExitAd(triggerName);
   } else if (auctionInProgress) {
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Auction in progress, waiting for completion..."));
-    // Wait for auction to complete
-    let attempts = 0;
-    const maxAttempts = 50;
-    const checkInterval = setInterval(() => {
-      attempts++;
-      if (cachedBid) {
-        clearInterval(checkInterval);
-        (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Bid received, showing ad"));
-        showExitAd();
-      } else if (attempts >= maxAttempts) {
-        clearInterval(checkInterval);
-        (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Timeout waiting for bids, no ad to show"));
-      }
-    }, 100);
+    waitForBidAndShow(triggerName);
   }
+}
+function canTriggerRun(triggerName) {
+  const suppression = getTriggerSuppression(triggerName);
+  if (!suppression) {
+    return true;
+  }
+  (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": ").concat(suppression.message));
+  callTriggerSuppressed(triggerName, suppression);
+  if (suppression.reason === 'frequencyCap') {
+    callFrequencyCapReached(triggerName);
+  }
+  return false;
+}
+function getTriggerSuppression(triggerName) {
+  const now = Date.now();
+  const state = getTriggerState(triggerName);
+  const triggerConfig = displayConfig.trigger[triggerName] || {};
+  if (lastRenderAt != null && now - lastRenderAt < GLOBAL_RENDER_INTERVAL) {
+    return {
+      reason: 'globalRenderInterval',
+      message: "".concat(triggerName, " trigger suppressed by the 30s global render gate")
+    };
+  }
+  if (triggerConfig.repeatInterval === null && state.hasRendered) {
+    return {
+      reason: 'oncePerPageLoad',
+      message: "".concat(triggerName, " trigger already rendered for this page load")
+    };
+  }
+  if (typeof triggerConfig.repeatInterval === 'number' && state.lastRenderAt != null && now - state.lastRenderAt < triggerConfig.repeatInterval) {
+    return {
+      reason: 'repeatInterval',
+      message: "".concat(triggerName, " trigger suppressed by repeat interval")
+    };
+  }
+  const frequencySuppression = getFrequencyCapSuppression();
+  if (frequencySuppression) {
+    return Object.assign({
+      reason: 'frequencyCap',
+      message: "".concat(triggerName, " trigger suppressed by ").concat(frequencySuppression.cap, " frequency cap")
+    }, frequencySuppression);
+  }
+  return null;
+}
+function waitForBidAndShow(triggerName) {
+  let attempts = 0;
+  const maxAttempts = 50;
+  const checkInterval = setInterval(() => {
+    attempts++;
+    if (cachedBid) {
+      clearInterval(checkInterval);
+      (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Bid received, showing ad"));
+      showExitAd(triggerName);
+    } else if (attempts >= maxAttempts) {
+      clearInterval(checkInterval);
+      (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Timeout waiting for bids, no ad to show"));
+      callTriggerSuppressed(triggerName, {
+        reason: 'noBid',
+        message: "".concat(triggerName, " trigger did not render because no bid was returned")
+      });
+    }
+  }, 100);
+  addCleanup(() => clearInterval(checkInterval));
 }
 
 /**
- * Check frequency capping
+ * Check frequency capping.
  */
-function checkFrequencyCap() {
-  if (!moduleConfig.display || !moduleConfig.display.frequency) {
-    return true; // No frequency cap configured
-  }
-  const freq = moduleConfig.display.frequency;
+function getFrequencyCapSuppression() {
+  const freq = displayConfig.frequency || {};
   try {
-    // Check session cap
-    if (freq.maxPerSession) {
+    if (typeof freq.maxTriggersPerPage === 'number' && pageTriggerCount >= freq.maxTriggersPerPage) {
+      (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Page frequency cap reached (").concat(pageTriggerCount, "/").concat(freq.maxTriggersPerPage, ")"));
+      return {
+        cap: 'page',
+        count: pageTriggerCount,
+        limit: freq.maxTriggersPerPage
+      };
+    }
+    if (typeof freq.maxTriggersPerSession === 'number') {
       const sessionCount = parseInt(storage.getDataFromSessionStorage(STORAGE_KEY_SESSION) || '0');
-      if (sessionCount >= freq.maxPerSession) {
-        (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Session frequency cap reached (").concat(sessionCount, "/").concat(freq.maxPerSession, ")"));
-        return false;
+      if (sessionCount >= freq.maxTriggersPerSession) {
+        (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Session frequency cap reached (").concat(sessionCount, "/").concat(freq.maxTriggersPerSession, ")"));
+        return {
+          cap: 'session',
+          count: sessionCount,
+          limit: freq.maxTriggersPerSession
+        };
       }
     }
-
-    // Check daily cap
-    if (freq.maxPerDay) {
+    if (typeof freq.maxTriggersPerDay === 'number') {
       const dailyData = storage.getDataFromLocalStorage(STORAGE_KEY_DAILY);
       if (dailyData) {
         const {
@@ -15061,36 +15305,51 @@ function checkFrequencyCap() {
           count
         } = JSON.parse(dailyData);
         const today = new Date().toDateString();
-        if (date === today && count >= freq.maxPerDay) {
-          (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Daily frequency cap reached (").concat(count, "/").concat(freq.maxPerDay, ")"));
-          return false;
+        if (date === today && count >= freq.maxTriggersPerDay) {
+          (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Daily frequency cap reached (").concat(count, "/").concat(freq.maxTriggersPerDay, ")"));
+          return {
+            cap: 'day',
+            count,
+            limit: freq.maxTriggersPerDay
+          };
         }
       }
     }
-    return true;
+    return null;
   } catch (e) {
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)("".concat(MODULE_NAME, ": Error checking frequency cap"), e);
-    return true; // Allow ad on error
+    return null;
+  }
+}
+function callFrequencyCapReached(triggerName) {
+  if (moduleConfig.onFrequencyCapReached && typeof moduleConfig.onFrequencyCapReached === 'function') {
+    moduleConfig.onFrequencyCapReached({
+      trigger: triggerName
+    });
+  }
+}
+function callTriggerSuppressed(triggerName, suppression) {
+  if (moduleConfig.onTriggerSuppressed && typeof moduleConfig.onTriggerSuppressed === 'function') {
+    moduleConfig.onTriggerSuppressed(Object.assign({
+      trigger: triggerName
+    }, suppression));
   }
 }
 
 /**
- * Update frequency cap counters
+ * Update frequency cap counters.
  */
 function updateFrequencyCap() {
-  if (!moduleConfig.display || !moduleConfig.display.frequency) {
-    return;
-  }
-  const freq = moduleConfig.display.frequency;
+  const freq = displayConfig.frequency || {};
   try {
-    // Update session count
-    if (freq.maxPerSession) {
+    if (typeof freq.maxTriggersPerPage === 'number') {
+      pageTriggerCount++;
+    }
+    if (typeof freq.maxTriggersPerSession === 'number') {
       const sessionCount = parseInt(storage.getDataFromSessionStorage(STORAGE_KEY_SESSION) || '0');
       storage.setDataInSessionStorage(STORAGE_KEY_SESSION, (sessionCount + 1).toString());
     }
-
-    // Update daily count
-    if (freq.maxPerDay) {
+    if (typeof freq.maxTriggersPerDay === 'number') {
       const today = new Date().toDateString();
       const dailyData = storage.getDataFromLocalStorage(STORAGE_KEY_DAILY);
       let count = 1;
@@ -15108,255 +15367,223 @@ function updateFrequencyCap() {
         count
       }));
     }
-
-    // Update last shown timestamp
-    storage.setDataInLocalStorage(STORAGE_KEY_LAST_SHOWN, Date.now().toString());
   } catch (e) {
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)("".concat(MODULE_NAME, ": Error updating frequency cap"), e);
   }
 }
-
-/**
- * Show the Exit Ad
- */
-function showExitAd() {
-  if (!cachedBid) {
-    (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": No cached bid to display"));
-    return;
-  }
-  (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Displaying Exit Ad"), cachedBid);
-  const displayConfig = moduleConfig.display || {};
-  const displayType = displayConfig.type || 'overlay';
-  if (displayType === 'overlay') {
-    showOverlay();
-  } else if (displayType === 'interstitial') {
-    showInterstitial();
-  }
-
-  // Clear cached bid immediately - each bid can only be used once
-  cachedBid = null;
-
-  // Update frequency cap
-  updateFrequencyCap();
-
-  // Call onAdRender callback
-  if (moduleConfig.onAdRender && typeof moduleConfig.onAdRender === 'function') {
-    moduleConfig.onAdRender();
-  }
+function updateTriggerRenderState(triggerName) {
+  const now = Date.now();
+  const state = getTriggerState(triggerName);
+  state.hasRendered = true;
+  state.lastRenderAt = now;
+  lastRenderAt = now;
 }
 
 /**
- * Show overlay ad
+ * Show the Exit Ad.
  */
-function showOverlay() {
-  const displayConfig = moduleConfig.display || {};
+function showExitAd(triggerName) {
+  if (!cachedBid) {
+    (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": No cached bid to display"));
+    callTriggerSuppressed(triggerName, {
+      reason: 'noCachedBid',
+      message: "".concat(triggerName, " trigger did not render because no cached bid was available")
+    });
+    return;
+  }
+  if (!canTriggerRun(triggerName)) {
+    return;
+  }
+  (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Displaying Exit Ad"), cachedBid);
+  showOverlay(triggerName);
+  cachedBid = null;
+  updateFrequencyCap();
+  updateTriggerRenderState(triggerName);
+  if (moduleConfig.onAdRender && typeof moduleConfig.onAdRender === 'function') {
+    moduleConfig.onAdRender({
+      trigger: triggerName
+    });
+  }
+}
+function injectStyles() {
+  replaceStyleTag(BASE_STYLE_ID, BASE_CSS);
+  replaceStyleTag(OVERRIDE_STYLE_ID, displayConfig.cssOverrides || '');
+}
+function replaceStyleTag(id, cssText) {
+  const existing = document.getElementById(id);
+  if (existing) {
+    existing.parentNode.removeChild(existing);
+  }
+  if (!cssText) return;
+  const style = document.createElement('style');
+  style.id = id;
+  style.type = 'text/css';
+  style.textContent = cssText;
+  document.head.appendChild(style);
+}
+function removeStyles() {
+  [BASE_STYLE_ID, OVERRIDE_STYLE_ID].forEach(id => {
+    const style = document.getElementById(id);
+    if (style) {
+      style.parentNode.removeChild(style);
+    }
+  });
+}
 
-  // Remove any existing overlay from previous ad displays
+/**
+ * Show overlay ad.
+ */
+function showOverlay(triggerName) {
+  var _displayConfig$closeB;
   const existingOverlay = document.getElementById('exit-ads-overlay');
   if (existingOverlay) {
     existingOverlay.parentNode.removeChild(existingOverlay);
   }
-
-  // Create overlay container
   const overlay = document.createElement('div');
   overlay.id = 'exit-ads-overlay';
-  overlay.style.cssText = "\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background: rgba(0, 0, 0, 0.8);\n    z-index: 999999;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    opacity: 1;\n    transition: opacity 0.2s ease-out;\n  ";
-
-  // Create ad container
+  overlay.className = 'exit-ads-overlay';
+  overlay.setAttribute('data-exit-ads-trigger', triggerName);
   const adContainer = document.createElement('div');
   adContainer.id = moduleConfig.adUnit.code;
-
-  // Set min dimensions based on bid size to prevent collapse with third-party tags
-  const minWidth = cachedBid.width || 300;
-  const minHeight = cachedBid.height || 250;
-  adContainer.style.cssText = "\n    position: relative;\n    background: white;\n    padding: 20px;\n    border-radius: 8px;\n    box-shadow: 0 4px 20px rgba(0,0,0,0.3);\n    min-width: ".concat(minWidth, "px;\n    min-height: ").concat(minHeight, "px;\n  ");
-
-  // Render the ad first - insert HTML directly
+  adContainer.className = 'exit-ads-container';
+  adContainer.style.setProperty('--exit-ads-container-min-width', "".concat(cachedBid.width || 300, "px"));
+  adContainer.style.setProperty('--exit-ads-container-min-height', "".concat(cachedBid.height || 250, "px"));
   if (cachedBid.ad) {
     adContainer.innerHTML = cachedBid.ad;
   } else {
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logError)("".concat(MODULE_NAME, ": Cached bid has no ad creative"));
   }
-
-  // Create close button AFTER ad content (so it's not overwritten)
-  if (displayConfig.closeButton !== false) {
-    const closeButton = document.createElement('button');
-    closeButton.innerHTML = '&times;';
-    closeButton.style.cssText = "\n      position: absolute;\n      top: -12px;\n      right: -12px;\n      background: #000;\n      color: #fff;\n      border: none;\n      border-radius: 50%;\n      width: 28px;\n      height: 28px;\n      font-size: 20px;\n      font-weight: normal;\n      line-height: 28px;\n      text-align: center;\n      cursor: pointer;\n      z-index: 2147483647;\n      box-shadow: 0 2px 6px rgba(0,0,0,0.4);\n      padding: 0;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      pointer-events: auto;\n    ";
-
-    // Add hover effect
-    closeButton.onmouseenter = function () {
-      if (!this.disabled) {
-        this.style.background = '#333';
-      }
-    };
-    closeButton.onmouseleave = function () {
-      if (!this.disabled) {
-        this.style.background = '#000';
-      }
-    };
-
-    // Handle close delay with countdown
-    const closeDelay = displayConfig.closeDelay || 0;
-    if (closeDelay > 0) {
-      closeButton.disabled = true;
-      closeButton.style.opacity = '0.7';
-      closeButton.style.cursor = 'not-allowed';
-      let remainingSeconds = Math.ceil(closeDelay / 1000);
-      closeButton.innerHTML = remainingSeconds;
-      closeButton.style.fontSize = '14px';
-      closeButton.style.fontWeight = 'bold';
-      const countdownInterval = setInterval(() => {
-        remainingSeconds--;
-        if (remainingSeconds > 0) {
-          closeButton.innerHTML = remainingSeconds;
-        } else {
-          clearInterval(countdownInterval);
-          closeButton.innerHTML = '&times;';
-          closeButton.style.fontSize = '20px';
-          closeButton.style.fontWeight = 'normal';
-          closeButton.disabled = false;
-          closeButton.style.opacity = '1';
-          closeButton.style.cursor = 'pointer';
-        }
-      }, 1000);
-    }
-    closeButton.onclick = e => {
-      e.stopPropagation();
-      e.preventDefault();
-      closeExitAd();
-    };
-    adContainer.appendChild(closeButton);
+  if (((_displayConfig$closeB = displayConfig.closeButton) === null || _displayConfig$closeB === void 0 ? void 0 : _displayConfig$closeB.enabled) !== false) {
+    adContainer.appendChild(createCloseButton(triggerName));
   }
   overlay.appendChild(adContainer);
   document.body.appendChild(overlay);
+  currentOverlayTrigger = triggerName;
+}
+function createCloseButton(triggerName) {
+  var _getNumber5, _displayConfig$closeB2;
+  const closeButton = document.createElement('button');
+  closeButton.className = 'exit-ads-close-button';
+  closeButton.innerHTML = '&times;';
+  const closeDelay = Math.max(0, (_getNumber5 = getNumber((_displayConfig$closeB2 = displayConfig.closeButton) === null || _displayConfig$closeB2 === void 0 ? void 0 : _displayConfig$closeB2.delay)) !== null && _getNumber5 !== void 0 ? _getNumber5 : 0);
+  if (closeDelay > 0) {
+    closeButton.disabled = true;
+    closeButton.classList.add('exit-ads-close-button--disabled', 'exit-ads-close-button--countdown');
+    let remainingSeconds = Math.ceil(closeDelay / 1000);
+    closeButton.innerHTML = formatCloseCountdown(remainingSeconds);
+    const countdownInterval = setInterval(() => {
+      remainingSeconds--;
+      if (remainingSeconds > 0) {
+        closeButton.innerHTML = formatCloseCountdown(remainingSeconds);
+      } else {
+        clearInterval(countdownInterval);
+        closeButton.innerHTML = '&times;';
+        closeButton.disabled = false;
+        closeButton.classList.remove('exit-ads-close-button--disabled', 'exit-ads-close-button--countdown');
+      }
+    }, 1000);
+    addCleanup(() => clearInterval(countdownInterval));
+  }
+  closeButton.onclick = e => {
+    e.stopPropagation();
+    e.preventDefault();
+    closeExitAd(triggerName);
+  };
+  return closeButton;
+}
+function formatCloseCountdown(seconds) {
+  return seconds > 99 ? '99+' : seconds.toString();
 }
 
 /**
- * Show interstitial ad (similar to overlay but full screen)
- */
-function showInterstitial() {
-  // For now, use same implementation as overlay
-  // Can be customized later for different styling
-  showOverlay();
-}
-
-/**
- * Close the Exit Ad
+ * Close the Exit Ad.
  */
 function closeExitAd() {
+  let triggerName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : currentOverlayTrigger;
   const overlay = document.getElementById('exit-ads-overlay');
-  if (overlay) {
-    // Instead of removing the overlay (which triggers mobile adapter lifecycle issues),
-    // just hide it completely. This prevents the "dismissed => dismissed" state error.
+  if (overlay && overlay.getAttribute('data-closed') !== 'true') {
     overlay.style.opacity = '0';
     overlay.style.pointerEvents = 'none';
     overlay.style.display = 'none';
-
-    // Mark it for potential cleanup later if needed
     overlay.setAttribute('data-closed', 'true');
+    lastRenderAt = Date.now();
   }
-
-  // Do NOT reset hasBeenTriggered - automatic triggers should only fire once per session
-  // Manual triggers bypass this flag entirely
-  // Cached bid is already cleared when ad is shown
-
-  // Call onAdClose callback
   if (moduleConfig.onAdClose && typeof moduleConfig.onAdClose === 'function') {
-    moduleConfig.onAdClose();
+    moduleConfig.onAdClose({
+      trigger: triggerName
+    });
   }
   (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Exit Ad closed"));
 }
 
 /**
- * Manual trigger function (exposed to publishers)
- * Unlike automatic triggers, manual triggers can be called multiple times per session
+ * Manual trigger function exposed to publishers.
  */
 function triggerExitAd() {
   if (!isInitialized) {
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Module not initialized"));
     return;
   }
-
-  // Manual triggers bypass the hasBeenTriggered check
-  // but still respect frequency caps
-  if (!checkFrequencyCap()) {
-    (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Not showing ad - frequency cap limit reached"));
-
-    // Call onFrequencyCapReached callback if provided
-    if (moduleConfig.onFrequencyCapReached && typeof moduleConfig.onFrequencyCapReached === 'function') {
-      moduleConfig.onFrequencyCapReached();
+  const triggerName = 'manual';
+  const manualSuppression = getTriggerSuppression(triggerName);
+  if (manualSuppression) {
+    (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": ").concat(manualSuppression.message));
+    callTriggerSuppressed(triggerName, manualSuppression);
+    if (manualSuppression.reason === 'frequencyCap') {
+      callFrequencyCapReached(triggerName);
     }
     return;
   }
-  (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Manual trigger activated!"));
-
-  // Call onTrigger callback if provided
+  (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Manual trigger activated"));
   if (moduleConfig.onTrigger && typeof moduleConfig.onTrigger === 'function') {
-    moduleConfig.onTrigger();
+    moduleConfig.onTrigger({
+      trigger: triggerName
+    });
   }
-
-  // If we don't have a cached bid yet, start auction
   if (!cachedBid && !auctionInProgress) {
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": No cached bid, starting auction..."));
     startAuction();
-    // Wait for auction to complete, then show ad
-    let attempts = 0;
-    const maxAttempts = 50; // 5 seconds max
-    const checkInterval = setInterval(() => {
-      attempts++;
-      if (cachedBid) {
-        clearInterval(checkInterval);
-        (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Bid received, showing ad"));
-        showExitAd();
-      } else if (attempts >= maxAttempts) {
-        clearInterval(checkInterval);
-        (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Timeout waiting for bids, no ad to show"));
-      }
-    }, 100);
+    waitForBidAndShow(triggerName);
   } else if (cachedBid) {
-    // Show ad immediately
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Using cached bid"));
-    showExitAd();
+    showExitAd(triggerName);
   } else if (auctionInProgress) {
     (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Auction in progress, waiting for completion..."));
-    // Wait for auction to complete
-    let attempts = 0;
-    const maxAttempts = 50;
-    const checkInterval = setInterval(() => {
-      attempts++;
-      if (cachedBid) {
-        clearInterval(checkInterval);
-        (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logInfo)("".concat(MODULE_NAME, ": Bid received, showing ad"));
-        showExitAd();
-      } else if (attempts >= maxAttempts) {
-        clearInterval(checkInterval);
-        (0,_src_utils_js__WEBPACK_IMPORTED_MODULE_2__.logWarn)("".concat(MODULE_NAME, ": Timeout waiting for bids, no ad to show"));
-      }
-    }, 100);
+    waitForBidAndShow(triggerName);
   }
 }
 
 /**
- * Reset module state (useful for testing)
+ * Reset module state.
  */
 function reset() {
-  hasBeenTriggered = false;
+  if (configUnsubscribe) {
+    configUnsubscribe();
+    configUnsubscribe = null;
+  }
+  stopTriggerMonitoring();
+  removeEventListeners();
+  removeStyles();
   cachedBid = null;
   auctionInProgress = false;
-  triggerMonitorActive = false;
   isInitialized = false;
   moduleConfig = null;
-  scrollMonitorCallbacks = [];
+  displayConfig = null;
+  lastRenderAt = null;
+  pageTriggerCount = 0;
+  currentOverlayTrigger = null;
+  const overlay = document.getElementById('exit-ads-overlay');
+  if (overlay) {
+    overlay.parentNode.removeChild(overlay);
+  }
+  init();
 }
 
 /**
- * Module registration
+ * Module registration.
  */
 const pbjs = (0,_src_prebidGlobal_js__WEBPACK_IMPORTED_MODULE_0__.getGlobal)();
-init(pbjs);
-
-// Expose API on pbjs global
+init();
 pbjs.exitAds = {
   trigger: triggerExitAd,
   reset: reset,
