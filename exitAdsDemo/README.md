@@ -1,55 +1,31 @@
-# Exit Ads Module — Publisher Integration Guide
+# Exit Ads Module - Publisher Integration Guide
 
-Exit Ads is a Prebid.js module that displays an ad overlay when users reach configurable trigger points (scroll depth, time on page, exit intent, or custom logic). It runs its own isolated auction, renders the winning bid directly as an overlay, and includes built-in frequency capping.
+Exit Ads is a Prebid.js module that displays an ad overlay when users reach configured display opportunities such as bottom-of-page, return-to-top, idle time, tab return, app/window focus return, or publisher-defined custom events. It runs an isolated auction for the exit ad unit and renders the winning bid directly in an overlay.
 
-- Works with **any** Prebid.js bidder adapter — not limited to GumGum
-- Does **not** require a dedicated GAM/ad server slot — the module renders the creative directly
-- Does **not** interfere with your existing ad units or auctions
+- Works with **any** Prebid.js bidder adapter included in your build
+- Does **not** require a dedicated GAM/ad server slot
+- Does **not** interfere with existing page ad units or auctions
 
 ## Prerequisites
 
 - Node.js >= 20
-- An existing Prebid.js build process (or willingness to set one up)
-- Your bidder adapter credentials (zone IDs, placement IDs, etc.)
-- `localStorage` and `sessionStorage` available in the browser (standard — required for frequency capping)
+- An existing Prebid.js build process, or willingness to build Prebid from this repository
+- Your bidder adapter credentials
+- `localStorage` and `sessionStorage` available for session/day frequency caps
 
 ## Installation
 
-### If you already have Prebid.js (most publishers)
+### If you already have Prebid.js
 
-Your site already loads a `prebid.js` file that was built with a set of adapters. To add Exit Ads, you rebuild Prebid from this repository with `exitAdsModule` added to your existing module list.
-
-**1. Clone this repository**
-
-```bash
-git clone https://github.com/gumgum/exit-ads.git
-cd exit-ads
-npm install
-```
-
-**2. Build with your existing adapters + exitAdsModule**
-
-List every adapter and module you currently use, and append `exitAdsModule`:
+Rebuild Prebid with your existing adapters and append `exitAdsModule`:
 
 ```bash
 gulp build --modules=gumgumBidAdapter,appnexusBidAdapter,rubiconBidAdapter,consentManagement,...,exitAdsModule
 ```
 
-> **Important:** If you omit an adapter you currently use, that bidder will stop working on your site. Make sure you include everything from your current build. If you're unsure which adapters you currently bundle, check your existing build command or contact your Prebid maintainer.
+The output file is `build/dist/prebid.js`. Replace your current bundle with that file, then add the `exitAds` config below.
 
-The output file is `build/dist/prebid.js`.
-
-**3. Replace your current prebid.js with the new build**
-
-Swap the file on your CDN or hosting. The new bundle is a drop-in replacement — it contains everything your old bundle had, plus the Exit Ads module.
-
-**4. Add Exit Ads configuration to your page**
-
-Add a `pbjs.setConfig` call with your Exit Ads configuration. This is the only page-level code change required. See [Page Configuration](#page-configuration) below.
-
-### If you don't have Prebid.js yet
-
-Clone this repository, install dependencies, and build with the adapters you need:
+### If you do not have Prebid.js yet
 
 ```bash
 git clone https://github.com/gumgum/exit-ads.git
@@ -58,13 +34,13 @@ npm install
 gulp build --modules=exitAdsModule,gumgumBidAdapter
 ```
 
-Then include `build/dist/prebid.js` on your page and add the Exit Ads configuration.
+Include `build/dist/prebid.js` on your page and configure `exitAds`.
 
 ## Page Configuration
 
-Add this to your page where you configure Prebid. No other page changes are needed.
-
 ### Minimal example
+
+If `display`, `display.trigger`, or `display.frequency` is omitted, the module uses the defaults documented below.
 
 ```javascript
 pbjs.que = pbjs.que || [];
@@ -87,26 +63,19 @@ pbjs.que.push(function () {
             }
           }
         ]
-      },
-      trigger: {
-        scroll: { depth: 90 }
-      },
-      display: {
-        frequency: { maxPerSession: 1, maxPerDay: 3 }
       }
     }
   });
 });
 ```
 
-### Full example with all options
+### Full example
 
 ```javascript
 pbjs.que = pbjs.que || [];
 pbjs.que.push(function () {
   pbjs.setConfig({
     exitAds: {
-      // Ad unit — use any Prebid bidder(s) you have in your build
       adUnit: {
         code: 'exit-ad-slot',
         mediaTypes: {
@@ -118,58 +87,100 @@ pbjs.que.push(function () {
           {
             bidder: 'gumgum',
             params: { zone: 'YOUR_ZONE', slot: 'YOUR_SLOT', bidfloor: 0.03 }
-          },
-          {
-            bidder: 'appnexus',
-            params: { placementId: '12345' }
           }
         ]
       },
 
-      // When to show the ad (conditions are OR — first one met wins)
-      trigger: {
-        scroll: { depth: 90 },      // At 90% scroll depth
-        timeOnPage: 60000,           // OR after 60 seconds
-        exitIntent: true,            // OR when cursor leaves the viewport
-        custom: function () {        // OR a custom condition
-          return window.articleComplete === true;
-        }
-      },
-
-      // When to start the auction (before the trigger fires)
-      prefetch: {
-        mode: 'lazy',                // 'eager' = immediately, 'lazy' = at a trigger point
-        lazyTriggerPoint: {
-          scroll: { depth: 70 }      // Start auction at 70% scroll
-        }
-      },
-
-      // How the ad is displayed
       display: {
-        type: 'overlay',             // 'overlay' or 'interstitial'
-        closeButton: true,
-        closeDelay: 3000,            // Milliseconds before close button is enabled
+        type: 'overlay',
+        closeButton: {
+          enabled: true,
+          delay: 3000
+        },
         frequency: {
-          maxPerSession: 1,          // Per browser session (resets on tab close)
-          maxPerDay: 3               // Per calendar day (resets at midnight)
-        }
+          maxTriggersPerPage: 5,
+          maxTriggersPerSession: 5,
+          maxTriggersPerDay: 10
+        },
+        trigger: {
+          bottomOfPage: {
+            enabled: true,
+            threshold: 90,
+            prefetchAtThreshold: 70,
+            repeatInterval: 60000
+          },
+          returnToTop: {
+            enabled: true,
+            threshold: 10,
+            prefetchAtThreshold: 50,
+            repeatInterval: 60000
+          },
+          idleTime: {
+            enabled: true,
+            minTime: 60000,
+            prefetchAtTime: 30000,
+            repeatInterval: 60000
+          },
+          tabFocusReturn: {
+            enabled: true,
+            minTime: 1000,
+            repeatInterval: 60000
+          },
+          appFocusReturn: {
+            enabled: true,
+            minTime: 1000,
+            repeatInterval: 60000
+          },
+          custom: {
+            enabled: true,
+            repeatInterval: 60000,
+            setup: function ({ trigger }) {
+              window.addEventListener('article-complete', trigger);
+
+              return function cleanup() {
+                window.removeEventListener('article-complete', trigger);
+              };
+            }
+          }
+        },
+        cssOverrides: `
+          .exit-ads-overlay {
+          }
+
+          .exit-ads-container {
+          }
+
+          .exit-ads-close-button {
+          }
+
+          .exit-ads-close-button:hover {
+          }
+
+          .exit-ads-close-button--disabled {
+          }
+
+          .exit-ads-close-button--countdown {
+          }
+        `
       },
 
-      // Callbacks (all optional)
       onBidCached: function (bidInfo) {
         console.log('Bid cached:', bidInfo.bidder, bidInfo.cpm, bidInfo.size);
       },
-      onTrigger: function () {
-        console.log('Exit Ad trigger activated');
+      onTrigger: function (context) {
+        console.log('Exit Ad trigger activated:', context.trigger);
       },
-      onAdRender: function () {
-        console.log('Exit Ad rendered');
+      onAdRender: function (context) {
+        console.log('Exit Ad rendered:', context.trigger);
       },
-      onAdClose: function () {
-        console.log('Exit Ad closed');
+      onAdClose: function (context) {
+        console.log('Exit Ad closed:', context.trigger);
       },
-      onFrequencyCapReached: function () {
-        console.log('Frequency cap reached — ad not shown');
+      onFrequencyCapReached: function (context) {
+        console.log('Frequency cap reached:', context.trigger);
+      },
+      onTriggerSuppressed: function (context) {
+        console.log('Exit Ad suppressed:', context.trigger, context.reason);
       }
     }
   });
@@ -180,57 +191,124 @@ pbjs.que.push(function () {
 
 ### `adUnit` (required)
 
-Standard Prebid.js ad unit. The `bids` array determines which bidders compete — you can use any adapter included in your build.
+Standard Prebid.js ad unit. The `bids` array determines which bidders compete.
 
 | Field | Description |
 |---|---|
 | `code` | Unique identifier for the exit ad unit |
-| `mediaTypes.banner.sizes` | Array of eligible sizes, e.g. `[[300, 250], [728, 90]]` |
-| `bids` | Array of bidder configs — same format as any Prebid ad unit |
-
-### `trigger` (required)
-
-When the ad should appear. Multiple types can be combined (OR logic — first condition met activates).
-
-| Field | Type | Description |
-|---|---|---|
-| `scroll.depth` | Number (0–100) | Percentage of page scrolled |
-| `timeOnPage` | Number (ms) | Milliseconds since page load |
-| `exitIntent` | Boolean | Fires when cursor leaves the viewport (desktop) |
-| `custom` | Function | Return `true` to trigger — polled every second |
-
-### `prefetch` (optional)
-
-Controls when the bid auction starts, independently of when the ad is shown.
-
-| Field | Type | Default | Description |
-|---|---|---|---|
-| `mode` | `'eager'` or `'lazy'` | `'lazy'` | `eager`: auction starts on page load. `lazy`: auction starts when `lazyTriggerPoint` is met |
-| `lazyTriggerPoint` | Object | — | Same shape as `trigger` — defines when the auction begins |
-
-**When to use each mode:**
-- **Eager** — high-engagement content where the exit ad is very likely to show. Minimizes latency.
-- **Lazy** — general content where many users may leave before reaching the trigger. Reduces wasted bid requests.
+| `mediaTypes.banner.sizes` | Eligible banner sizes, e.g. `[[300, 250], [728, 90]]` |
+| `bids` | Bidder configs in normal Prebid ad unit format |
 
 ### `display` (optional)
 
+`display` controls overlay presentation, trigger policy, frequency caps, and CSS overrides. If omitted, all defaults apply.
+
 | Field | Type | Default | Description |
 |---|---|---|---|
-| `type` | `'overlay'` or `'interstitial'` | `'overlay'` | Display format |
-| `closeButton` | Boolean | `true` | Show a close button |
-| `closeDelay` | Number (ms) | `0` | Delay before the close button becomes active. Shows a countdown. |
-| `frequency.maxPerSession` | Number | unlimited | Max impressions per browser session |
-| `frequency.maxPerDay` | Number | unlimited | Max impressions per calendar day |
+| `type` | `'overlay'` or `'interstitial'` | `'overlay'` | Display format. `interstitial` currently uses the overlay renderer. |
+| `closeButton.enabled` | Boolean | `true` | Whether to show the close button |
+| `closeButton.delay` | Number (ms) | `3000` | Delay before close button is enabled |
+| `cssOverrides` | String | `''` | CSS stylesheet text injected after module base styles |
 
-### Callbacks (optional)
+### `display.frequency`
+
+Frequency caps apply globally across all successful exit-ad displays, including manual displays. No-bid attempts and suppressed trigger events do not consume caps.
+
+| Field | Type | Default | Description |
+|---|---|---|---|
+| `maxTriggersPerPage` | Number | `5` | Maximum successful displays during the current page view |
+| `maxTriggersPerSession` | Number | `5` | Maximum successful displays in the browser session |
+| `maxTriggersPerDay` | Number | `10` | Maximum successful displays for the current calendar day |
+
+### `display.trigger`
+
+Multiple enabled triggers are OR conditions. The first eligible trigger begins the auction/display flow. No trigger can render within 30 seconds of a previous successful render.
+
+Closing an exit ad also restarts the same 30-second global render interval, so a user who dismisses the overlay is not immediately presented with another one.
+
+| Field | Default | Description |
+|---|---|---|
+| `bottomOfPage.enabled` | `true` | Enable bottom-of-page trigger |
+| `bottomOfPage.threshold` | `90` | Fire when scroll depth reaches this percentage |
+| `bottomOfPage.prefetchAtThreshold` | `70` | Optional scroll percentage to start the auction before display eligibility |
+| `bottomOfPage.repeatInterval` | `60000` | Minimum ms before this trigger can render again; `null` means once per page view |
+| `returnToTop.enabled` | `true` | Enable return-to-top trigger |
+| `returnToTop.threshold` | `10` | Fire after user scrolls past this percentage and returns to it |
+| `returnToTop.prefetchAtThreshold` | `50` | Optional scroll percentage to start the auction before return |
+| `returnToTop.repeatInterval` | `60000` | Minimum ms before this trigger can render again; `null` means once per page view |
+| `idleTime.enabled` | `true` | Enable page-time trigger |
+| `idleTime.minTime` | `60000` | Fire after this many ms on the page |
+| `idleTime.prefetchAtTime` | `30000` | Optional ms on page to start the auction before display eligibility |
+| `idleTime.repeatInterval` | `60000` | Minimum ms before this trigger can render again; `null` means once per page view |
+| `tabFocusReturn.enabled` | `true` | Enable hidden-to-visible tab return trigger |
+| `tabFocusReturn.minTime` | `1000` | Minimum hidden duration before return can trigger |
+| `tabFocusReturn.repeatInterval` | `60000` | Minimum ms before this trigger can render again; `null` means once per page view |
+| `appFocusReturn.enabled` | `true` | Enable visible-page window blur/focus return trigger |
+| `appFocusReturn.minTime` | `1000` | Minimum blurred duration before focus return can trigger |
+| `appFocusReturn.repeatInterval` | `60000` | Minimum ms before this trigger can render again; `null` means once per page view |
+
+`repeatInterval: 0` is valid. It allows the trigger to repeat as soon as other gates allow it, including the non-configurable 30-second global render interval.
+
+### `custom` trigger
+
+The primary custom trigger API lets publishers own their own event and timing logic:
+
+```javascript
+custom: {
+  enabled: true,
+  repeatInterval: 60000,
+  setup: function ({ trigger }) {
+    window.addEventListener('article-complete', trigger);
+
+    return function cleanup() {
+      window.removeEventListener('article-complete', trigger);
+    };
+  }
+}
+```
+
+For simple cases, `custom` can also be a boolean condition function. It is polled once per second:
+
+```javascript
+custom: function () {
+  return window.articleComplete === true;
+}
+```
+
+### CSS selectors
+
+The module injects base CSS first, then `display.cssOverrides` second. Use these stable selectors:
+
+```css
+.exit-ads-overlay {
+}
+
+.exit-ads-container {
+}
+
+.exit-ads-close-button {
+}
+
+.exit-ads-close-button:hover {
+}
+
+.exit-ads-close-button--disabled {
+}
+
+.exit-ads-close-button--countdown {
+}
+```
+
+### Callbacks
 
 | Callback | When it fires |
 |---|---|
-| `onBidCached(bidInfo)` | A bid has been received and cached. `bidInfo` contains `bidder`, `cpm`, `size`. |
-| `onTrigger()` | A trigger condition was met |
-| `onAdRender()` | The ad overlay was rendered on screen |
-| `onAdClose()` | The user closed the ad |
-| `onFrequencyCapReached()` | A trigger fired but the ad was suppressed by frequency caps |
+| `onBidCached(bidInfo)` | A bid has been received and cached |
+| `onTrigger({ trigger })` | A trigger passed gating and started the auction/display flow |
+| `onAdRender({ trigger })` | The overlay was rendered |
+| `onAdClose({ trigger })` | The user closed the overlay |
+| `onFrequencyCapReached({ trigger })` | A trigger or manual call was suppressed by frequency caps |
+| `onTriggerSuppressed({ trigger, reason, message })` | A trigger/manual call was eligible enough to be evaluated but did not render |
 
 ### Manual trigger API
 
@@ -238,69 +316,51 @@ Controls when the bid auction starts, independently of when the ad is shown.
 pbjs.exitAds.trigger();
 ```
 
-Manual triggers bypass the one-per-page limit on automatic triggers but still respect frequency caps.
+Manual triggers respect the 30-second global render interval and `display.frequency`, and successful manual renders consume frequency caps.
 
 ## How It Works
 
-1. Module initializes when `pbjs.setConfig({ exitAds: {...} })` is called
-2. Trigger monitors are registered based on your `trigger` config
-3. If `prefetch` is configured, the bid auction starts early (before the trigger fires)
-4. When a trigger condition is met:
-   - Frequency caps are checked
-   - If no bid is cached yet, the module starts an auction and waits (up to 5 seconds)
-   - The winning bid's creative is rendered in a full-screen overlay
-5. Frequency counters are updated in `sessionStorage` / `localStorage`
-6. Automatic triggers fire only once per page load; manual triggers can fire multiple times (subject to caps)
+1. Module initializes when `pbjs.setConfig({ exitAds: {...} })` is called.
+2. `display` is merged with defaults.
+3. Trigger monitors are registered.
+4. Optional per-trigger prefetch points can start an auction before display eligibility.
+5. When a trigger passes repeat, global interval, and frequency gates:
+   - `onTrigger` fires
+   - an auction starts if no bid is cached
+   - the winning bid renders in the overlay
+   - page/session/day counters update after successful render
 
 ## Testing Your Integration
 
-After deploying the new `prebid.js` and adding the config:
-
-1. Open your browser's developer console
-2. Look for log messages starting with `exitAds:` — you should see `Initialized v1.0.0`
-3. Trigger the ad (scroll to your configured depth, wait for the timer, or use `pbjs.exitAds.trigger()` in the console)
+1. Open your browser's developer console.
+2. Look for log messages starting with `exitAds:`.
+3. Trigger the ad by scrolling, waiting for idle time, switching tabs/apps and returning, or calling `pbjs.exitAds.trigger()`.
 4. Verify:
-   - A bid was requested and cached
-   - The overlay appears with the winning creative
-   - The close button works (after the delay, if configured)
-   - Frequency caps are enforced (refresh and trigger again — check that caps limit the impressions)
+   - A bid was requested and cached.
+   - The overlay appears with the winning creative.
+   - The close button works after the delay.
+   - Frequency caps count successful displays only.
 
 **To reset frequency caps during testing:**
 
 ```javascript
-sessionStorage.removeItem('exitAds_session_count');
-localStorage.removeItem('exitAds_daily_count');
-localStorage.removeItem('exitAds_last_shown');
+sessionStorage.removeItem('exitAds_frequency_session_count');
+localStorage.removeItem('exitAds_frequency_daily_count');
 ```
-
-## Live Demo
-
-A working demo is available at: https://gumgum.github.io/exit-ads/
-
-This demo uses test GumGum credentials and a sample creative. It is not suitable for production use.
 
 ## FAQ
 
 **Will this break my existing ads?**
-No. The Exit Ads module runs its own isolated auction for a separate ad unit. Your existing ad units, bidders, and GAM integration are unaffected.
+No. The Exit Ads module runs its own auction for a separate ad unit. Existing page ad units and auctions are unaffected.
 
-**Do I need to set up a GAM slot for the exit ad?**
-No. The module renders the winning creative directly into a DOM overlay. No ad server slot is needed.
-
-**What if I already have the GumGum adapter in my build?**
-That's fine — just make sure it appears once in your `--modules` list. Prebid deduplicates automatically.
+**Do I need a GAM slot for the exit ad?**
+No. The module renders the winning creative directly into a DOM overlay.
 
 **Can I use bidders other than GumGum?**
-Yes. Exit Ads works with any Prebid.js bidder adapter. Just include the adapter in your build and reference it in `adUnit.bids`.
-
-**What sizes are supported?**
-Any standard banner size. Configure them in `adUnit.mediaTypes.banner.sizes`. Common choices are `300x250`, `728x90`, `300x600`, and `320x50`.
+Yes. Exit Ads works with any Prebid.js bidder adapter included in your build.
 
 **What happens if no bid is returned?**
-No ad is shown. The module waits up to 5 seconds for a bid after triggering — if none arrives, it silently does nothing.
+No ad is shown. The module waits up to 5 seconds after trigger activation for a bid.
 
-**Can I trigger the ad programmatically?**
-Yes — call `pbjs.exitAds.trigger()` from your own code. This is useful for integrating with custom CMS or reader-progress events.
-
-**How does frequency capping work?**
-Session caps use `sessionStorage` (reset when the tab is closed). Daily caps use `localStorage` (reset at midnight). If storage is unavailable, the module allows the ad to show (no silent failure).
+**How are tab and app return different?**
+`tabFocusReturn` uses document hidden-to-visible changes. `appFocusReturn` uses window blur-to-focus only while the page stays visible, so the same tab switch does not fire both triggers.
