@@ -32,19 +32,16 @@ const DEFAULT_TRIGGER_CONFIG = {
   bottomOfPage: {
     enabled: true,
     threshold: 90,
-    prefetchAtThreshold: 70,
     repeatInterval: 60000
   },
   returnToTop: {
     enabled: true,
     threshold: 10,
-    prefetchAtThreshold: 50,
     repeatInterval: 60000
   },
   idleTime: {
     enabled: true,
     minTime: 60000,
-    prefetchAtTime: 30000,
     repeatInterval: 60000
   },
   tabFocusReturn: {
@@ -453,21 +450,31 @@ function setupReturnToTopMonitor(triggerConfig) {
   const triggerName = 'returnToTop';
   const threshold = normalizePercent(triggerConfig.threshold);
   const prefetchAtThreshold = getNumber(triggerConfig.prefetchAtThreshold);
+  const normalizedPrefetchThreshold = normalizePercent(prefetchAtThreshold);
   let hasPassedThreshold = false;
-  let abovePrefetchThreshold = false;
+  let hasPassedPrefetchThreshold = false;
+  let lastScrollDepth = calculateScrollDepth();
 
   const onScroll = () => {
     const scrollDepth = calculateScrollDepth();
+    const scrollingUp = scrollDepth < lastScrollDepth;
 
     if (prefetchAtThreshold != null) {
-      const normalizedPrefetchThreshold = normalizePercent(prefetchAtThreshold);
-      if (!abovePrefetchThreshold && scrollDepth >= normalizedPrefetchThreshold) {
-        abovePrefetchThreshold = true;
+      if (scrollDepth > normalizedPrefetchThreshold) {
+        hasPassedPrefetchThreshold = true;
+      } else if (
+        hasPassedThreshold &&
+        hasPassedPrefetchThreshold &&
+        scrollingUp &&
+        scrollDepth <= normalizedPrefetchThreshold &&
+        scrollDepth > threshold
+      ) {
+        hasPassedPrefetchThreshold = false;
         prefetchBid(triggerName);
-      } else if (scrollDepth < normalizedPrefetchThreshold) {
-        abovePrefetchThreshold = false;
       }
     }
+
+    lastScrollDepth = scrollDepth;
 
     if (scrollDepth > threshold) {
       hasPassedThreshold = true;
@@ -709,8 +716,8 @@ function getTriggerSuppression(triggerName) {
 
   if (triggerConfig.repeatInterval === null && state.hasRendered) {
     return {
-      reason: 'oncePerPageView',
-      message: `${triggerName} trigger already rendered for this page view`
+      reason: 'oncePerPageLoad',
+      message: `${triggerName} trigger already rendered for this page load`
     };
   }
 

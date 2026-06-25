@@ -366,8 +366,8 @@
       if (context.reason === 'repeatInterval') {
         return 'inside this trigger repeat interval';
       }
-      if (context.reason === 'oncePerPageView') {
-        return 'this trigger is once per page view';
+      if (context.reason === 'oncePerPageLoad') {
+        return 'this trigger is once per page load';
       }
       if (context.reason === 'frequencyCap') {
         return (context.cap || 'frequency') + ' cap reached';
@@ -562,7 +562,7 @@
         localStorage.removeItem('exitAds_frequency_daily_count');
         renderCount = 0;
         lastTrigger = 'None';
-        logEvent('Frequency caps cleared');
+        logEvent('Stored frequency caps cleared. Reload or reset the module to clear the page-load cap.');
         updateFrequencyDisplay();
         updateRenderMetrics('None', false);
       } catch (e) {
@@ -586,7 +586,7 @@
 
         const freqEl = document.getElementById('frequency-status');
         if (freqEl) {
-          freqEl.innerHTML = renderCount + '/5 page | ' + sessionCount + '/5 session | ' + dailyCount + '/10 day';
+          freqEl.innerHTML = renderCount + '/5 page load | ' + sessionCount + '/5 tab session | ' + dailyCount + '/10 local day';
         }
       } catch (e) {
         // Ignore errors
@@ -733,20 +733,21 @@
             <button class="secondary" onclick="jumpToBottomTrigger()">Bottom-of-page Zone</button>
             <button class="secondary" onclick="armReturnToTopTrigger()">Arm Return-to-top</button>
             <button class="secondary" onclick="jumpToTopTrigger()">Return to Top</button>
-            <button class="secondary" onclick="clearFrequencyCaps()">Clear Caps</button>
+            <button class="secondary" onclick="clearFrequencyCaps()">Clear Stored Caps</button>
             <button class="secondary" onclick="resetExitAds()">Reset Module</button>
           </div>
 
           <h3 class="section-spaced">Frequency Caps</h3>
           <div class="metric">
-            <span class="metric-label">Page / session / day</span>
-            <span class="metric-value" id="frequency-status">0/5 page | 0/5 session | 0/10 day</span>
+            <span class="metric-label">Page load / tab session / local day</span>
+            <span class="metric-value" id="frequency-status">0/5 page load | 0/5 tab session | 0/10 local day</span>
           </div>
+          <p class="trigger-note">The page-load cap is in memory and resets on reload. The tab-session cap uses <code>sessionStorage</code> and usually resets when this tab closes. The local-day cap uses <code>localStorage</code> and resets when the saved date no longer matches today.</p>
         </section>
 
         <section class="panel content">
           <h2>Default Trigger Scenarios</h2>
-          <p class="paragraph">This demo uses the module defaults, with idle shortened to 45 seconds so it is practical to test. Use the controls below or interact with the browser as described.</p>
+          <p class="paragraph">This demo uses the standard trigger defaults, shortens idle to 45 seconds, and opts into prefetch points so auction timing is visible in the event log. Use the controls below or interact with the browser as described.</p>
           <ul class="trigger-list">
             <li>
               <span class="trigger-name">Bottom-of-page</span>
@@ -754,7 +755,7 @@
             </li>
             <li>
               <span class="trigger-name">Return-to-top</span>
-              Click <strong>Arm Return-to-top</strong>, then <strong>Return to Top</strong>. The trigger fires when you return to the top 10% after scrolling deeper.
+              Click <strong>Arm Return-to-top</strong>, then <strong>Return to Top</strong>. The auction prefetches while scrolling upward through 50%, and the trigger fires when you return to the top 10%.
             </li>
             <li>
               <span class="trigger-name">Idle time</span>

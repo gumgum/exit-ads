@@ -125,19 +125,16 @@ pbjs.que.push(function () {
           bottomOfPage: {
             enabled: true,
             threshold: 90,
-            prefetchAtThreshold: 70,
             repeatInterval: 60000
           },
           returnToTop: {
             enabled: true,
             threshold: 10,
-            prefetchAtThreshold: 50,
             repeatInterval: 60000
           },
           idleTime: {
             enabled: true,
             minTime: 60000,
-            prefetchAtTime: 30000,
             repeatInterval: 60000
           },
           tabFocusReturn: {
@@ -230,42 +227,42 @@ Standard Prebid.js ad unit. The `bids` array determines which bidders compete.
 
 ### `display.frequency`
 
-Frequency caps apply globally across all successful exit-ad displays, including manual displays. No-bid attempts and suppressed trigger events do not consume caps.
+Frequency caps apply globally across all successful exit-ad displays, including manual displays. No-bid attempts and suppressed trigger events do not consume caps. The counters below are independent of trigger type.
 
 | Field | Type | Default | Description |
 |---|---|---|---|
-| `maxTriggersPerPage` | Number | `5` | Maximum successful overlay renders during the current page view |
-| `maxTriggersPerSession` | Number | `5` | Maximum successful overlay renders in the browser session |
-| `maxTriggersPerDay` | Number | `10` | Maximum successful overlay renders for the current calendar day |
+| `maxTriggersPerPage` | Number | `5` | Maximum successful overlay renders for the current page load. This counter is in memory and resets when the page is reloaded or navigated away from and loaded again. |
+| `maxTriggersPerSession` | Number | `5` | Maximum successful overlay renders for the current browser tab session. This counter is stored in `sessionStorage` and resets when that tab/session storage is cleared, usually when the tab is closed. |
+| `maxTriggersPerDay` | Number | `10` | Maximum successful overlay renders for the current local day in the user's browser timezone. This counter is stored in `localStorage` with a date value and resets automatically when the stored date no longer matches `new Date().toDateString()`. |
 
 ### `display.trigger`
 
-Multiple enabled triggers are OR conditions. The first eligible trigger begins the auction/display flow. No trigger can render within 30 seconds of a previous successful render.
+Multiple enabled triggers are OR conditions. The first eligible trigger begins the auction/display flow. No trigger can render within 30 seconds of a previous successful render or manual close. This 30-second gate is in memory and resets on page reload.
 
-Closing an exit ad also restarts the same 30-second global render interval, so a user who dismisses the overlay is not immediately presented with another one.
+Closing an exit ad restarts the same 30-second global render interval, so a user who dismisses the overlay is not immediately presented with another one.
 
 | Field | Default | Description |
 |---|---|---|
 | `bottomOfPage.enabled` | `true` | Enable bottom-of-page trigger |
 | `bottomOfPage.threshold` | `90` | Trigger when scroll depth reaches this percentage |
-| `bottomOfPage.prefetchAtThreshold` | `70` | Scroll percentage that starts the auction before the trigger threshold is reached |
-| `bottomOfPage.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page view |
+| `bottomOfPage.prefetchAtThreshold` | unset | Optional scroll percentage that starts the auction before the trigger threshold is reached |
+| `bottomOfPage.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page load |
 | `returnToTop.enabled` | `true` | Enable return-to-top trigger |
 | `returnToTop.threshold` | `10` | Trigger after the user has scrolled deeper than this percentage and then returns to it |
-| `returnToTop.prefetchAtThreshold` | `50` | Scroll percentage that starts the auction before the user returns to the top threshold |
-| `returnToTop.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page view |
+| `returnToTop.prefetchAtThreshold` | unset | Optional scroll percentage that starts the auction while the user is scrolling upward toward the top threshold. The user must first scroll deeper than this value, then cross back upward through it. Set this higher than `returnToTop.threshold`; values at or below the trigger threshold do not create a useful prefetch window. |
+| `returnToTop.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page load |
 | `idleTime.enabled` | `true` | Enable page-time trigger |
 | `idleTime.minTime` | `60000` | Trigger after this many ms on the page |
-| `idleTime.prefetchAtTime` | `30000` | Time on page in ms that starts the auction before `minTime` |
-| `idleTime.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page view |
+| `idleTime.prefetchAtTime` | unset | Optional time on page in ms that starts the auction before `minTime`. Values greater than or equal to `idleTime.minTime` are ignored. |
+| `idleTime.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page load |
 | `tabFocusReturn.enabled` | `true` | Enable hidden-to-visible tab return trigger |
 | `tabFocusReturn.minTime` | `1000` | Minimum time in ms that the document must be hidden before returning to visible can trigger |
-| `tabFocusReturn.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page view |
+| `tabFocusReturn.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page load |
 | `appFocusReturn.enabled` | `true` | Enable visible-page window blur/focus return trigger |
 | `appFocusReturn.minTime` | `1000` | Minimum time in ms that the window must be blurred while the document remains visible before focus return can trigger |
-| `appFocusReturn.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page view |
+| `appFocusReturn.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page load |
 
-`repeatInterval` is measured from a successful render for that specific trigger. Suppressed attempts and no-bid attempts do not reset it.
+`repeatInterval` is measured from a successful render for that specific trigger. Suppressed attempts and no-bid attempts do not reset it. `repeatInterval: null` is tracked in memory and resets on page reload.
 
 ### `custom` trigger
 

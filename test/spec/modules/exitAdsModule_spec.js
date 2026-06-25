@@ -178,14 +178,13 @@ describe('exitAdsModule', function () {
   it('uses default display, trigger, frequency, close button, and styles when display is omitted', function () {
     configure();
 
-    clock.tick(29999);
+    clock.tick(59999);
     sinon.assert.notCalled(requestBidsStub);
 
     clock.tick(1);
     sinon.assert.called(requestBidsStub);
     completeAuction();
-
-    clock.tick(30000);
+    clock.tick(100);
 
     const overlay = document.getElementById('exit-ads-overlay');
     const closeButton = document.querySelector('.exit-ads-close-button');
@@ -268,7 +267,7 @@ describe('exitAdsModule', function () {
     expect(document.querySelector('#exit-ad-creative')).to.exist;
   });
 
-  it('prefetches after returnToTop prefetch threshold and renders after returning to top threshold', function () {
+  it('prefetches returnToTop only when crossing the prefetch threshold upward', function () {
     const onTrigger = sinon.spy();
     configure({
       display: oneTriggerDisplay('returnToTop', {
@@ -282,6 +281,11 @@ describe('exitAdsModule', function () {
 
     setScrollDepth(55);
 
+    sinon.assert.notCalled(requestBidsStub);
+    sinon.assert.notCalled(onTrigger);
+
+    setScrollDepth(35);
+
     sinon.assert.called(requestBidsStub);
     sinon.assert.notCalled(onTrigger);
 
@@ -290,6 +294,27 @@ describe('exitAdsModule', function () {
 
     sinon.assert.calledOnce(onTrigger);
     expect(document.querySelector('#exit-ad-creative')).to.exist;
+  });
+
+  it('ignores idleTime prefetchAtTime when it is at or after minTime', function () {
+    const onTrigger = sinon.spy();
+    configure({
+      display: oneTriggerDisplay('idleTime', {
+        minTime: 60000,
+        prefetchAtTime: 60000
+      }),
+      callbacks: {
+        onTrigger
+      }
+    });
+
+    clock.tick(59999);
+    sinon.assert.notCalled(requestBidsStub);
+    sinon.assert.notCalled(onTrigger);
+
+    clock.tick(1);
+    sinon.assert.calledOnce(requestBidsStub);
+    sinon.assert.calledOnce(onTrigger);
   });
 
   it('prefetches idleTime before rendering at minTime', function () {
@@ -473,12 +498,17 @@ describe('exitAdsModule', function () {
     sinon.assert.calledWith(onTrigger, sinon.match({ trigger: 'manual' }));
   });
 
-  it('supports repeatInterval null as once per page view', function () {
+  it('supports repeatInterval null as once per page load', function () {
+    const onTriggerSuppressed = sinon.spy();
+
     configure({
       display: oneTriggerDisplay('bottomOfPage', {
         threshold: 90,
         repeatInterval: null
-      })
+      }),
+      callbacks: {
+        onTriggerSuppressed
+      }
     });
 
     setScrollDepth(95);
@@ -490,6 +520,10 @@ describe('exitAdsModule', function () {
     setScrollDepth(95);
 
     sinon.assert.notCalled(requestBidsStub);
+    sinon.assert.calledWith(onTriggerSuppressed, sinon.match({
+      trigger: 'bottomOfPage',
+      reason: 'oncePerPageLoad'
+    }));
   });
 
   it('allows repeatInterval zero after the global render interval', function () {
