@@ -158,6 +158,22 @@
       background: #1f2937;
     }
 
+    button.toggle {
+      background: #167a3c;
+    }
+
+    button.toggle:hover {
+      background: #126130;
+    }
+
+    button.toggle.toggle-off {
+      background: #98a2b3;
+    }
+
+    button.toggle.toggle-off:hover {
+      background: #7d8694;
+    }
+
     .scroll-indicator {
       position: fixed;
       top: 0;
@@ -314,6 +330,14 @@
     var renderCount = 0;
     var lastTrigger = 'None';
 
+    // Runtime-toggleable trigger state. The module reads its config only once
+    // at init (it unsubscribes after the first read), so toggling a trigger
+    // updates this state and then resets + reconfigures the module to apply it.
+    var triggerEnabled = {
+      tabFocusReturn: true,
+      appFocusReturn: true
+    };
+
     function logEvent(message) {
       var timestamp = new Date().toLocaleTimeString();
       triggerLog.push('[' + timestamp + '] ' + message);
@@ -449,12 +473,12 @@
                 repeatInterval: 60000
               },
               tabFocusReturn: {
-                enabled: true,
+                enabled: triggerEnabled.tabFocusReturn,
                 minTime: 1000,
                 repeatInterval: 60000
               },
               appFocusReturn: {
-                enabled: true,
+                enabled: triggerEnabled.appFocusReturn,
                 minTime: 1000,
                 repeatInterval: 60000
               },
@@ -660,15 +684,17 @@
     // Load creatives on page load
     loadCreatives();
 
-    // Reset
-    function resetExitAds() {
+    // Reset the module and re-apply the current config. The module only reads
+    // its config once at init, so any config change (including trigger toggles)
+    // must go through reset() + setConfig() to take effect.
+    function reconfigureExitAds(message) {
       if (pbjs.exitAds && pbjs.exitAds.reset) {
         pbjs.exitAds.reset();
         renderCount = 0;
         lastTrigger = 'None';
         updateRenderMetrics('None', false);
         updateFrequencyDisplay();
-        logEvent('Exit Ads state reset - reconfiguring...');
+        logEvent(message || 'Exit Ads state reset - reconfiguring...');
 
         setTimeout(function() {
           pbjs.que.push(function() {
@@ -676,8 +702,49 @@
             logEvent('Exit Ads reconfigured');
           });
         }, 100);
+      } else {
+        logEvent('ERROR: Exit Ads module not loaded - cannot reconfigure');
       }
     }
+
+    // Reset
+    function resetExitAds() {
+      reconfigureExitAds('Exit Ads state reset - reconfiguring...');
+    }
+
+    // Toggle a focus-return trigger on or off, then reconfigure the module so
+    // the change applies. triggerName is 'tabFocusReturn' or 'appFocusReturn'.
+    function toggleTrigger(triggerName) {
+      var labels = {
+        tabFocusReturn: 'Tab change and return',
+        appFocusReturn: 'Browser blur and refocus'
+      };
+
+      triggerEnabled[triggerName] = !triggerEnabled[triggerName];
+      updateTriggerToggleLabels();
+
+      var state = triggerEnabled[triggerName] ? 'enabled' : 'disabled';
+      reconfigureExitAds(labels[triggerName] + ' trigger ' + state + ' - reconfiguring...');
+    }
+
+    // Keep the toggle button labels and styling in sync with trigger state.
+    function updateTriggerToggleLabels() {
+      var buttons = {
+        tabFocusReturn: { el: document.getElementById('toggle-tab-return'), label: 'Tab Change & Return' },
+        appFocusReturn: { el: document.getElementById('toggle-app-return'), label: 'Browser Blur & Refocus' }
+      };
+
+      Object.keys(buttons).forEach(function(triggerName) {
+        var button = buttons[triggerName];
+        if (!button.el) return;
+        var on = triggerEnabled[triggerName];
+        button.el.textContent = button.label + ': ' + (on ? 'ON' : 'OFF');
+        button.el.classList.toggle('toggle-off', !on);
+        button.el.setAttribute('aria-pressed', String(on));
+      });
+    }
+
+    window.addEventListener('load', updateTriggerToggleLabels);
 
     // Time on page
     var pageLoadTime = Date.now();
@@ -735,6 +802,8 @@
             <button class="secondary" onclick="jumpToTopTrigger()">Return to Top</button>
             <button class="secondary" onclick="clearFrequencyCaps()">Clear Stored Caps</button>
             <button class="secondary" onclick="resetExitAds()">Reset Module</button>
+            <button type="button" class="toggle" id="toggle-tab-return" aria-pressed="true" onclick="toggleTrigger('tabFocusReturn')">Tab Change &amp; Return: ON</button>
+            <button type="button" class="toggle" id="toggle-app-return" aria-pressed="true" onclick="toggleTrigger('appFocusReturn')">Browser Blur &amp; Refocus: ON</button>
           </div>
 
           <h3 class="section-spaced">Frequency Caps</h3>
