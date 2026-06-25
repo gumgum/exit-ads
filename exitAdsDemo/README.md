@@ -6,6 +6,26 @@ Exit Ads is a Prebid.js module that displays an ad overlay when users reach conf
 - Does **not** require a dedicated GAM/ad server slot
 - Does **not** interfere with existing page ad units or auctions
 
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Page Configuration](#page-configuration)
+  - [Minimal example](#minimal-example)
+  - [Full example](#full-example)
+- [Configuration Reference](#configuration-reference)
+  - [`adUnit`](#adunit-required)
+  - [`display`](#display-optional)
+  - [`display.frequency`](#displayfrequency)
+  - [`display.trigger`](#displaytrigger)
+  - [`custom` trigger](#custom-trigger)
+  - [CSS selectors](#css-selectors)
+  - [Callbacks](#callbacks)
+  - [Manual trigger API](#manual-trigger-api)
+- [How It Works](#how-it-works)
+- [Testing Your Integration](#testing-your-integration)
+- [FAQ](#faq)
+
 ## Prerequisites
 
 - Node.js >= 20
@@ -92,7 +112,6 @@ pbjs.que.push(function () {
       },
 
       display: {
-        type: 'overlay',
         closeButton: {
           enabled: true,
           delay: 3000
@@ -205,10 +224,9 @@ Standard Prebid.js ad unit. The `bids` array determines which bidders compete.
 
 | Field | Type | Default | Description |
 |---|---|---|---|
-| `type` | `'overlay'` or `'interstitial'` | `'overlay'` | Display format. `interstitial` currently uses the overlay renderer. |
 | `closeButton.enabled` | Boolean | `true` | Whether to show the close button |
-| `closeButton.delay` | Number (ms) | `3000` | Delay before close button is enabled |
-| `cssOverrides` | String | `''` | CSS stylesheet text injected after module base styles |
+| `closeButton.delay` | Number (ms) | `3000` | Time the close button stays disabled after render. While disabled it displays a whole-second countdown rounded up from milliseconds, e.g. `5000` displays `5`, `32543` displays `33`. Values above 99 seconds display `99+` until the countdown drops below 100. |
+| `cssOverrides` | String | `''` | CSS appended after the module base stylesheet. Use it to override the stable `.exit-ads-*` classes without editing module code. |
 
 ### `display.frequency`
 
@@ -216,9 +234,9 @@ Frequency caps apply globally across all successful exit-ad displays, including 
 
 | Field | Type | Default | Description |
 |---|---|---|---|
-| `maxTriggersPerPage` | Number | `5` | Maximum successful displays during the current page view |
-| `maxTriggersPerSession` | Number | `5` | Maximum successful displays in the browser session |
-| `maxTriggersPerDay` | Number | `10` | Maximum successful displays for the current calendar day |
+| `maxTriggersPerPage` | Number | `5` | Maximum successful overlay renders during the current page view |
+| `maxTriggersPerSession` | Number | `5` | Maximum successful overlay renders in the browser session |
+| `maxTriggersPerDay` | Number | `10` | Maximum successful overlay renders for the current calendar day |
 
 ### `display.trigger`
 
@@ -229,25 +247,25 @@ Closing an exit ad also restarts the same 30-second global render interval, so a
 | Field | Default | Description |
 |---|---|---|
 | `bottomOfPage.enabled` | `true` | Enable bottom-of-page trigger |
-| `bottomOfPage.threshold` | `90` | Fire when scroll depth reaches this percentage |
-| `bottomOfPage.prefetchAtThreshold` | `70` | Optional scroll percentage to start the auction before display eligibility |
-| `bottomOfPage.repeatInterval` | `60000` | Minimum ms before this trigger can render again; `null` means once per page view |
+| `bottomOfPage.threshold` | `90` | Trigger when scroll depth reaches this percentage |
+| `bottomOfPage.prefetchAtThreshold` | `70` | Scroll percentage that starts the auction before the trigger threshold is reached |
+| `bottomOfPage.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page view |
 | `returnToTop.enabled` | `true` | Enable return-to-top trigger |
-| `returnToTop.threshold` | `10` | Fire after user scrolls past this percentage and returns to it |
-| `returnToTop.prefetchAtThreshold` | `50` | Optional scroll percentage to start the auction before return |
-| `returnToTop.repeatInterval` | `60000` | Minimum ms before this trigger can render again; `null` means once per page view |
+| `returnToTop.threshold` | `10` | Trigger after the user has scrolled deeper than this percentage and then returns to it |
+| `returnToTop.prefetchAtThreshold` | `50` | Scroll percentage that starts the auction before the user returns to the top threshold |
+| `returnToTop.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page view |
 | `idleTime.enabled` | `true` | Enable page-time trigger |
-| `idleTime.minTime` | `60000` | Fire after this many ms on the page |
-| `idleTime.prefetchAtTime` | `30000` | Optional ms on page to start the auction before display eligibility |
-| `idleTime.repeatInterval` | `60000` | Minimum ms before this trigger can render again; `null` means once per page view |
+| `idleTime.minTime` | `60000` | Trigger after this many ms on the page |
+| `idleTime.prefetchAtTime` | `30000` | Time on page in ms that starts the auction before `minTime` |
+| `idleTime.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page view |
 | `tabFocusReturn.enabled` | `true` | Enable hidden-to-visible tab return trigger |
-| `tabFocusReturn.minTime` | `1000` | Minimum hidden duration before return can trigger |
-| `tabFocusReturn.repeatInterval` | `60000` | Minimum ms before this trigger can render again; `null` means once per page view |
+| `tabFocusReturn.minTime` | `1000` | Minimum time in ms that the document must be hidden before returning to visible can trigger |
+| `tabFocusReturn.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page view |
 | `appFocusReturn.enabled` | `true` | Enable visible-page window blur/focus return trigger |
-| `appFocusReturn.minTime` | `1000` | Minimum blurred duration before focus return can trigger |
-| `appFocusReturn.repeatInterval` | `60000` | Minimum ms before this trigger can render again; `null` means once per page view |
+| `appFocusReturn.minTime` | `1000` | Minimum time in ms that the window must be blurred while the document remains visible before focus return can trigger |
+| `appFocusReturn.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page view |
 
-`repeatInterval: 0` is valid. It allows the trigger to repeat as soon as other gates allow it, including the non-configurable 30-second global render interval.
+`repeatInterval` is measured from a successful render for that specific trigger. Suppressed attempts and no-bid attempts do not reset it.
 
 ### `custom` trigger
 
@@ -303,12 +321,12 @@ The module injects base CSS first, then `display.cssOverrides` second. Use these
 
 | Callback | When it fires |
 |---|---|
-| `onBidCached(bidInfo)` | A bid has been received and cached |
-| `onTrigger({ trigger })` | A trigger passed gating and started the auction/display flow |
-| `onAdRender({ trigger })` | The overlay was rendered |
-| `onAdClose({ trigger })` | The user closed the overlay |
+| `onBidCached(bidInfo)` | A bid has been received and cached for the exit ad unit |
+| `onTrigger({ trigger })` | A trigger/manual call passed gating and the module is starting or waiting for an auction |
+| `onAdRender({ trigger })` | The overlay was successfully rendered; frequency counters and repeat timing are updated after this |
+| `onAdClose({ trigger })` | The user closed the overlay; the hard 30-second global render gate restarts |
 | `onFrequencyCapReached({ trigger })` | A trigger or manual call was suppressed by frequency caps |
-| `onTriggerSuppressed({ trigger, reason, message })` | A trigger/manual call was eligible enough to be evaluated but did not render |
+| `onTriggerSuppressed({ trigger, reason, message })` | A trigger/manual call was evaluated but did not render, for example because of the global gate, repeat interval, frequency cap, no bid, or no cached bid |
 
 ### Manual trigger API
 
@@ -338,7 +356,7 @@ Manual triggers respect the 30-second global render interval and `display.freque
 4. Verify:
    - A bid was requested and cached.
    - The overlay appears with the winning creative.
-   - The close button works after the delay.
+   - The close button shows a countdown while disabled, then can close the overlay.
    - Frequency caps count successful displays only.
 
 **To reset frequency caps during testing:**

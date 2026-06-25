@@ -60,7 +60,6 @@ const DEFAULT_TRIGGER_CONFIG = {
 };
 
 const DEFAULT_DISPLAY_CONFIG = {
-  type: 'overlay',
   closeButton: {
     enabled: true,
     delay: 3000
@@ -884,16 +883,7 @@ function showExitAd(triggerName) {
 
   logInfo(`${MODULE_NAME}: Displaying Exit Ad`, cachedBid);
 
-  const displayType = displayConfig.type || 'overlay';
-
-  if (displayType === 'overlay') {
-    showOverlay(triggerName);
-  } else if (displayType === 'interstitial') {
-    showInterstitial(triggerName);
-  } else {
-    logWarn(`${MODULE_NAME}: Unknown display type "${displayType}", using overlay`);
-    showOverlay(triggerName);
-  }
+  showOverlay(triggerName);
 
   cachedBid = null;
 
@@ -980,12 +970,12 @@ function createCloseButton(triggerName) {
     closeButton.classList.add('exit-ads-close-button--disabled', 'exit-ads-close-button--countdown');
 
     let remainingSeconds = Math.ceil(closeDelay / 1000);
-    closeButton.innerHTML = remainingSeconds;
+    closeButton.innerHTML = formatCloseCountdown(remainingSeconds);
 
     const countdownInterval = setInterval(() => {
       remainingSeconds--;
       if (remainingSeconds > 0) {
-        closeButton.innerHTML = remainingSeconds;
+        closeButton.innerHTML = formatCloseCountdown(remainingSeconds);
       } else {
         clearInterval(countdownInterval);
         closeButton.innerHTML = '&times;';
@@ -1006,11 +996,8 @@ function createCloseButton(triggerName) {
   return closeButton;
 }
 
-/**
- * Show interstitial ad.
- */
-function showInterstitial(triggerName) {
-  showOverlay(triggerName);
+function formatCloseCountdown(seconds) {
+  return seconds > 99 ? '99+' : seconds.toString();
 }
 
 /**

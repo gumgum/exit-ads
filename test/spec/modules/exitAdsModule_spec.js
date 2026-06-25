@@ -196,6 +196,54 @@ describe('exitAdsModule', function () {
     expect(document.getElementById('exit-ads-base-styles')).to.exist;
   });
 
+  it('shows a rounded seconds countdown for closeButton.delay without overflowing large values', function () {
+    configure({
+      display: {
+        closeButton: {
+          enabled: true,
+          delay: 32543
+        },
+        frequency: {
+          maxTriggersPerPage: 10,
+          maxTriggersPerSession: 10,
+          maxTriggersPerDay: 10
+        },
+        trigger: disabledTriggers
+      }
+    });
+
+    triggerExitAd();
+    completeAuctionAndRender();
+
+    const closeButton = document.querySelector('.exit-ads-close-button');
+    expect(closeButton.textContent).to.equal('33');
+    expect(closeButton.disabled).to.equal(true);
+
+    clock.tick(1000);
+    expect(closeButton.textContent).to.equal('32');
+
+    resetExitAds();
+    configure({
+      display: {
+        closeButton: {
+          enabled: true,
+          delay: 123456
+        },
+        frequency: {
+          maxTriggersPerPage: 10,
+          maxTriggersPerSession: 10,
+          maxTriggersPerDay: 10
+        },
+        trigger: disabledTriggers
+      }
+    });
+
+    triggerExitAd();
+    completeAuctionAndRender();
+
+    expect(document.querySelector('.exit-ads-close-button').textContent).to.equal('99+');
+  });
+
   it('prefetches at bottomOfPage threshold and renders at display threshold', function () {
     const onTrigger = sinon.spy();
     configure({
