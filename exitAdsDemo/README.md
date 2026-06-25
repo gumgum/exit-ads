@@ -18,8 +18,13 @@ Exit Ads is a Prebid.js module that displays an ad overlay when users reach conf
   - [`display`](#display-optional)
   - [`display.frequency`](#displayfrequency)
   - [`display.trigger`](#displaytrigger)
-  - [`custom` trigger](#custom-trigger)
-  - [CSS selectors](#css-selectors)
+    - [`display.trigger.bottomOfPage`](#displaytriggerbottomofpage)
+    - [`display.trigger.returnToTop`](#displaytriggerreturntotop)
+    - [`display.trigger.idleTime`](#displaytriggeridletime)
+    - [`display.trigger.tabFocusReturn`](#displaytriggertabfocusreturn)
+    - [`display.trigger.appFocusReturn`](#displaytriggerappfocusreturn)
+    - [`display.trigger.custom`](#displaytriggercustom)
+  - [`display.cssOverrides`](#displaycssoverrides)
   - [Callbacks](#callbacks)
   - [Manual trigger API](#manual-trigger-api)
 - [How It Works](#how-it-works)
@@ -241,32 +246,72 @@ Multiple enabled triggers are OR conditions. The first eligible trigger begins t
 
 Closing an exit ad restarts the same 30-second global render interval, so a user who dismisses the overlay is not immediately presented with another one.
 
+`repeatInterval` is measured from a successful render for that specific trigger. Suppressed attempts and no-bid attempts do not reset it. `repeatInterval: null` is tracked in memory and resets on page reload.
+
+#### `display.trigger.bottomOfPage`
+
+Triggers when the user scrolls down to a configured page-depth percentage.
+
 | Field | Default | Description |
 |---|---|---|
 | `bottomOfPage.enabled` | `true` | Enable bottom-of-page trigger |
 | `bottomOfPage.threshold` | `90` | Trigger when scroll depth reaches this percentage |
 | `bottomOfPage.prefetchAtThreshold` | unset | Optional scroll percentage that starts the auction before the trigger threshold is reached |
 | `bottomOfPage.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page load |
+
+#### `display.trigger.returnToTop`
+
+Triggers when the user scrolls deeper than the configured threshold, then returns upward to that threshold.
+
+| Field | Default | Description |
+|---|---|---|
 | `returnToTop.enabled` | `true` | Enable return-to-top trigger |
 | `returnToTop.threshold` | `10` | Trigger after the user has scrolled deeper than this percentage and then returns to it |
 | `returnToTop.prefetchAtThreshold` | unset | Optional scroll percentage that starts the auction while the user is scrolling upward toward the top threshold. The user must first scroll deeper than this value, then cross back upward through it. Set this higher than `returnToTop.threshold`; values at or below the trigger threshold do not create a useful prefetch window. |
 | `returnToTop.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page load |
+
+#### `display.trigger.idleTime`
+
+Triggers after the user has remained on the page for the configured time.
+
+| Field | Default | Description |
+|---|---|---|
 | `idleTime.enabled` | `true` | Enable page-time trigger |
 | `idleTime.minTime` | `60000` | Trigger after this many ms on the page |
 | `idleTime.prefetchAtTime` | unset | Optional time on page in ms that starts the auction before `minTime`. Values greater than or equal to `idleTime.minTime` are ignored. |
 | `idleTime.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page load |
+
+#### `display.trigger.tabFocusReturn`
+
+Triggers when the document changes from hidden back to visible after the configured minimum hidden time.
+
+| Field | Default | Description |
+|---|---|---|
 | `tabFocusReturn.enabled` | `true` | Enable hidden-to-visible tab return trigger |
 | `tabFocusReturn.minTime` | `1000` | Minimum time in ms that the document must be hidden before returning to visible can trigger |
 | `tabFocusReturn.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page load |
+
+#### `display.trigger.appFocusReturn`
+
+Triggers when the browser window blurs and focuses again while the document remains visible.
+
+| Field | Default | Description |
+|---|---|---|
 | `appFocusReturn.enabled` | `true` | Enable visible-page window blur/focus return trigger |
 | `appFocusReturn.minTime` | `1000` | Minimum time in ms that the window must be blurred while the document remains visible before focus return can trigger |
 | `appFocusReturn.repeatInterval` | `60000` | Minimum ms after this trigger successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page load |
 
-`repeatInterval` is measured from a successful render for that specific trigger. Suppressed attempts and no-bid attempts do not reset it. `repeatInterval: null` is tracked in memory and resets on page reload.
+#### `display.trigger.custom`
 
-### `custom` trigger
+Lets publishers own their own event and timing logic. `custom` is inactive by default and only runs when supplied.
 
-The primary custom trigger API lets publishers own their own event and timing logic:
+| Field | Default | Description |
+|---|---|---|
+| `custom.enabled` | unset | Enable the custom trigger. No custom trigger is registered unless `custom` is supplied. |
+| `custom.repeatInterval` | `60000` | Minimum ms after custom successfully renders before it can render again; `0` means only the global 30s gate applies, `null` means once per page load |
+| `custom.setup` | unset | Function called with `{ trigger }`; call `trigger()` when publisher logic says the ad should run. May return a cleanup function. |
+
+The primary custom trigger API:
 
 ```javascript
 custom: {
@@ -290,7 +335,7 @@ custom: function () {
 }
 ```
 
-### CSS selectors
+### `display.cssOverrides`
 
 The module injects base CSS first, then `display.cssOverrides` second. Use these stable selectors:
 
