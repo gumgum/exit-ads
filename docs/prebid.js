@@ -1,5 +1,5 @@
 /* prebid.js v10.25.0-pre
-Updated: 2026-06-25
+Updated: 2026-06-26
 Modules: exitAdsModule, gumgumBidAdapter */
 
 if (!window.pbjs || !window.pbjs.libLoaded) {

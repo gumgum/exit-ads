@@ -624,6 +624,120 @@
     // Creative management
     let availableCreatives = [];
     let selectedCreative = null;
+    let creativeSelectionToken = 0;
+    const PAGE_URL = 'https://gumgum.github.io/exit-ads/';
+    const PIXEL = 'https://c.gumgum.com/px.gif';
+    const ONE_BY_ONE_GIF = 'data:image/gif;base64,R0lGODlhAQABAPAAAP///wAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==';
+    const ALIGNMENT_URL = 'https://advertising-api-v2.prod.va.ggops.com/alignment/domain/github.io/ad-product-id/3';
+    const FALLBACK_ALIGNMENT_RESPONSE = {
+      alignment: {
+        domain: 'github.io',
+        alignment: null,
+        contentWidth: 1000,
+        clsEnabled: true,
+        alignmentConfiguration: '[{"name":"all","config":{"default":{"automaticPlaybackSelector":"#exit-ads-overlay"}}}]'
+      },
+      zoneAdPreferences: null
+    };
+    let alignmentResponsePromise = null;
+
+    function prefetchAlignmentResponse() {
+      if (!alignmentResponsePromise) {
+        alignmentResponsePromise = fetch(ALIGNMENT_URL)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Alignment request returned ' + response.status);
+            }
+            return response.json();
+          })
+          .then(response => {
+            logEvent('Alignment response prefetched for Studio creative');
+            return response;
+          })
+          .catch(error => {
+            logEvent('Alignment prefetch failed, using fallback response: ' + error.message);
+            return FALLBACK_ALIGNMENT_RESPONSE;
+          });
+      }
+
+      return alignmentResponsePromise;
+    }
+
+    function encodeBase64(value) {
+      return btoa(unescape(encodeURIComponent(value)));
+    }
+
+    function eventPixelUrl(eventName) {
+      return PIXEL + '?ID=' + eventName;
+    }
+
+    function replaceCreativeMacros(markup, creative, alignmentResponse) {
+      const alignmentValue = encodeBase64(JSON.stringify(alignmentResponse));
+      const macroValues = {
+        impressionUrl: ONE_BY_ONE_GIF,
+        pageViewId: 'exit-ads-demo-pageview',
+        advertiserId: 'exit-ads-demo-advertiser',
+        adBuyId: 'exit-ads-demo-ad-buy',
+        unitTypeId: '52',
+        creative: creative.id,
+        verticalId: '0',
+        dealId: '',
+        pageUrl: PAGE_URL,
+        adHeight: String(creative.height),
+        adWidth: String(creative.width),
+        clickUrl: eventPixelUrl('CLICK'),
+        hoverUrl: eventPixelUrl('HOVER'),
+        skipUrl: eventPixelUrl('SKIP'),
+        muteUrl: eventPixelUrl('MUTE'),
+        unmuteUrl: eventPixelUrl('UNMUTE'),
+        pauseUrl: eventPixelUrl('PAUSE'),
+        videoPlayUrl: eventPixelUrl('VIDEO_PLAY'),
+        videoImpressionUrl: eventPixelUrl('VIDEO_IMPRESSION'),
+        videoCompleted100Url: eventPixelUrl('VIDEO_COMPLETED_100'),
+        videoCompleted25Url: eventPixelUrl('VIDEO_COMPLETED_25'),
+        videoCompleted50Url: eventPixelUrl('VIDEO_COMPLETED_50'),
+        videoCompleted75Url: eventPixelUrl('VIDEO_COMPLETED_75'),
+        videoAutoplayPlayUrl: eventPixelUrl('VIDEO_AUTOPLAY_PLAY'),
+        videoClickSiteUrl: eventPixelUrl('VIDEO_CLICK_SITE'),
+        videoAutoplayCompleted100Url: eventPixelUrl('VIDEO_AUTOPLAY_COMPLETED_100'),
+        videoAutoplayCompleted25Url: eventPixelUrl('VIDEO_AUTOPLAY_COMPLETED_25'),
+        videoAutoplayCompleted50Url: eventPixelUrl('VIDEO_AUTOPLAY_COMPLETED_50'),
+        videoAutoplayCompleted75Url: eventPixelUrl('VIDEO_AUTOPLAY_COMPLETED_75'),
+        viewable50Url: eventPixelUrl('VIEWABLE_50'),
+        viewable100Url: eventPixelUrl('VIEWABLE_100'),
+        engagementUrl: eventPixelUrl('ENGAGEMENT'),
+        attnUrl: eventPixelUrl('ATTN'),
+        adPostRenderUrl: eventPixelUrl('AD_POST_RENDER'),
+        adPreRenderUrl: eventPixelUrl('AD_PRE_RENDER'),
+        pxyzErrorUrl: eventPixelUrl('PXYZ_ERROR'),
+        otherEvent1Url: eventPixelUrl('OTHER_EVENT_1'),
+        otherEvent2Url: eventPixelUrl('OTHER_EVENT_2'),
+        otherEvent3Url: eventPixelUrl('OTHER_EVENT_3'),
+        otherEvent4Url: eventPixelUrl('OTHER_EVENT_4'),
+        otherEvent5Url: eventPixelUrl('OTHER_EVENT_5'),
+        closeUrl: eventPixelUrl('CLOSE'),
+        alignment: alignmentValue,
+        politicalDisclosure: '',
+        dsa: '',
+        moatUrl: eventPixelUrl('MOAT')
+      };
+
+      let preparedMarkup = markup.replace(/\[([A-Za-z0-9]+)\]/g, function(match, key) {
+        return Object.prototype.hasOwnProperty.call(macroValues, key) ? macroValues[key] : '';
+      });
+
+      preparedMarkup = preparedMarkup.replace('{scriptSets}', '{}');
+
+      return preparedMarkup;
+    }
+
+    function prepareCreativeForDemo(creative) {
+      return prefetchAlignmentResponse().then(alignmentResponse => {
+        return Object.assign({}, creative, {
+          creative: replaceCreativeMacros(creative.creative, creative, alignmentResponse)
+        });
+      });
+    }
 
     // Load available creatives from JSON file
     function loadCreatives() {
@@ -668,17 +782,26 @@
         return;
       }
 
-      selectedCreative = availableCreatives[index];
+      const selectionToken = ++creativeSelectionToken;
+      const sourceCreative = availableCreatives[index];
 
       // Update info display
       const infoEl = document.getElementById('creative-info');
-      infoEl.innerHTML = '<strong>Type:</strong> ' + selectedCreative.type +
-                        ' | <strong>Size:</strong> ' + selectedCreative.width + 'x' + selectedCreative.height;
+      infoEl.innerHTML = '<strong>Type:</strong> ' + sourceCreative.type +
+                        ' | <strong>Size:</strong> ' + sourceCreative.width + 'x' + sourceCreative.height;
 
-      // Store selected creative ID in window for gumgumBidAdapter to access
-      window.selectedTestCreative = selectedCreative;
+      prepareCreativeForDemo(sourceCreative).then(preparedCreative => {
+        if (selectionToken !== creativeSelectionToken) {
+          return;
+        }
 
-      logEvent('Selected creative: ' + selectedCreative.name);
+        selectedCreative = preparedCreative;
+
+        // Store selected creative ID in window for gumgumBidAdapter to access
+        window.selectedTestCreative = selectedCreative;
+
+        logEvent('Selected creative: ' + selectedCreative.name);
+      });
     }
 
     // Load creatives on page load
