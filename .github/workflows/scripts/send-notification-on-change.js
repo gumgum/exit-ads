@@ -37,8 +37,8 @@ async function getAccessToken(clientId, clientSecret, refreshToken) {
   const refreshToken = process.env.OAUTH2_REFRESH_TOKEN;
 
   // validate params
-  if (!repo || !prNumber || !token || !clientId || !clientSecret || !refreshToken) {
-    console.error('Missing required environment variables.');
+  if (!repo || !prNumber || !token) {
+    console.error('Missing required GitHub environment variables.');
     process.exit(1);
   }
 
@@ -87,6 +87,11 @@ async function getAccessToken(clientId, clientSecret, refreshToken) {
     }
 
     console.log('Grouped matches by email:', matchesByEmail);
+
+    if (!clientId || !clientSecret || !refreshToken) {
+      console.error('Missing required OAuth2 environment variables.');
+      process.exit(1);
+    }
 
     // get ready to email the changes
     const accessToken = await getAccessToken(clientId, clientSecret, refreshToken);
