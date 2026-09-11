@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f8f4" />
+    <meta
+      name="description"
+      content="Configuration. Install, configure, and launch GumGum Exit Ads on your publisher site."
+    />
+    <title>Configuration | GumGum Exit Ads</title>
+    <link rel="icon" href="assets/gumgum-logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="guides.css" />
+    <script type="module" src="navigation.js"></script>
+    <script type="module" src="configurator.js"></script>
+  </head>
+  <body class="guide-page">
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="index.html" aria-label="GumGum Exit Ads home"
+          ><img
+            src="assets/gumgum-logo.svg"
+            width="123"
+            height="39"
+            alt="GumGum"
+          /><span class="brand-divider"></span
+          ><span class="product-name">Exit Ads</span></a
+        >
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="site-navigation"
+        >
+          <span>Menu</span
+          ><svg viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M3 6h14M3 10h14M3 14h14" />
+          </svg>
+        </button>
+        <nav class="site-nav" id="site-navigation" aria-label="Main navigation">
+          <a href="index.html">Experience</a
+          ><a href="integration.html">Integration</a
+          ><a href="configuration.html" aria-current="page">Configuration</a>
+          <a
+            class="developer-link"
+            href="https://gumgum-inc.github.io/exit-ads-module/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Developer tools (opens in a new tab)"
+            >Developer tools <span aria-hidden="true">↗</span></a
+          >
+        </nav>
+      </header>
+      <main>
+        <section class="guide-hero config-hero">
+          <div>
+            <p class="eyebrow">
+              <span class="small-dot"></span> PUBLISHER GUIDE / CONFIGURATION
+            </p>
+            <h1>Your moments.<br /><span>Your rules.</span></h1>
+            <p class="guide-lead">
+              Choose when to appear. Set how often.<br />Take a configuration
+              that’s ready for your team.
+            </p>
+            <a class="mobile-code-link" href="#configuration-preview"
+              >View generated code ↓</a
+            >
+          </div>
+          <aside class="hero-note">
+            <span class="note-eyebrow">A SETUP THAT’S YOURS</span>
+            <p>Choose the cue.<br />Set the pace.<br />Make it your own.</p>
+            <a class="text-link" href="integration.html"
+              >Read the integration guide <span aria-hidden="true">↗</span></a
+            >
+          </aside>
+        </section>
+        <div class="config-layout">
+          <form id="configuration-form" class="config-form" novalidate>
+            <section class="form-section">
+              <div class="form-section-heading">
+                <span class="step-number">01</span>
+                <div>
+                  <h2>Choose your moments</h2>
+                  <p>
+                    Enable any combination. The first eligible moment can show
+                    an ad.
+                  </p>
+                </div>
+              </div>
+              <div class="trigger-settings">
+                <div class="trigger-setting">
+                  <div class="trigger-title">
+                    <label class="switch-label" for="bottomOfPage"
+                      ><span>Page end</span
+                      ><input
+                        type="checkbox"
+                        id="bottomOfPage"
+                        name="bottomOfPage"
+                        checked /><span
+                        class="switch-track"
+                        aria-hidden="true"
+                      ></span
+                    ></label>
+                    <p>A reader reaches your chosen page depth.</p>
+                  </div>
+                  <label class="number-setting" for="bottomOfPageValue"
+                    ><span>Page depth</span
+                    ><span class="input-with-unit"
+                      ><input
+                        type="number"
+                        id="bottomOfPageValue"
+                        name="bottomOfPageValue"
+                        value="90"
+                        min="0"
+                        max="100"
+                        step="1"
+                        required
+                      /><span>%</span></span
+                    ></label
+                  >
+                </div>
+                <div class="trigger-setting">
+                  <div class="trigger-title">
+                    <label class="switch-label" for="returnToTop"
+                      ><span>Back to top</span
+                      ><input
+                        type="checkbox"
+                        id="returnToTop"
+                        name="returnToTop"
+                        checked /><span
+                        class="switch-track"
+                        aria-hidden="true"
+                      ></span
+                    ></label>
+                    <p>A reader explores, then scrolls back up.</p>
+                  </div>
+                  <label class="number-setting" for="returnToTopValue"
+                    ><span>Top of page</span
+                    ><span class="input-with-unit"
+                      ><input
+                        type="number"
+                        id="returnToTopValue"
+                        name="returnToTopValue"
+                        value="10"
+                        min="0"
+                        max="100"
+                        step="1"
+                        required
+                      /><span>%</span></span
+                    ></label
+                  >
+                </div>
+                <div class="trigger-setting">
+                  <div class="trigger-title">
+                    <label class="switch-label" for="idleTime"
+                      ><span>Time on page</span
+                      ><input
+                        type="checkbox"
+                        id="idleTime"
+                        name="idleTime"
+                        checked /><span
+                        class="switch-track"
+                        aria-hidden="true"
+                      ></span
+                    ></label>
+                    <p>Time spent on the page, including active reading.</p>
+                  </div>
+                  <label class="number-setting" for="idleTimeValue"
+                    ><span>Time on page</span
+                    ><span class="input-with-unit"
+                      ><input
+                        type="number"
+                        id="idleTimeValue"
+                        name="idleTimeValue"
+                        value="60"
+                        min="0"
+                        step="1"
+                        required
+                      /><span>sec</span></span
+                    ></label
+                  >
+                </div>
+                <div class="trigger-setting">
+                  <div class="trigger-title">
+                    <label class="switch-label" for="tabFocusReturn"
+                      ><span>Tab return</span
+                      ><input
+                        type="checkbox"
+                        id="tabFocusReturn"
+                        name="tabFocusReturn"
+                        checked /><span
+                        class="switch-track"
+                        aria-hidden="true"
+                      ></span
+                    ></label>
+                    <p>A reader returns after visiting another tab.</p>
+                  </div>
+                  <label class="number-setting" for="tabFocusReturnValue"
+                    ><span>Minimum time away</span
+                    ><span class="input-with-unit"
+                      ><input
+                        type="number"
+                        id="tabFocusReturnValue"
+                        name="tabFocusReturnValue"
+                        value="1"
+                        min="0"
+                        step="1"
+                        required
+                      /><span>sec</span></span
+                    ></label
+                  >
+                </div>
+                <div class="trigger-setting">
+                  <div class="trigger-title">
+                    <label class="switch-label" for="appFocusReturn"
+                      ><span>App return</span
+                      ><input
+                        type="checkbox"
+                        id="appFocusReturn"
+                        name="appFocusReturn"
+                        checked /><span
+                        class="switch-track"
+                        aria-hidden="true"
+                      ></span
+                    ></label>
+                    <p>A reader refocuses the browser after another window.</p>
+                  </div>
+                  <label class="number-setting" for="appFocusReturnValue"
+                    ><span>Minimum time away</span
+                    ><span class="input-with-unit"
+                      ><input
+                        type="number"
+                        id="appFocusReturnValue"
+                        name="appFocusReturnValue"
+                        value="1"
+                        min="0"
+                        step="1"
+                        required
+                      /><span>sec</span></span
+                    ></label
+                  >
+                </div>
+                <div class="trigger-setting custom-setting">
+                  <div class="trigger-title">
+                    <label class="switch-label" for="custom"
+                      ><span>Your own event</span
+                      ><input type="checkbox" id="custom" name="custom" /><span
+                        class="switch-track"
+                        aria-hidden="true"
+                      ></span
+                    ></label>
+                    <p>
+                      A video ends, an article completes, or a milestone is
+                      reached.
+                    </p>
+                  </div>
+                  <label class="custom-event-field" for="customEvent"
+                    ><span>Event name</span
+                    ><input
+                      id="customEvent"
+                      name="customEvent"
+                      type="text"
+                      value="video-complete"
+                      required
+                      disabled
+                  /></label>
+                </div>
+              </div>
+              <p class="form-hint">
+                Tab and app moments fire on return. Time on page measures
+                elapsed time, not inactivity.
+              </p>
+            </section>
+            <section class="form-section">
+              <div class="form-section-heading">
+                <span class="step-number">02</span>
+                <div>
+                  <h2>Set the pace</h2>
+                  <p>
+                    Keep the experience comfortable, across every enabled
+                    moment.
+                  </p>
+                </div>
+              </div>
+              <div class="form-field-grid">
+                <label for="closeDelay"
+                  >Close-button delay<span class="input-with-unit"
+                    ><input
+                      id="closeDelay"
+                      name="closeDelay"
+                      type="number"
+                      value="3"
+                      min="0"
+                      step="1"
+                      required
+                    /><span>sec</span></span
+                  ></label
+                ><label for="repeat"
+                  >Repeat a moment<select name="repeat" id="repeat">
+                    <option value="60000">After 60 seconds</option>
+                    <option value="null">Once per page load</option>
+                    <option value="0">After the 30-second global gap</option>
+                  </select></label
+                >
+              </div>
+              <div class="form-field-grid cap-fields">
+                <label for="perPage"
+                  >Ads per page<input
+                    type="number"
+                    id="perPage"
+                    name="perPage"
+                    value="5"
+                    min="0"
+                    step="1"
+                    required /></label
+                ><label for="perSession"
+                  >Ads per tab session<input
+                    type="number"
+                    id="perSession"
+                    name="perSession"
+                    value="5"
+                    min="0"
+                    step="1"
+                    required /></label
+                ><label for="perDay"
+                  >Ads per day<input
+                    type="number"
+                    id="perDay"
+                    name="perDay"
+                    value="10"
+                    min="0"
+                    step="1"
+                    required
+                /></label>
+              </div>
+              <div class="inline-note">
+                <span class="note-symbol">↳</span>
+                <p>
+                  There is always at least a
+                  <strong>30-second gap</strong> after a successful display or
+                  close. Caps count successful displays, including manual ones.
+                  Set any cap to 0 to prevent displays.
+                </p>
+              </div>
+            </section>
+            <section class="form-section">
+              <div class="form-section-heading">
+                <span class="step-number">03</span>
+                <div>
+                  <h2>Connect your placement</h2>
+                  <p>Use the IDs supplied by your GumGum team.</p>
+                </div>
+              </div>
+              <div class="form-field-grid">
+                <label for="zone"
+                  >Zone ID<input
+                    id="zone"
+                    name="zone"
+                    type="text"
+                    placeholder="YOUR_ZONE_ID"
+                    autocomplete="off"
+                    spellcheck="false" /></label
+                ><label for="slot"
+                  >Slot ID<input
+                    id="slot"
+                    name="slot"
+                    type="text"
+                    placeholder="YOUR_SLOT_ID"
+                    autocomplete="off"
+                    spellcheck="false" /></label
+                ><label for="size"
+                  >Eligible banner size<select id="size" name="size">
+                    <option value="300x250">
+                      300 × 250 · Medium rectangle
+                    </option>
+                    <option value="300x600">300 × 600 · Half page</option>
+                    <option value="728x90">728 × 90 · Leaderboard</option>
+                  </select></label
+                >
+              </div>
+              <p class="form-hint">
+                This builder runs in your browser. It does not save or send your
+                placement details.
+              </p>
+            </section>
+          </form>
+          <aside class="configuration-preview" id="configuration-preview">
+            <div class="preview-heading">
+              <div>
+                <span class="section-eyebrow">YOUR CONFIGURATION</span>
+                <h2>Ready for your next step.</h2>
+              </div>
+              <span class="preview-badge" id="configuration-summary"
+                >5 moments enabled</span
+              >
+            </div>
+            <p class="preview-intro">
+              Your choices update the code below. Add your placement IDs before
+              publishing.
+            </p>
+            <div class="code-block config-code-block">
+              <div class="code-toolbar">
+                <span>exit-ads-config.js</span
+                ><button
+                  type="button"
+                  class="copy-button"
+                  data-copy="configuration-code"
+                >
+                  Copy code
+                </button>
+              </div>
+              <pre><code id="configuration-code" tabindex="0">Enable JavaScript to generate your configuration.</code></pre>
+            </div>
+            <p
+              id="configuration-status"
+              class="configuration-status"
+              role="status"
+              aria-live="polite"
+            >
+              The first eligible moment can show an ad. Frequency caps apply
+              across all moments.
+            </p>
+            <button
+              class="guide-button download-button"
+              id="download-configuration"
+              type="button"
+            >
+              Download configuration <span aria-hidden="true">↓</span></button
+            ><a class="preview-next" href="integration.html#connect"
+              >Next: add it to your page <span aria-hidden="true">→</span></a
+            >
+            <p class="fine-print">
+              Downloads your settings as JavaScript. Install Prebid and the
+              Exit Ads companion script separately.
+            </p>
+          </aside>
+        </div>
+        <section class="configuration-reference" id="reference">
+          <div class="reference-heading">
+            <p class="eyebrow">
+              <span class="small-dot"></span> WHEN YOU NEED A LITTLE MORE
+            </p>
+            <h2>The details, without the guesswork.</h2>
+            <p>
+              Defaults, advanced options, and the small things that shape the
+              experience.
+            </p>
+          </div>
+          <details class="guide-disclosure">
+            <summary>
+              Module defaults at a glance<span aria-hidden="true">+</span>
+            </summary>
+            <div>
+              <p>
+                The builder starts with these defaults. Any omitted built-in
+                trigger is enabled by the module, so the generator explicitly
+                writes <code>enabled: false</code> for moments you turn off.
+              </p>
+              <div class="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Setting</th>
+                      <th>Default</th>
+                      <th>What it means</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Page end</td>
+                      <td>90%</td>
+                      <td>Scroll down to this page depth.</td>
+                    </tr>
+                    <tr>
+                      <td>Return to top</td>
+                      <td>10%</td>
+                      <td>
+                        Scroll deeper first, then return upward to this
+                        threshold.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Time on page</td>
+                      <td>60 seconds</td>
+                      <td>Elapsed time, including active reading.</td>
+                    </tr>
+                    <tr>
+                      <td>Tab / app return</td>
+                      <td>1 second away</td>
+                      <td>Show on return after the minimum time away.</td>
+                    </tr>
+                    <tr>
+                      <td>Custom event</td>
+                      <td>Off</td>
+                      <td>Register your own event when needed.</td>
+                    </tr>
+                    <tr>
+                      <td>Close button</td>
+                      <td>On · 3 seconds</td>
+                      <td>A countdown appears before the button is usable.</td>
+                    </tr>
+                    <tr>
+                      <td>Repeat interval</td>
+                      <td>60 seconds</td>
+                      <td>
+                        Per moment, measured from its last successful display.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Page / session / day caps</td>
+                      <td>5 / 5 / 10</td>
+                      <td>Shared across all moments and manual displays.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </details>
+          <details class="guide-disclosure">
+            <summary>
+              Prepare a bid before the moment arrives<span aria-hidden="true"
+                >+</span
+              >
+            </summary>
+            <div>
+              <p>
+                Optional prefetch points can start the auction early. Add these
+                properties under <code>display.trigger</code> for the moments
+                you enable.
+              </p>
+              <div class="code-block">
+                <div class="code-toolbar">
+                  <span>JAVASCRIPT · DISPLAY.TRIGGER</span
+                  ><button
+                    type="button"
+                    class="copy-button"
+                    data-copy="prefetch-example"
+                  >
+                    Copy code
+                  </button>
+                </div>
+                <pre><code id="prefetch-example" tabindex="0">bottomOfPage: {
+  enabled: true,
+  threshold: 90,
+  prefetchAtThreshold: 70
+},
+returnToTop: {
+  enabled: true,
+  threshold: 10,
+  prefetchAtThreshold: 50
+},
+idleTime: {
+  enabled: true,
+  minTime: 60000,
+  prefetchAtTime: 45000
+}</code></pre>
+              </div>
+              <p>
+                For page end, prefetch before the display depth. For return to
+                top, the reader must first pass the prefetch depth, then cross
+                it upward; set it above the display threshold. For time on page,
+                <code>prefetchAtTime</code> must be below <code>minTime</code>.
+                Time values in code are milliseconds.
+              </p>
+            </div>
+          </details>
+          <details class="guide-disclosure">
+            <summary>
+              Connect a custom event or trigger directly<span aria-hidden="true"
+                >+</span
+              >
+            </summary>
+            <div>
+              <p>
+                When you enable “Your own event,” the generator registers a
+                listener and a cleanup function. Your site still needs to
+                dispatch that event. For example, connect your video player’s
+                completion handler:
+              </p>
+              <div class="code-block">
+                <div class="code-toolbar">
+                  <span>JAVASCRIPT</span
+                  ><button
+                    type="button"
+                    class="copy-button"
+                    data-copy="custom-event-example"
+                  >
+                    Copy code
+                  </button>
+                </div>
+                <pre><code id="custom-event-example" tabindex="0">// Replace #my-video with your video element’s selector.
+const video = document.querySelector(&#x27;#my-video&#x27;);
+if (video) {
+  video.addEventListener(&#x27;ended&#x27;, function () {
+    window.dispatchEvent(new Event(&#x27;video-complete&#x27;));
+  });
+}</code></pre>
+              </div>
+              <p>
+                Use the same event name in your configuration. You can also call
+                <code>window.pbjs.exitAds.trigger()</code> after Prebid has
+                loaded. Both custom and manual requests respect the global
+                display interval and frequency caps.
+              </p>
+              <p>
+                For conditions you can check directly, use a custom polling
+                trigger. The module checks it once per second. Choose polling or
+                an event setup for your custom moment.
+              </p>
+              <div class="code-block">
+                <div class="code-toolbar">
+                  <span>JAVASCRIPT · DISPLAY.TRIGGER</span
+                  ><button
+                    type="button"
+                    class="copy-button"
+                    data-copy="polling-example"
+                  >
+                    Copy code
+                  </button>
+                </div>
+                <pre><code id="polling-example" tabindex="0">custom: {
+  enabled: true,
+  repeatInterval: 60000,
+  condition: function () {
+    return window.readerState?.articleComplete === true;
+  }
+}</code></pre>
+              </div>
+            </div>
+          </details>
+          <details class="guide-disclosure">
+            <summary>
+              Frequency limits and repeat timing<span aria-hidden="true"
+                >+</span
+              >
+            </summary>
+            <div>
+              <p>
+                Page caps reset on page reload. Session caps use the current
+                tab’s session storage. Daily caps use local storage and reset on
+                the browser’s next local calendar day. Only Prebid-confirmed
+                successful renders consume caps. Prefetches, no-bid outcomes,
+                suppressed attempts, and failed renders do not.
+              </p>
+              <p>
+                Each moment’s <code>repeatInterval</code> is measured from its
+                own last successful display. Use <code>null</code> for once per
+                page load, or <code>0</code> to rely on the global 30-second
+                gap. Closing an ad restarts that global gap. These intervals are
+                separate from the total number of ads allowed.
+              </p>
+            </div>
+          </details>
+          <details class="guide-disclosure">
+            <summary>
+              Ad sizes and presentation<span aria-hidden="true">+</span>
+            </summary>
+            <div>
+              <p>
+                Exit Ads supports banner ads. The builder selects one eligible
+                banner size. Your integration can supply more than one in
+                <code>adUnit.mediaTypes.banner.sizes</code>, for example
+                <code>[[300, 250], [300, 600]]</code>. Include sizes appropriate
+                to your pages and placements.
+              </p>
+              <p>
+                The close button is enabled by default. Set
+                <code>display.closeButton.delay</code> to <code>0</code> for
+                immediate closing. Its countdown rounds up to whole seconds.
+                Additional styles go in <code>display.cssOverrides</code>, using
+                the module’s stable classes:
+              </p>
+              <div class="code-block">
+                <div class="code-toolbar">
+                  <span>JAVASCRIPT · DISPLAY.CSSOVERRIDES</span
+                  ><button
+                    type="button"
+                    class="copy-button"
+                    data-copy="style-example"
+                  >
+                    Copy code
+                  </button>
+                </div>
+                <pre><code id="style-example" tabindex="0">cssOverrides: `
+  .exit-ads-overlay { background: rgba(12, 30, 25, 0.85); }
+  .exit-ads-container { border-radius: 12px; }
+  .exit-ads-close-button { background: #203c33; }
+`</code></pre>
+              </div>
+            </div>
+          </details>
+          <details class="guide-disclosure">
+            <summary>Auction settings<span aria-hidden="true">+</span></summary>
+            <div>
+              <p>
+                Add optional <code>auction</code> settings alongside
+                <code>adUnit</code> and <code>display</code> inside
+                <code>exitAds</code>. Exit Ads otherwise uses your Prebid
+                auction timeout.
+              </p>
+              <div class="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Setting</th>
+                      <th>Use</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>timeout</code></td>
+                      <td>Maximum auction wait, in milliseconds.</td>
+                    </tr>
+                    <tr>
+                      <td><code>labels</code></td>
+                      <td>
+                        Array of labels for Prebid size or configuration
+                        selection.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>ortb2</code></td>
+                      <td>First-party data for this auction.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </details>
+          <details class="guide-disclosure">
+            <summary>
+              Storage and consent<span aria-hidden="true">+</span>
+            </summary>
+            <div>
+              <p>
+                Frequency limits use browser storage when available. Add
+                <code>storage</code> alongside <code>adUnit</code> and
+                <code>display</code> to choose how those counters are stored.
+              </p>
+              <div class="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Setting</th>
+                      <th>Default</th>
+                      <th>Use</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>mode</code></td>
+                      <td><code>auto</code></td>
+                      <td>
+                        Use <code>memory</code> to keep counters only in the
+                        current page.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>prefix</code></td>
+                      <td><code>exitAds</code></td>
+                      <td>Namespace for the module’s storage keys.</td>
+                    </tr>
+                    <tr>
+                      <td><code>canAccess</code></td>
+                      <td>Unset</td>
+                      <td>
+                        Optional callback that checks your consent policy before
+                        each persistent storage access. Return false to use
+                        memory.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>
+                Prebid’s <code>deviceAccess: false</code>, denied storage, or
+                unavailable browser storage also falls back to memory. In memory
+                mode, session and daily counts do not survive a page reload.
+              </p>
+            </div>
+          </details>
+          <details class="guide-disclosure">
+            <summary>
+              Callbacks, troubleshooting, and configuration changes<span
+                aria-hidden="true"
+                >+</span
+              >
+            </summary>
+            <div>
+              <p>
+                Add callbacks alongside <code>adUnit</code> and
+                <code>display</code> inside <code>exitAds</code> to observe what
+                happens.
+              </p>
+              <div class="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Callback</th>
+                      <th>When it runs</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>onBidCached</code></td>
+                      <td>A bid has been received and cached.</td>
+                    </tr>
+                    <tr>
+                      <td><code>onTrigger</code></td>
+                      <td>
+                        An eligible trigger starts or waits for an auction.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>onAdRender</code></td>
+                      <td>
+                        Prebid confirms the winning creative rendered
+                        successfully.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><code>onAdClose</code></td>
+                      <td>The reader activated the enabled close button.</td>
+                    </tr>
+                    <tr>
+                      <td><code>onFrequencyCapReached</code></td>
+                      <td>A request was prevented by a frequency cap.</td>
+                    </tr>
+                    <tr>
+                      <td><code>onTriggerSuppressed</code></td>
+                      <td>
+                        A request was suppressed; inspect its reason, such as
+                        noBid, renderFailed, or frequencyCap.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>
+                No bid means no ad. Check placement IDs, available demand,
+                enabled moments, and frequency limits. Configuration updates via
+                <code>pbjs.setConfig()</code> apply immediately, cleaning up old
+                monitors, overlays, styles, and cached bids. Use
+                <code>pbjs.exitAds.reset()</code> to reset page state and
+                restart monitors, or <code>pbjs.exitAds.destroy()</code> for
+                page teardown.
+              </p>
+              <a
+                class="text-link"
+                href="https://gumgum-inc.github.io/exit-ads-module/"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Inspect events in the developer test tool
+                <span aria-hidden="true">↗</span></a
+              >
+            </div>
+          </details>
+        </section>
+        <noscript
+          ><p class="inline-note">
+            JavaScript is needed for the configuration builder. The default
+            settings and reference sections below remain available.
+          </p></noscript
+        >
+      </main>
+      <footer class="site-footer">
+        <span>GumGum <span class="footer-slash">/</span> Exit Ads</span
+        ><span>From the moment to the implementation.</span>
+      </footer>
+      <p id="copy-status" class="sr-only" role="status" aria-live="polite"></p>
+    </div>
+  </body>
+</html>

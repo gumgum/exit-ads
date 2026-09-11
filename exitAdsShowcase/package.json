@@ -1,0 +1,8 @@
+{
+  "name": "gumgum-exit-ads-showcase",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-test-coverage --test tests/*.test.js"
+  }
+}

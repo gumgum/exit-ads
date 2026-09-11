@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f8f4" />
+    <meta
+      name="description"
+      content="Integration. Install, configure, and launch GumGum Exit Ads on your publisher site."
+    />
+    <title>Integration | GumGum Exit Ads</title>
+    <link rel="icon" href="assets/gumgum-logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="guides.css" />
+    <script type="module" src="navigation.js"></script>
+  </head>
+  <body class="guide-page">
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="index.html" aria-label="GumGum Exit Ads home"
+          ><img
+            src="assets/gumgum-logo.svg"
+            width="123"
+            height="39"
+            alt="GumGum"
+          /><span class="brand-divider"></span
+          ><span class="product-name">Exit Ads</span></a
+        >
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="site-navigation"
+        >
+          <span>Menu</span
+          ><svg viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M3 6h14M3 10h14M3 14h14" />
+          </svg>
+        </button>
+        <nav class="site-nav" id="site-navigation" aria-label="Main navigation">
+          <a href="index.html">Experience</a
+          ><a href="integration.html" aria-current="page">Integration</a
+          ><a href="configuration.html">Configuration</a>
+          <a
+            class="developer-link"
+            href="https://gumgum-inc.github.io/exit-ads-module/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Developer tools (opens in a new tab)"
+            >Developer tools <span aria-hidden="true">↗</span></a
+          >
+        </nav>
+      </header>
+      <main>
+        <section class="guide-hero">
+          <div>
+            <p class="eyebrow">
+              <span class="small-dot"></span> PUBLISHER GUIDE / INTEGRATION
+            </p>
+            <h1>Make the moment<br /><span>part of your site.</span></h1>
+            <p class="guide-lead">
+              A few steps from the experience you’ve seen<br
+                class="desktop-break"
+              />
+              to an Exit Ad on your own pages.
+            </p>
+          </div>
+          <aside class="hero-note">
+            <span class="note-eyebrow">BUILT TO FIT IN</span>
+            <p>
+              Your Prebid setup.<br />Your own ad unit.<br />Your chosen
+              moments.
+            </p>
+            <span>No dedicated GAM slot required.</span>
+          </aside>
+        </section>
+        <div class="guide-layout">
+          <aside class="guide-contents">
+            <span class="contents-label">ON THIS PAGE</span
+            ><a href="#before-you-start">Before you start</a
+            ><a href="#install">01 &nbsp; Install the module</a
+            ><a href="#configure">02 &nbsp; Choose your moments</a
+            ><a href="#connect">03 &nbsp; Connect your page</a
+            ><a href="#verify">04 &nbsp; Check the experience</a>
+            <div class="contents-note">
+              Need to see it again?<a href="index.html"
+                >Back to the experience <span>↗</span></a
+              >
+            </div>
+          </aside>
+          <div class="guide-sections">
+            <section id="before-you-start" class="before-start">
+              <p class="section-eyebrow">BEFORE YOU START</p>
+              <h2>Three things to have ready.</h2>
+              <div class="readiness-grid">
+                <div>
+                  <span>01</span>
+                  <h3>Your placement</h3>
+                  <p>
+                    A GumGum zone ID and slot ID, supplied by your GumGum team.
+                  </p>
+                </div>
+                <div>
+                  <span>02</span>
+                  <h3>Your website</h3>
+                  <p>
+                    Access to your site’s scripts and a place to host the Exit
+                    Ads file.
+                  </p>
+                </div>
+                <div>
+                  <span>03</span>
+                  <h3>Your Prebid setup</h3>
+                  <p>
+                    An existing Prebid.js bundle that includes the GumGum bid
+                    adapter.
+                  </p>
+                </div>
+              </div>
+            </section>
+            <section id="install" class="guide-section">
+              <div class="section-heading">
+                <span class="step-number">01</span>
+                <div>
+                  <p class="section-eyebrow">INSTALL</p>
+                  <h2>Add Exit Ads to Prebid.</h2>
+                </div>
+              </div>
+              <p>
+                Download the publisher package and host
+                <code>exit-ads.min.js</code> with your site’s JavaScript assets.
+                It runs alongside your existing Prebid.js bundle and uses the
+                <code>gumgumBidAdapter</code> to request ads.
+              </p>
+              <a
+                class="guide-button"
+                href="https://gumgum-inc.github.io/exit-ads-module/exit-ads-publisher.zip"
+              >
+                Download publisher package <span aria-hidden="true">↓</span>
+              </a>
+              <p class="fine-print">
+                A ready-to-use companion script. No build step required.
+              </p>
+              <div class="inline-note">
+                <span class="note-symbol">↳</span>
+                <p>
+                  The package does not include Prebid.js. Check that your
+                  existing bundle includes the GumGum bid adapter before
+                  connecting Exit Ads.
+                </p>
+              </div>
+            </section>
+            <section id="configure" class="guide-section">
+              <div class="section-heading">
+                <span class="step-number">02</span>
+                <div>
+                  <p class="section-eyebrow">CONFIGURE</p>
+                  <h2>Decide when your brand appears.</h2>
+                </div>
+              </div>
+              <p>
+                Choose the moments you want, set their timing, and control how
+                often an ad can appear. Add your GumGum placement IDs, then copy
+                or download the configuration.
+              </p>
+              <a class="guide-button" href="configuration.html"
+                >Build your configuration <span aria-hidden="true">→</span></a
+              >
+              <p class="fine-print">
+                The configuration starts with the module’s defaults. The
+                showcase’s 45-second timer is an illustration; the module
+                defaults to 60 seconds.
+              </p>
+            </section>
+            <section id="connect" class="guide-section">
+              <div class="section-heading">
+                <span class="step-number">03</span>
+                <div>
+                  <p class="section-eyebrow">CONNECT</p>
+                  <h2>Bring it onto the page.</h2>
+                </div>
+              </div>
+              <p>
+                Save the generated configuration as
+                <code>exit-ads-config.js</code>. Load Prebid, the Exit Ads
+                companion script, and your configuration in that order. No
+                separate initialization call is needed.
+              </p>
+              <div class="code-block">
+                <div class="code-toolbar">
+                  <span>HTML</span
+                  ><button
+                    type="button"
+                    class="copy-button"
+                    data-copy="load-scripts"
+                  >
+                    Copy code
+                  </button>
+                </div>
+                <pre><code id="load-scripts" tabindex="0">&lt;!-- Use your own file paths. Keep this loading order. --&gt;
+&lt;script src=&quot;/js/prebid.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/exit-ads.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/js/exit-ads-config.js&quot;&gt;&lt;/script&gt;</code></pre>
+              </div>
+              <p class="fine-print">
+                If your page already loads Prebid, add the companion script and
+                configuration immediately afterward; load Prebid only once.
+                Avoid async loading here so the companion is ready before
+                configuration runs.
+              </p>
+              <div class="inline-note">
+                <span class="note-symbol">↳</span>
+                <p>
+                  Use your own placement IDs and ad sizes. The Doritos artwork
+                  in the showcase is an example; your winning bid supplies the
+                  live creative.
+                </p>
+              </div>
+            </section>
+            <section id="verify" class="guide-section">
+              <div class="section-heading">
+                <span class="step-number">04</span>
+                <div>
+                  <p class="section-eyebrow">VERIFY</p>
+                  <h2>See the real experience.</h2>
+                </div>
+              </div>
+              <p>
+                On a test page, perform one of your enabled moments. You can
+                also request an ad directly after Prebid has loaded:
+              </p>
+              <div class="code-block">
+                <div class="code-toolbar">
+                  <span>JAVASCRIPT</span
+                  ><button
+                    type="button"
+                    class="copy-button"
+                    data-copy="manual-trigger"
+                  >
+                    Copy code
+                  </button>
+                </div>
+                <pre><code id="manual-trigger" tabindex="0">// Run on your configured test page.
+window.pbjs.que.push(function () {
+  window.pbjs.exitAds.trigger();
+});</code></pre>
+              </div>
+              <ul class="check-list">
+                <li>Confirm an eligible winning bid renders in an overlay.</li>
+                <li>Check that the close countdown matches your setting.</li>
+                <li>Close the ad and confirm the page remains usable.</li>
+                <li>Check repeat timing and page, session, and daily caps.</li>
+              </ul>
+              <p>
+                No eligible bid means no ad. Check placement IDs, ad sizes,
+                available demand, and your site’s consent setup. Manual requests
+                also respect frequency limits and the minimum 30-second gap
+                after a successful display or close.
+              </p>
+              <a
+                class="tool-callout"
+                href="https://gumgum-inc.github.io/exit-ads-module/"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><div>
+                  <span class="section-eyebrow">FOR YOUR INTEGRATION TEAM</span>
+                  <h3>Open the developer test tool</h3>
+                  <p>
+                    Exercise real triggers, inspect the event log, and test
+                    creative rendering with the existing integration demo.
+                  </p>
+                </div>
+                <span aria-hidden="true">↗</span></a
+              >
+              <p class="fine-print">
+                Opens the existing GitHub Pages demo in a new tab. It uses demo
+                settings and placements; your generated configuration belongs on
+                your own test page.
+              </p>
+            </section>
+          </div>
+        </div>
+      </main>
+      <footer class="site-footer">
+        <span>GumGum <span class="footer-slash">/</span> Exit Ads</span
+        ><span>From the moment to the implementation.</span>
+      </footer>
+      <p id="copy-status" class="sr-only" role="status" aria-live="polite"></p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f8f4" />
+    <meta
+      name="description"
+      content="See how GumGum Exit Ads turn natural pauses into standout brand moments. An animated walkthrough of six publisher-controlled triggers."
+    />
+    <title>Exit Ads — A moment that matters | GumGum</title>
+    <link rel="icon" href="assets/gumgum-logo.svg" type="image/svg+xml" />
+    <link
+      rel="preload"
+      href="assets/circular-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/circular-bold.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="guides.css" />
+    <script type="module" src="navigation.js"></script>
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <svg
+      class="icon-library"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <symbol id="icon-down" viewBox="0 0 24 24">
+        <path d="M12 3v13m-5-5 5 5 5-5M5 21h14" />
+      </symbol>
+      <symbol id="icon-up" viewBox="0 0 24 24">
+        <path d="M12 21V8m-5 5 5-5 5 5M5 3h14" />
+      </symbol>
+      <symbol id="icon-clock" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 7v5l3 2" />
+      </symbol>
+      <symbol id="icon-tabs" viewBox="0 0 24 24">
+        <rect x="3" y="7" width="14" height="13" rx="2" />
+        <path d="M7 7V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v12h-4M3 11h14" />
+      </symbol>
+      <symbol id="icon-app" viewBox="0 0 24 24">
+        <rect x="3" y="3" width="7" height="7" rx="1.5" />
+        <rect x="14" y="3" width="7" height="7" rx="1.5" />
+        <rect x="3" y="14" width="7" height="7" rx="1.5" />
+        <path d="M14 17h7m-3-3 3 3-3 3" />
+      </symbol>
+      <symbol id="icon-custom" viewBox="0 0 24 24">
+        <path d="m13 2-9 12h7l-1 8 10-13h-8z" />
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24">
+        <path d="m5 12 4 4L19 6" />
+      </symbol>
+      <symbol id="icon-arrow" viewBox="0 0 24 24">
+        <path d="M4 12h15m-6-6 6 6-6 6" />
+      </symbol>
+      <symbol id="icon-pause" viewBox="0 0 24 24">
+        <path d="M9 5v14M15 5v14" />
+      </symbol>
+      <symbol id="icon-play" viewBox="0 0 24 24">
+        <path d="m8 5 11 7-11 7z" />
+      </symbol>
+    </svg>
+
+    <div class="page-shell">
+      <header class="site-header">
+        <a class="brand" href="index.html" aria-label="GumGum Exit Ads home"
+          ><img
+            src="assets/gumgum-logo.svg"
+            width="123"
+            height="39"
+            alt="GumGum"
+          /><span class="brand-divider"></span
+          ><span class="product-name">Exit Ads</span></a
+        >
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-label="Open navigation"
+          aria-expanded="false"
+          aria-controls="site-navigation"
+        >
+          <span>Menu</span
+          ><svg viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M3 6h14M3 10h14M3 14h14" />
+          </svg>
+        </button>
+        <nav class="site-nav" id="site-navigation" aria-label="Main navigation">
+          <a href="index.html" aria-current="page">Experience</a
+          ><a href="integration.html">Integration</a
+          ><a href="configuration.html">Configuration</a>
+          <a
+            class="developer-link"
+            href="https://gumgum-inc.github.io/exit-ads-module/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Developer tools (opens in a new tab)"
+            >Developer tools <span aria-hidden="true">↗</span></a
+          >
+        </nav>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow">
+              <span class="small-dot"></span> THE EXIT ADS EXPERIENCE
+            </p>
+            <h1 id="page-title">
+              A natural pause.<br /><span>A powerful moment.</span>
+            </h1>
+          </div>
+          <div class="intro-copy">
+            <p>
+              Meet people at the moments between. <br />Exit Ads turn a pause in
+              browsing into<br class="desktop-break" />
+              a standout brand experience.
+            </p>
+            <p class="intro-invitation">
+              Watch it happen. No scrolling required.<svg
+                class="icon"
+                aria-hidden="true"
+              >
+                <use href="#icon-down" />
+              </svg>
+            </p>
+          </div>
+        </section>
+
+        <section class="experience" aria-label="Animated Exit Ads walkthrough">
+          <div class="experience-toolbar">
+            <span class="toolbar-label">CHOOSE A MOMENT</span>
+            <button
+              id="playback"
+              class="playback"
+              type="button"
+              aria-label="Pause walkthrough"
+            >
+              <span class="playback-dot"></span
+              ><span id="playback-label">Autoplay on</span
+              ><svg class="icon" aria-hidden="true">
+                <use id="playback-icon" href="#icon-pause" />
+              </svg>
+            </button>
+          </div>
+          <div
+            id="moment-tabs"
+            class="moment-tabs"
+            role="tablist"
+            aria-label="Exit Ad moments"
+          >
+            <button
+              class="moment-tab"
+              id="tab-bottom"
+              role="tab"
+              aria-selected="true"
+              aria-controls="moment-panel"
+              data-moment="0"
+            >
+              <svg class="icon" aria-hidden="true">
+                <use href="#icon-down" /></svg
+              ><span>Page end</span>
+            </button>
+            <button
+              class="moment-tab"
+              id="tab-top"
+              role="tab"
+              aria-selected="false"
+              aria-controls="moment-panel"
+              tabindex="-1"
+              data-moment="1"
+            >
+              <svg class="icon" aria-hidden="true"><use href="#icon-up" /></svg
+              ><span>Back to top</span>
+            </button>
+            <button
+              class="moment-tab"
+              id="tab-time"
+              role="tab"
+              aria-selected="false"
+              aria-controls="moment-panel"
+              tabindex="-1"
+              data-moment="2"
+            >
+              <svg class="icon" aria-hidden="true">
+                <use href="#icon-clock" /></svg
+              ><span>Time on page</span>
+            </button>
+            <button
+              class="moment-tab"
+              id="tab-tab"
+              role="tab"
+              aria-selected="false"
+              aria-controls="moment-panel"
+              tabindex="-1"
+              data-moment="3"
+            >
+              <svg class="icon" aria-hidden="true">
+                <use href="#icon-tabs" /></svg
+              ><span>Tab return</span>
+            </button>
+            <button
+              class="moment-tab"
+              id="tab-app"
+              role="tab"
+              aria-selected="false"
+              aria-controls="moment-panel"
+              tabindex="-1"
+              data-moment="4"
+            >
+              <svg class="icon" aria-hidden="true"><use href="#icon-app" /></svg
+              ><span>App return</span>
+            </button>
+            <button
+              class="moment-tab"
+              id="tab-custom"
+              role="tab"
+              aria-selected="false"
+              aria-controls="moment-panel"
+              tabindex="-1"
+              data-moment="5"
+            >
+              <svg class="icon" aria-hidden="true">
+                <use href="#icon-custom" /></svg
+              ><span>Your moment</span>
+            </button>
+          </div>
+
+          <div
+            id="moment-panel"
+            class="moment-panel"
+            role="tabpanel"
+            tabindex="0"
+            aria-labelledby="tab-bottom"
+            data-scene="bottom"
+            data-phase="action"
+          >
+            <div class="scene-copy">
+              <p class="scene-index">
+                <span id="scene-number">01</span><span class="index-line"></span
+                ><span id="scene-category">THE FINAL SCROLL</span>
+              </p>
+              <h2 id="scene-title">The story ends.<br />Your moment begins.</h2>
+              <p id="scene-description" class="scene-description">
+                As a reader reaches the end of an article, an Exit Ad brings
+                your brand into view.
+              </p>
+              <div class="scene-metric">
+                <span id="metric-value">0</span><span id="metric-unit">%</span
+                ><svg class="icon metric-icon" aria-hidden="true">
+                  <use id="metric-icon" href="#icon-down" />
+                </svg>
+              </div>
+              <p id="metric-caption" class="metric-caption">
+                of the page explored
+              </p>
+              <p class="setting">
+                <span class="setting-dot"></span
+                ><span id="scene-setting">Example trigger: 90% page depth</span>
+              </p>
+            </div>
+
+            <div class="scene-visual">
+              <div class="orbit orbit-one" aria-hidden="true"></div>
+              <div class="orbit orbit-two" aria-hidden="true"></div>
+              <div class="browser-wrap">
+                <div class="browser" aria-label="Simulated publisher website">
+                  <div class="browser-tabs" aria-hidden="true">
+                    <div class="window-dots"><i></i><i></i><i></i></div>
+                    <div class="mock-tab publisher-tab">
+                      <span class="mini-mark">o.</span> Offscript — The great
+                      outdoors <span>×</span>
+                    </div>
+                    <div class="mock-tab other-tab">
+                      <span class="tab-dot"></span> A different tab
+                      <span>×</span>
+                    </div>
+                    <span class="new-tab">+</span>
+                  </div>
+                  <div class="browser-address" aria-hidden="true">
+                    <span>‹</span><span>›</span
+                    ><span class="reload-symbol">↻</span>
+                    <div>
+                      <svg class="lock-icon" viewBox="0 0 16 16">
+                        <rect x="4" y="7" width="8" height="6" rx="1.5" />
+                        <path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" /></svg
+                      ><span id="mock-address"
+                        >offscript.example / explore / the-great-outdoors</span
+                      >
+                    </div>
+                    <span>•••</span>
+                  </div>
+                  <div class="browser-viewport">
+                    <div class="publisher-content" aria-hidden="true">
+                      <div class="publisher-header">
+                        <span class="publisher-logo"
+                          >offscript<span>®</span></span
+                        ><span>PLACES &nbsp; PEOPLE &nbsp; PERSPECTIVES</span
+                        ><span class="publisher-menu">☰</span>
+                      </div>
+                      <div id="article-scroll" class="article-scroll">
+                        <div class="article-heading">
+                          <span>OUT THERE &nbsp; / &nbsp; 6 MIN READ</span>
+                          <h3>A little further from<br />the everyday.</h3>
+                          <p>
+                            Good things happen when you take the scenic route.
+                          </p>
+                        </div>
+                        <div class="landscape">
+                          <img
+                            src="assets/editorial-landscape.jpg"
+                            width="1200"
+                            height="800"
+                            alt=""
+                          /><span>Less noise. More possibility.</span>
+                        </div>
+                        <div class="article-body">
+                          <div>
+                            <span class="article-kicker"
+                              >FIND YOUR OWN PACE</span
+                            >
+                            <h4>
+                              The best way forward<br />is sometimes a detour.
+                            </h4>
+                            <p>
+                              Beyond the familiar, there’s a different kind of
+                              rhythm. A quiet trail. A wider horizon. A little
+                              room to breathe.
+                            </p>
+                            <p>
+                              Take the long way. Stay for the view. Leave the
+                              everyday a little further behind.
+                            </p>
+                            <div class="article-lines">
+                              <i></i><i></i><i></i>
+                            </div>
+                          </div>
+                          <aside>
+                            <span>FIELD NOTES</span>
+                            <p>
+                              Go somewhere<br />that makes you<br />look up.
+                            </p>
+                            <div class="small-landscape"></div>
+                          </aside>
+                        </div>
+                        <div class="article-end">
+                          <span class="end-mark">o.</span
+                          ><span
+                            >YOU’VE REACHED THE END.<br /><strong
+                              >Where to next?</strong
+                            ></span
+                          ><svg class="icon"><use href="#icon-arrow" /></svg>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="scroll-rail" aria-hidden="true">
+                      <span id="scroll-thumb"></span>
+                    </div>
+                    <div class="scroll-marker" aria-hidden="true">
+                      <span id="depth-label">90% page depth</span>
+                    </div>
+                    <div class="away-tab" aria-hidden="true">
+                      <div class="away-mark">a.</div>
+                      <div class="away-search">
+                        A moment somewhere else <span>⌕</span>
+                      </div>
+                      <div class="away-tiles"><i></i><i></i><i></i></div>
+                    </div>
+                    <div class="timer-widget" aria-hidden="true">
+                      <svg viewBox="0 0 64 64">
+                        <circle cx="32" cy="32" r="27" />
+                        <circle id="timer-ring" cx="32" cy="32" r="27" />
+                      </svg>
+                      <div>
+                        <strong id="timer-readout">00:00</strong
+                        ><span>TIME ON PAGE</span>
+                      </div>
+                      <span class="time-speed">45 seconds, sped up</span>
+                    </div>
+                    <div class="custom-widget" aria-hidden="true">
+                      <div class="video-landscape">
+                        <div class="video-play">▶</div>
+                        <div class="video-track">
+                          <span id="video-progress"></span>
+                        </div>
+                      </div>
+                      <div class="video-label">
+                        <span id="video-label">The adventure, in motion</span
+                        ><span id="video-time">00:00 / 00:30</span>
+                      </div>
+                    </div>
+                    <div id="ad-overlay" class="ad-overlay" inert>
+                      <div class="ad-presentation">
+                        <div class="ad-meta">
+                          <span>ADVERTISEMENT</span
+                          ><button
+                            id="close-ad"
+                            class="close-ad"
+                            type="button"
+                            aria-label="Close example ad"
+                            disabled
+                          >
+                            3
+                          </button>
+                        </div>
+                        <div
+                          class="doritos-creative"
+                          role="img"
+                          aria-label="Doritos Collisions and Netflix Stranger Things creative. Snack Stranger."
+                        >
+                          <img
+                            class="creative-forest"
+                            src="assets/background-forest.webp"
+                            alt=""
+                          />
+                          <img
+                            class="creative-tree tree-left"
+                            src="assets/tree-left-back.webp"
+                            alt=""
+                          />
+                          <img
+                            class="creative-tree tree-right"
+                            src="assets/tree-right-back.webp"
+                            alt=""
+                          />
+                          <img
+                            class="creative-logo"
+                            src="assets/doritos-logo.webp"
+                            alt=""
+                          />
+                          <img
+                            class="creative-bag"
+                            src="assets/bag-img.webp"
+                            alt=""
+                          />
+                          <img
+                            class="creative-chip chip-left"
+                            src="assets/left-dorito.webp"
+                            alt=""
+                          />
+                          <img
+                            class="creative-chip chip-right"
+                            src="assets/right-dorito.webp"
+                            alt=""
+                          />
+                          <img
+                            class="creative-lockup"
+                            src="assets/lockup-snackstranger.png"
+                            alt=""
+                          />
+                          <img
+                            class="creative-netflix"
+                            src="assets/onlyonNetflix-ht.png"
+                            alt=""
+                          />
+                          <img
+                            class="creative-disclaimer"
+                            src="assets/disclaimer.png"
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="app-window" aria-hidden="true">
+                  <div class="app-window-header">
+                    <span class="notes-icon">▤</span> Notes<span>×</span>
+                  </div>
+                  <div class="notes-content">
+                    <span>ON MY MIND</span>
+                    <h4>A little time<br />away.</h4>
+                    <p>
+                      Find a new trail.<br />Take the scenic route.<br />Remember
+                      the snacks.
+                    </p>
+                    <div class="notes-line"></div>
+                    <div class="notes-line short"></div>
+                  </div>
+                </div>
+                <div class="simulated-cursor" aria-hidden="true">
+                  <svg viewBox="0 0 28 34">
+                    <path d="M3 2v25l7-7 6 11 5-3-6-10h10z" /></svg
+                  ><span>Reader</span>
+                </div>
+                <div class="event-pill">
+                  <span class="event-dot"></span
+                  ><span id="event-text">Reading the article</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="experience-footer">
+            <div class="story-steps" aria-label="Walkthrough progress">
+              <span class="story-step active" data-step="action"
+                ><i>1</i><span>The reader’s moment</span></span
+              ><span class="step-connector"></span
+              ><span class="story-step" data-step="detected"
+                ><i>2</i><span>Trigger detected</span></span
+              ><span class="step-connector"></span
+              ><span class="story-step" data-step="ad"
+                ><i>3</i><span>Exit Ad appears</span></span
+              >
+            </div>
+            <div class="scene-pagination">
+              <span id="scene-count">01 / 06</span
+              ><button id="next-moment" type="button" aria-label="Next moment">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#icon-arrow" />
+                </svg>
+              </button>
+            </div>
+            <div class="playback-track" aria-hidden="true">
+              <span id="playback-progress"></span>
+            </div>
+          </div>
+          <p
+            id="announcement"
+            class="sr-only"
+            aria-live="polite"
+            aria-atomic="true"
+          ></p>
+        </section>
+
+        <section
+          class="principles"
+          aria-label="How Exit Ads fit the experience"
+        >
+          <div>
+            <span class="principle-number">01 /</span>
+            <p>
+              <strong>Your moment. Your rules.</strong
+              ><span
+                >Choose the triggers and timing that fit your audience.</span
+              >
+            </p>
+          </div>
+          <div>
+            <span class="principle-number">02 /</span>
+            <p>
+              <strong>One moment. Full attention.</strong
+              ><span>A creative overlay brings the brand into focus.</span>
+            </p>
+          </div>
+          <div>
+            <span class="principle-number">03 /</span>
+            <p>
+              <strong>A pause, then back to it.</strong
+              ><span>Close the ad and continue. You control frequency.</span>
+            </p>
+          </div>
+        </section>
+      </main>
+      <footer class="site-footer">
+        <span>GumGum <span class="footer-slash">/</span> Exit Ads</span
+        ><span>Illustrative experience. Timings accelerated.</span>
+      </footer>
+      <noscript
+        ><p class="noscript">
+          Enable JavaScript to play the animated walkthrough. Exit Ads can
+          appear at page end, on a return to the top, after a set time, on tab
+          or app return, or at a publisher-defined event.
+        </p></noscript
+      >
+    </div>
+  </body>
+</html>

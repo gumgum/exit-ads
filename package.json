@@ -19,6 +19,7 @@
   },
   "scripts": {
     "serve": "gulp serve",
+    "exit-ads:showcase": "python3 -m http.server 8081 --bind 127.0.0.1 --directory exitAdsShowcase",
     "test": "gulp test",
     "lint": "gulp lint",
     "exit-ads": "npx gulp build-bundle-dev --modules=exitAdsModule,gumgumBidAdapter --nolint && cp build/dev/prebid.js exitAdsDemo/prebid.js && cd exitAdsDemo && python3 -m http.server 8080"
